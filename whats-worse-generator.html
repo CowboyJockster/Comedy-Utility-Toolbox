@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What's Worse? Generator V3</title>
+
+  <style>
+    .navbar {
+      background: #1d1713;
+      padding: 15px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .navbar a:hover {
+      color: #f1d9a5;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fafafa;
+      color: #222;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+      color: #222;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    .helpBar {
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      color: #2f241d;
+    }
+
+    .helpButton {
+      width: auto;
+      margin: 0;
+      padding: 6px 12px;
+      border-radius: 50%;
+      background: #2f241d;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+    }
+
+    .helpButton:hover {
+      background: #b87b2f;
+    }
+
+    .help-box {
+      display: none;
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 18px;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+
+    .help-box h2 {
+      margin-top: 0;
+    }
+
+    .help-box h3 {
+      margin-bottom: 5px;
+      color: #2f241d;
+    }
+
+    .toolBox {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 15px;
+      margin-bottom: 6px;
+    }
+
+    input, textarea, select, button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      margin-bottom: 12px;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    button {
+      cursor: pointer;
+      font-weight: bold;
+      border: none;
+      color: white;
+      margin-top: 10px;
+    }
+
+    .generateButton {
+      background-color: #2E8B57;
+    }
+
+    .generateButton:hover {
+      background-color: #256F47;
+    }
+
+    .clearButton {
+      background-color: #B22222;
+    }
+
+    .clearButton:hover {
+      background-color: #8B1A1A;
+    }
+
+    .result {
+      margin-top: 25px;
+      background: #f2f2f2;
+      border-left: 5px solid #2E8B57;
+      padding: 18px;
+      border-radius: 8px;
+      line-height: 1.5;
+    }
+
+    .worseStep {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .stepTitle {
+      font-weight: bold;
+      color: #2E8B57;
+      margin-bottom: 5px;
+    }
+
+    .promptText {
+      margin-top: 7px;
+      color: #444;
+    }
+
+    .notes {
+      margin-top: 20px;
+      padding: 15px;
+      background: #fff8dc;
+      border-left: 5px solid #DAA520;
+      border-radius: 8px;
+      color: #333;
+    }
+
+    .footerNote {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    ul {
+      padding-left: 22px;
+    }
+
+    .returnButton {
+      display: inline-block;
+      padding: 12px 18px;
+      background: #2f241d;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 25px;
+    }
+
+    .returnButton:hover {
+      background: #b87b2f;
+    }
+  </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+  <a href="index.html">HOME</a>
+  <a href="about.html">ABOUT</a>
+  <a href="index.html#tools">TOOLBOX</a>
+  <a href="toolbox-contact.html">CONTACT</a>
+</nav>
+
+<h1>What's Worse? Generator V3</h1>
+
+<div class="subtitle">
+  Take a simple annoyance, problem, or situation and push it through stronger comparison levels until the comedy pressure starts talking.
+</div>
+
+<div class="helpBar">
+  <span>Need help making a premise worse, sharper, and funnier?</span>
+  <button class="helpButton" onclick="toggleHelp()">?</button>
+</div>
+
+<div id="helpBox" class="help-box">
+  <h2>How to Use This Tool</h2>
+
+  <h3>Purpose</h3>
+  <p>
+    The What's Worse? Generator helps comedians take a simple problem, annoyance,
+    character trait, or premise and push it through stronger comparison levels.
+    It is designed to help you find sharper punchline directions, bigger act-outs,
+    stronger tags, and clearer final comedy images.
+  </p>
+
+  <h3>When To Use It</h3>
+  <p>
+    Use this tool when a premise feels too small, too plain, or too obvious.
+    It is especially useful when you know something is funny, but you need to
+    make the situation worse, stranger, more embarrassing, more specific, or
+    more visual before it becomes stage-ready.
+  </p>
+
+  <h3>How To Use It</h3>
+  <ol>
+    <li>Enter a problem, annoyance, character trait, or comedy premise.</li>
+    <li>Choose the category that best fits the idea.</li>
+    <li>Choose the What's Worse style.</li>
+    <li>Choose the comedy tone for your audience or venue.</li>
+    <li>Click Generate What's Worse Ladder.</li>
+    <li>Use the ladder to find stronger comparisons, exaggerations, tags, and final images.</li>
+  </ol>
+
+  <h3>Example Input</h3>
+  <p>
+    <strong>Premise:</strong><br>
+    Grandpa bought a smartphone.
+  </p>
+  <p>
+    <strong>Category:</strong><br>
+    Technology
+  </p>
+  <p>
+    <strong>Style:</strong><br>
+    Character Flaw Worse
+  </p>
+
+  <h3>Example Output</h3>
+  <p>
+    The tool may guide you from the simple problem — Grandpa does not understand
+    the phone — toward stronger levels: he argues with the screen, blames the
+    phone for spying, calls the phone company like it is a sheriff's department,
+    and finally treats the flashlight app like government surveillance.
+  </p>
+
+  <h3>Comedy Tip</h3>
+  <p>
+    The funniest answer is not always the wildest answer. Look for the comparison
+    that is worse, clearer, and more specific. Specific beats general every time.
+  </p>
+</div>
+
+<div class="toolBox">
+  <label for="premise">Enter Your Problem, Annoyance, or Comedy Premise:</label>
+  <textarea id="premise" placeholder="Example: Grandpa bought a smartphone."></textarea>
+
+  <label for="category">Choose Category:</label>
+  <select id="category">
+    <option value="everyday">Everyday Life</option>
+    <option value="technology">Technology</option>
+    <option value="family">Family</option>
+    <option value="relationships">Relationships</option>
+    <option value="work">Work</option>
+    <option value="travel">Travel</option>
+    <option value="rural">Small Town / Rural</option>
+    <option value="open">Open Category</option>
+  </select>
+
+  <label for="style">Choose What's Worse Style:</label>
+  <select id="style">
+    <option value="realistic">Realistic Worse</option>
+    <option value="embarrassing">Embarrassing Worse</option>
+    <option value="absurd">Absurd Worse</option>
+    <option value="character">Character Flaw Worse</option>
+    <option value="social">Social Disaster Worse</option>
+    <option value="rural">Rural / Midwestern Worse</option>
+  </select>
+
+  <label for="tone">Choose Comedy Tone:</label>
+  <select id="tone">
+    <option value="clean">Clean</option>
+    <option value="pg13">PG-13</option>
+    <option value="club">Comedy Club</option>
+    <option value="church">Church / Family Friendly</option>
+    <option value="corporate">Corporate Friendly</option>
+  </select>
+
+  <button class="generateButton" onclick="generateWorse()">Generate What's Worse Ladder</button>
+  <button class="clearButton" onclick="clearTool()">Clear</button>
+
+  <div id="output" class="result" style="display:none;"></div>
+
+  <div class="notes">
+    <strong>Purpose:</strong> This tool helps comedians find stronger punchline directions by comparing a normal problem to worse, stranger, more embarrassing, or more exaggerated versions of the same idea.
+  </div>
+
+  <div class="footerNote">Comedy Utility Toolbox — What's Worse? Generator V3</div>
+</div>
+
+<a href="index.html#tools" class="returnButton">
+← Return To Toolbox
+</a>
+
+<script>
+function toggleHelp() {
+  const helpBox = document.getElementById("helpBox");
+
+  if (helpBox.style.display === "block") {
+    helpBox.style.display = "none";
+  } else {
+    helpBox.style.display = "block";
+  }
+}
+
+const levelNames = [
+  "The Current Problem",
+  "What's Worse",
+  "Even Worse",
+  "Disaster Tier",
+  "Nuclear Option",
+  "Final Comedy Image"
+];
+
+const stylePrompts = {
+  realistic: [
+    "State the problem plainly and truthfully.",
+    "Make the inconvenience more annoying but still believable.",
+    "Add a practical consequence involving time, money, work, or family.",
+    "Let the problem interrupt normal life in a painfully familiar way.",
+    "Make the reaction bigger than the problem deserves.",
+    "End with a sharp truthful image the audience can instantly recognize."
+  ],
+  embarrassing: [
+    "Start with the private version of the problem.",
+    "Make one other person notice it.",
+    "Make the wrong person notice it.",
+    "Make the situation public, awkward, or hard to explain.",
+    "Force the character to defend something ridiculous with a straight face.",
+    "End with the most humiliating but still understandable version of the scene."
+  ],
+  absurd: [
+    "Start with the ordinary complaint.",
+    "Add one strange twist that still connects to the premise.",
+    "Let the premise develop its own ridiculous logic.",
+    "Treat the absurd version like everyone agrees it is normal.",
+    "Push the problem until reality starts begging for a lunch break.",
+    "End with a wild visual that still traces back to the original problem."
+  ],
+  character: [
+    "Start with how a normal person would handle the problem.",
+    "Let the character's flaw make the problem worse.",
+    "Have the character double down instead of learning anything.",
+    "Let pride, stubbornness, fear, vanity, cheapness, or confusion take over.",
+    "Make the character create a bigger problem while trying to solve the first one.",
+    "End with a payoff that could only happen to that specific character."
+  ],
+  social: [
+    "Start with the individual problem.",
+    "Add witnesses.",
+    "Add gossip, judgment, or group pressure.",
+    "Let the situation become a story other people repeat.",
+    "Make the character famous for the wrong reason.",
+    "End with the public reputation version of the problem."
+  ],
+  rural: [
+    "Start with the plain version of the problem.",
+    "Add a neighbor, family member, hardware store, diner, church, barn, or Wally World angle.",
+    "Compare the modern problem to an old-fashioned rural solution.",
+    "Let someone fix it with the wrong tool, wrong advice, or too much confidence.",
+    "Make the whole town somehow aware of it by noon.",
+    "End with a homespun image that makes the problem feel both ridiculous and familiar."
+  ]
+};
+
+const categoryAngles = {
+  everyday: [
+    "What makes this a daily irritation?",
+    "What ordinary chore or errand makes it worse?",
+    "What would make someone mutter under their breath?"
+  ],
+  technology: [
+    "What button, password, update, notification, or device makes this worse?",
+    "What happens when the machine acts smarter than the person?",
+    "What modern solution creates an older, dumber problem?"
+  ],
+  family: [
+    "Which family member makes this worse?",
+    "What old family habit gets triggered?",
+    "What would get brought up at Thanksgiving?"
+  ],
+  relationships: [
+    "What would be hard to explain to a partner?",
+    "What tiny issue turns into a relationship summit meeting?",
+    "What does one person remember forever while the other forgets immediately?"
+  ],
+  work: [
+    "What would make this worse in front of a boss or coworker?",
+    "What meeting, email, policy, or form makes it dumber?",
+    "What corporate phrase makes the problem sound official?"
+  ],
+  travel: [
+    "What airport, hotel, luggage, map, parking, or rental car detail makes this worse?",
+    "What goes wrong when everyone is already tired?",
+    "What would be impossible to explain to customer service?"
+  ],
+  rural: [
+    "What would Grandpa, Jimbo, a neighbor, or the hardware store guy say?",
+    "What would turn this into a small-town story?",
+    "What old-school fix makes the problem worse?"
+  ],
+  open: [
+    "What is the hidden pressure inside this premise?",
+    "What consequence changes the whole direction?",
+    "What image makes the idea memorable?"
+  ]
+};
+
+const toneGuides = {
+  clean: "Keep the language clean, relatable, and safe for mixed company.",
+  pg13: "Allow attitude, mild edge, and adult frustration without getting filthy.",
+  club: "Push harder with sharper exaggeration, stronger opinions, and more bite.",
+  church: "Keep it warm, family-safe, gently self-deprecating, and good-natured.",
+  corporate: "Keep it polished, professional, workplace-safe, and broadly relatable."
+};
+
+const pressureQuestions = [
+  "What would make this cost money?",
+  "What would make this public?",
+  "What would make this involve family?",
+  "What would make this embarrassing?",
+  "What would make someone overreact?",
+  "What would make this harder to explain than to actually fix?",
+  "What would make the audience say, 'I've seen that happen'?",
+  "What would be the dumbest possible official solution?",
+  "What would a stubborn person do that makes this worse?",
+  "What is the final visual image?"
+];
+
+function generateWorse() {
+  const premise = document.getElementById("premise").value.trim();
+  const category = document.getElementById("category").value;
+  const style = document.getElementById("style").value;
+  const tone = document.getElementById("tone").value;
+  const output = document.getElementById("output");
+
+  if (!premise) {
+    output.style.display = "block";
+    output.innerHTML = "Please enter a premise first. Even 'what's worse' needs something bad to start with.";
+    return;
+  }
+
+  let html = "";
+  html += `<h2>What's Worse? Ladder for:</h2>`;
+  html += `<p><strong>${escapeHTML(premise)}</strong></p>`;
+  html += `<p><strong>Tone Guide:</strong> ${toneGuides[tone]}</p>`;
+  html += `<hr>`;
+
+  stylePrompts[style].forEach((prompt, index) => {
+    html += `<div class="worseStep">`;
+    html += `<div class="stepTitle">${levelNames[index]}</div>`;
+    html += `<div>${prompt}</div>`;
+    html += `<div class="promptText"><em>Writing Prompt:</em> ${buildWritingPrompt(index, premise, style, category)}</div>`;
+    html += `</div>`;
+  });
+
+  html += `<h3>Category Pressure Angles</h3>`;
+  html += `<ul>`;
+  categoryAngles[category].forEach(angle => {
+    html += `<li>${angle}</li>`;
+  });
+  html += `</ul>`;
+
+  html += `<h3>Extra What's Worse Questions</h3>`;
+  html += `<ul>`;
+  pressureQuestions.forEach(question => {
+    html += `<li>${question}</li>`;
+  });
+  html += `</ul>`;
+
+  html += `<h3>Working Note</h3>`;
+  html += `<p>The best comedy version is not always the wildest version. Look for the level where the idea becomes worse, clearer, and more specific at the same time. Specific beats general every time.</p>`;
+
+  output.innerHTML = html;
+  output.style.display = "block";
+}
+
+function buildWritingPrompt(index, premise, style, category) {
+  const safePremise = escapeHTML(premise);
+
+  const basePrompts = {
+    realistic: [
+      `What is already annoying about "${safePremise}"?`,
+      `What would make "${safePremise}" take longer, cost more, or interrupt the day?`,
+      `What practical problem could grow out of "${safePremise}"?`,
+      `Where does "${safePremise}" become inconvenient for other people?`,
+      `What overreaction would make this funnier than the original problem?`,
+      `What final truthful detail makes this feel painfully familiar?`
+    ],
+    embarrassing: [
+      `What part of "${safePremise}" would someone want to keep private?`,
+      `Who would be the worst person to witness "${safePremise}"?`,
+      `What would make the character explain themselves badly?`,
+      `How could "${safePremise}" become public at the worst possible time?`,
+      `What ridiculous defense would the character attempt?`,
+      `What final embarrassing image does the audience clearly see?`
+    ],
+    absurd: [
+      `What is the normal complaint inside "${safePremise}"?`,
+      `What strange but connected twist makes it worse?`,
+      `What would happen if "${safePremise}" followed cartoon logic?`,
+      `How would everyone treat the ridiculous version like standard procedure?`,
+      `What is the biggest possible nonsense version that still connects?`,
+      `What final absurd image brings it home?`
+    ],
+    character: [
+      `Who is the funniest person to deal with "${safePremise}"?`,
+      `What flaw makes them handle it badly?`,
+      `How do they double down?`,
+      `What personal belief makes the problem worse?`,
+      `How do they accidentally create a second problem?`,
+      `What ending could only happen because of that person?`
+    ],
+    social: [
+      `What is the private version of "${safePremise}"?`,
+      `Who notices first?`,
+      `Who starts talking about it?`,
+      `How does the story get exaggerated?`,
+      `What does the character become known for?`,
+      `What final public label or reputation sticks to them?`
+    ],
+    rural: [
+      `How would a plain-spoken local describe "${safePremise}"?`,
+      `What would Grandpa, Jimbo, a neighbor, or the hardware store guy do?`,
+      `What old-fashioned fix would make it worse?`,
+      `How does the small-town grapevine get involved?`,
+      `What barn, diner, church, Wally World, or truck-related detail raises the stakes?`,
+      `What final homespun image lands the laugh?`
+    ]
+  };
+
+  return basePrompts[style][index];
+}
+
+function clearTool() {
+  document.getElementById("premise").value = "";
+  document.getElementById("category").selectedIndex = 0;
+  document.getElementById("style").selectedIndex = 0;
+  document.getElementById("tone").selectedIndex = 0;
+  document.getElementById("output").style.display = "none";
+  document.getElementById("output").innerHTML = "";
+}
+
+function escapeHTML(str) {
+  return str.replace(/[&<>'"]/g, function(tag) {
+    const charsToReplace = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;'
+    };
+    return charsToReplace[tag] || tag;
+  });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Comedy Escalation Ladder Tool V3</title>
+
+  <style>
+    .navbar {
+      background: #1d1713;
+      padding: 15px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .navbar a:hover {
+      color: #f1d9a5;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 950px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fafafa;
+      color: #222;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+      color: #222;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    .helpBar {
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      color: #2f241d;
+      gap: 15px;
+    }
+
+    .helpButton {
+      width: auto;
+      margin: 0;
+      padding: 6px 12px;
+      border-radius: 50%;
+      background: #2f241d;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+      flex-shrink: 0;
+    }
+
+    .helpButton:hover {
+      background: #b87b2f;
+    }
+
+    .helpSection {
+      display: none;
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 18px;
+      border-radius: 10px;
+      margin: 20px 0;
+      line-height: 1.6;
+    }
+
+    .helpSection h2 {
+      margin-top: 0;
+    }
+
+    .helpSection h3 {
+      color: #2f241d;
+      margin-bottom: 8px;
+    }
+
+    .help-example {
+      background: white;
+      border-left: 5px solid #2E8B57;
+      padding: 12px 15px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    .toolBox {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 15px;
+      margin-bottom: 6px;
+    }
+
+    input, textarea, select, button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      margin-bottom: 12px;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    button {
+      cursor: pointer;
+      font-weight: bold;
+      border: none;
+      color: white;
+      margin-top: 10px;
+    }
+
+    .generateButton {
+      background-color: #2E8B57;
+    }
+
+    .generateButton:hover {
+      background-color: #256F47;
+    }
+
+    .randomButton {
+      background-color: #4169E1;
+    }
+
+    .randomButton:hover {
+      background-color: #2F4FB2;
+    }
+
+    .clearButton {
+      background-color: #B22222;
+    }
+
+    .clearButton:hover {
+      background-color: #8B1A1A;
+    }
+
+    .result {
+      margin-top: 25px;
+      background: #f2f2f2;
+      border-left: 5px solid #2E8B57;
+      padding: 18px;
+      border-radius: 8px;
+      white-space: normal;
+      line-height: 1.5;
+    }
+
+    .ladderStep {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .stepTitle {
+      font-weight: bold;
+      color: #2E8B57;
+      margin-bottom: 5px;
+      font-size: 18px;
+    }
+
+    .promptLine {
+      background: #fff8dc;
+      border-left: 5px solid #DAA520;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    .notes {
+      margin-top: 20px;
+      padding: 15px;
+      background: #fff8dc;
+      border-left: 5px solid #DAA520;
+      border-radius: 8px;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    .footerNote {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .returnButton {
+      display: inline-block;
+      padding: 12px 18px;
+      background: #2f241d;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 25px;
+    }
+
+    .returnButton:hover {
+      background: #b87b2f;
+    }
+
+    @media (max-width: 700px) {
+      body {
+        margin: 20px auto;
+      }
+
+      .navbar a {
+        display: inline-block;
+        margin: 6px 10px;
+      }
+
+      .helpBar {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <a href="index.html">HOME</a>
+    <a href="about.html">ABOUT</a>
+    <a href="index.html#tools">TOOLBOX</a>
+    <a href="toolbox-contact.html">CONTACT</a>
+  </nav>
+
+  <h1>Comedy Escalation Ladder Tool V3</h1>
+
+  <div class="subtitle">
+    Turn a simple premise into a step-by-step climb toward bigger laughs, higher stakes, and controlled absurdity.
+  </div>
+
+  <div class="helpBar">
+    <span>Need help making a joke idea climb higher without jumping the fence?</span>
+    <button class="helpButton" onclick="toggleHelp()">?</button>
+  </div>
+
+  <div id="helpSection" class="helpSection">
+    <h2>How to Use This Tool</h2>
+
+    <h3>Purpose</h3>
+    <p>
+      The Escalation Ladder Tool helps comedians take a simple joke idea, complaint,
+      story, or observation and build it upward in clear stages toward bigger laughs.
+    </p>
+
+    <h3>When To Use It</h3>
+    <p>
+      Use this tool when a premise feels too flat, when a joke needs stronger tags,
+      or when a story needs a better climb from normal reality to a larger payoff.
+    </p>
+
+    <h3>How To Use It</h3>
+    <ol>
+      <li>Enter your basic comedy premise.</li>
+      <li>Choose the escalation style that best fits the idea.</li>
+      <li>Choose the tone for the audience or venue.</li>
+      <li>Click Build Escalation Ladder.</li>
+      <li>Use the six steps as writing prompts, not finished jokes.</li>
+      <li>Look for the step where the idea becomes funny but still believable.</li>
+    </ol>
+
+    <h3>Example Input</h3>
+    <p>
+      <strong>Premise:</strong><br>
+      Grandpa bought a smart TV.<br><br>
+      <strong>Escalation Style:</strong><br>
+      Character-Based Escalation<br><br>
+      <strong>Tone:</strong><br>
+      Clean
+    </p>
+
+    <h3>Example Output</h3>
+    <p>
+      First he argues with the remote. Then he thinks the TV is spying on him.
+      Then he covers the screen with a dish towel. By the end, he is treating Netflix like a federal witness.
+    </p>
+
+    <h3>Comedy Tip</h3>
+    <p>
+      The top of the ladder should still connect to the bottom. Bigger is good. Random is not.
+      That is true in comedy, carpentry, and family reunions.
+    </p>
+  </div>
+
+  <div class="toolBox">
+    <label for="premise">Enter Your Comedy Premise:</label>
+    <textarea id="premise" placeholder="Example: Grandpa bought a smart TV."></textarea>
+
+    <label for="style">Choose Escalation Style:</label>
+    <select id="style">
+      <option value="absurd">Absurd Escalation</option>
+      <option value="realistic">Realistic Escalation</option>
+      <option value="character">Character-Based Escalation</option>
+      <option value="stakes">Rising Stakes Escalation</option>
+      <option value="misunderstanding">Misunderstanding Escalation</option>
+      <option value="regional">Regional / Rural Escalation</option>
+    </select>
+
+    <label for="tone">Choose Comedy Tone:</label>
+    <select id="tone">
+      <option value="clean">Clean</option>
+      <option value="pg13">PG-13</option>
+      <option value="club">Comedy Club</option>
+      <option value="church">Church / Family Friendly</option>
+      <option value="corporate">Corporate Friendly</option>
+    </select>
+
+    <button class="generateButton" onclick="generateLadder()">Build Escalation Ladder</button>
+    <button class="randomButton" onclick="randomFill()">Surprise Me</button>
+    <button class="clearButton" onclick="clearTool()">Clear</button>
+
+    <div id="output" class="result" style="display:none;"></div>
+
+    <div class="notes">
+      <strong>Purpose:</strong> This tool helps comedians build a joke, story, or bit by gradually increasing exaggeration, conflict, stakes, or absurdity. It does not finish the joke for you — it gives you the ladder so you can climb toward the funny.
+    </div>
+
+    <div class="footerNote">Comedy Utility Toolbox — Escalation Ladder Tool V3</div>
+  </div>
+
+  <a href="index.html#tools" class="returnButton">← Return To Toolbox</a>
+
+  <script>
+    const escalationTemplates = {
+      absurd: [
+        "Start with the ordinary truth of the premise.",
+        "Add one strange but believable complication.",
+        "Make the situation noticeably ridiculous.",
+        "Let the premise behave like it has its own twisted logic.",
+        "Push the idea into full absurdity while still connecting to the original premise.",
+        "Find the payoff where reality finally gives up and the joke takes over."
+      ],
+      realistic: [
+        "Start with what would naturally happen first.",
+        "Add a small inconvenience or irritation.",
+        "Let the problem become harder to ignore.",
+        "Add social pressure, embarrassment, or consequences.",
+        "Make the situation feel painfully familiar.",
+        "End with a punchline that reveals the bigger truth hiding inside the small problem."
+      ],
+      character: [
+        "Start with the character's normal behavior.",
+        "Show how the premise bothers, excites, confuses, or challenges them.",
+        "Let the character make the wrong choice for the right personal reason.",
+        "Make the character double down.",
+        "Reveal what this situation says about who they really are.",
+        "End with the character creating a problem only they would create."
+      ],
+      stakes: [
+        "Start with a low-stakes version of the premise.",
+        "Add a personal consequence.",
+        "Add a family, work, money, or reputation consequence.",
+        "Make the problem public.",
+        "Make the outcome feel wildly disproportionate.",
+        "End where the smallest original problem now feels like a life-changing disaster."
+      ],
+      misunderstanding: [
+        "Start with the basic meaning of the premise.",
+        "Let one person misunderstand a word, rule, object, or intention.",
+        "Have someone confidently act on the wrong interpretation.",
+        "Let the misunderstanding spread to another person or situation.",
+        "Make the wrong logic seem temporarily reasonable.",
+        "End with the reveal that everyone was solving the wrong problem."
+      ],
+      regional: [
+        "Start with the plain version of the premise.",
+        "Add a small-town, rural, Midwestern, ranch, or local reaction.",
+        "Compare the new situation to an old-fashioned way of doing things.",
+        "Let the character solve the modern problem with an outdated method.",
+        "Add neighbor, family, livestock, diner, church, hardware store, or Wally World pressure.",
+        "End with a homespun payoff that makes the modern world look ridiculous."
+      ]
+    };
+
+    const toneAdjustments = {
+      clean: "Keep the language clean, sharp, and usable in mixed company.",
+      pg13: "Allow a little bite, attitude, and adult frustration without getting filthy.",
+      club: "Push harder with attitude, sharper exaggeration, and stronger punchline pressure.",
+      church: "Keep it warm, relatable, family-safe, and gently self-aware.",
+      corporate: "Keep it polished, professional, relatable, and safe for a business audience."
+    };
+
+    const sampleAngles = [
+      "What is the normal version of this situation?",
+      "What would make it slightly worse?",
+      "What would make it embarrassing?",
+      "What would make the character overreact?",
+      "What old habit, belief, or personality flaw could make this worse?",
+      "What would happen if the smallest problem became the biggest deal in town?",
+      "Where does the logic break in a funny way?",
+      "What is the final image the audience can clearly picture?"
+    ];
+
+    const surpriseData = [
+      {
+        premise: "Grandpa bought a smart TV.",
+        style: "character",
+        tone: "clean"
+      },
+      {
+        premise: "Self-checkout machines are getting too personal.",
+        style: "misunderstanding",
+        tone: "pg13"
+      },
+      {
+        premise: "A family reunion should come with referees.",
+        style: "stakes",
+        tone: "club"
+      },
+      {
+        premise: "A modern pickup truck has too many buttons.",
+        style: "regional",
+        tone: "clean"
+      },
+      {
+        premise: "My wife sent me to the grocery store with verbal instructions.",
+        style: "realistic",
+        tone: "clean"
+      },
+      {
+        premise: "The church potluck has more politics than Washington.",
+        style: "absurd",
+        tone: "church"
+      }
+    ];
+
+    function toggleHelp() {
+      const helpSection = document.getElementById("helpSection");
+
+      if (helpSection.style.display === "block") {
+        helpSection.style.display = "none";
+      } else {
+        helpSection.style.display = "block";
+      }
+    }
+
+    function generateLadder() {
+      const premise = document.getElementById("premise").value.trim();
+      const style = document.getElementById("style").value;
+      const tone = document.getElementById("tone").value;
+      const output = document.getElementById("output");
+
+      if (!premise) {
+        output.style.display = "block";
+        output.innerHTML = "Please enter a premise first. Even the best ladder needs something to lean against.";
+        return;
+      }
+
+      const steps = escalationTemplates[style];
+      const toneNote = toneAdjustments[tone];
+
+      let html = "";
+      html += "<h2>Escalation Ladder for:</h2>";
+      html += "<p><strong>" + escapeHTML(premise) + "</strong></p>";
+      html += "<p><strong>Escalation Style:</strong> " + getStyleLabel(style) + "</p>";
+      html += "<p><strong>Tone Guide:</strong> " + escapeHTML(toneNote) + "</p>";
+      html += "<hr>";
+
+      steps.forEach(function(step, index) {
+        html += "<div class='ladderStep'>";
+        html += "<div class='stepTitle'>Step " + (index + 1) + ": " + getStepName(index) + "</div>";
+        html += "<div>" + escapeHTML(step) + "</div>";
+        html += "<div class='promptLine'><strong>Writing Prompt:</strong> " + escapeHTML(buildPrompt(index, premise, style)) + "</div>";
+        html += "</div>";
+      });
+
+      html += "<h3>Extra Comedy Pressure Questions</h3>";
+      html += "<ul>";
+      sampleAngles.forEach(function(angle) {
+        html += "<li>" + escapeHTML(angle) + "</li>";
+      });
+      html += "</ul>";
+
+      html += "<h3>Working Note</h3>";
+      html += "<p>Look for the step where the premise starts to feel funny but still believable. That is usually where the bit begins. The final step is not always the punchline — sometimes it is the tag, callback, or closing image.</p>";
+
+      output.innerHTML = html;
+      output.style.display = "block";
+    }
+
+    function getStepName(index) {
+      const names = [
+        "Normal Reality",
+        "First Complication",
+        "Bigger Problem",
+        "Point of No Return",
+        "Absurd or High-Stakes Turn",
+        "Payoff Zone"
+      ];
+
+      return names[index];
+    }
+
+    function getStyleLabel(style) {
+      const labels = {
+        absurd: "Absurd Escalation",
+        realistic: "Realistic Escalation",
+        character: "Character-Based Escalation",
+        stakes: "Rising Stakes Escalation",
+        misunderstanding: "Misunderstanding Escalation",
+        regional: "Regional / Rural Escalation"
+      };
+
+      return labels[style] || style;
+    }
+
+    function buildPrompt(index, premise, style) {
+      const promptSets = {
+        absurd: [
+          `What is the most normal version of "${premise}"?`,
+          `What is one odd thing that could happen because of "${premise}"?`,
+          `What would make "${premise}" feel ridiculous but still understandable?`,
+          `What would happen if everyone accepted the ridiculous logic of "${premise}"?`,
+          `How far can "${premise}" go before reality starts waving a white flag?`,
+          `What final image makes the audience think, "Of course it ended there"?`
+        ],
+        realistic: [
+          `What would actually happen first with "${premise}"?`,
+          `What small irritation would this cause?`,
+          `How could this become inconvenient in daily life?`,
+          `Where does embarrassment or pressure enter the scene?`,
+          `What part of this feels painfully true?`,
+          `What truthful punchline exposes the real problem?`
+        ],
+        character: [
+          `Who is the funniest person to experience "${premise}"?`,
+          `What would this character misunderstand, resist, or overdo?`,
+          `What wrong decision would feel perfectly right to them?`,
+          `How would they double down?`,
+          `What does their reaction reveal about them?`,
+          `What ending could only happen because of this character?`
+        ],
+        stakes: [
+          `What is the smallest consequence of "${premise}"?`,
+          `How could it affect the character personally?`,
+          `How could it affect money, family, reputation, or work?`,
+          `How could the problem become public?`,
+          `How could the reaction become wildly too big?`,
+          `What is the disaster version of this tiny problem?`
+        ],
+        misunderstanding: [
+          `What word, object, or idea inside "${premise}" could be misunderstood?`,
+          `Who misunderstands it first?`,
+          `What confident wrong action do they take?`,
+          `Who else gets dragged into the confusion?`,
+          `How does the wrong logic start making sense?`,
+          `What reveal proves everyone was chasing the wrong meaning?`
+        ],
+        regional: [
+          `How would a plain-spoken local describe "${premise}"?`,
+          `What would Grandpa, Jimbo, Aunt Molly, or a neighbor think about it?`,
+          `What old-fashioned comparison makes this premise funnier?`,
+          `How would someone solve this with tools from a barn, diner, church basement, or hardware store?`,
+          `How does the community get involved?`,
+          `What homespun image gives the bit its final laugh?`
+        ]
+      };
+
+      return promptSets[style][index];
+    }
+
+    function randomFill() {
+      const item = surpriseData[Math.floor(Math.random() * surpriseData.length)];
+
+      document.getElementById("premise").value = item.premise;
+      document.getElementById("style").value = item.style;
+      document.getElementById("tone").value = item.tone;
+    }
+
+    function clearTool() {
+      document.getElementById("premise").value = "";
+      document.getElementById("style").selectedIndex = 0;
+      document.getElementById("tone").selectedIndex = 0;
+      document.getElementById("output").style.display = "none";
+      document.getElementById("output").innerHTML = "";
+    }
+
+    function escapeHTML(str) {
+      return String(str).replace(/[&<>'"]/g, function(tag) {
+        const charsToReplace = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          "'": "&#39;",
+          '"': "&quot;"
+        };
+
+        return charsToReplace[tag] || tag;
+      });
+    }
+  </script>
+
+</body>
+</html>

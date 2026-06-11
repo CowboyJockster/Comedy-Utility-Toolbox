@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setlist Architect V3</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f1e8;
+      color: #222;
+    }
+
+    header {
+      background: #2f3e2f;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    nav {
+      background: #1f2a1f;
+      padding: 12px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 12px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1150px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .panel, .bit-card, .set-card {
+      background: white;
+      padding: 22px;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+      margin-bottom: 20px;
+    }
+
+    h2, h3 {
+      color: #2f3e2f;
+      margin-top: 0;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #bbb;
+      border-radius: 8px;
+      box-sizing: border-box;
+      margin-bottom: 12px;
+      font-family: Arial, sans-serif;
+    }
+
+    button {
+      border: none;
+      padding: 11px 15px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 5px 5px 5px 0;
+    }
+
+    .primary-btn { background: #2f6f3e; color: white; }
+    .secondary-btn { background: #704214; color: white; }
+    .danger-btn { background: #a83232; color: white; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #e9dfc7;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+      margin: 4px 4px 4px 0;
+    }
+
+    .empty-message {
+      background: #fffdf7;
+      padding: 18px;
+      border-left: 6px solid #704214;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .set-card {
+      border-left: 6px solid #2f6f3e;
+    }
+
+    .bit-card {
+      border-left: 6px solid #704214;
+    }
+
+    .summary {
+      background: #e9dfc7;
+      padding: 15px;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+
+    .helpBar {
+      background: #fff8e8;
+      border: 2px solid #704214;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      color: #2f241d;
+    }
+
+    .helpButton {
+      width: auto;
+      margin: 0;
+      padding: 6px 12px;
+      border-radius: 50%;
+      background: #2f241d;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+    }
+
+    .helpButton:hover {
+      background: #704214;
+    }
+
+    .helpSection {
+      display: none;
+      background: #fff8e8;
+      border: 2px solid #704214;
+      padding: 18px;
+      border-radius: 10px;
+      margin: 20px 0;
+      line-height: 1.6;
+    }
+
+    .helpSection h2 {
+      margin-top: 0;
+      color: #2f3e2f;
+    }
+
+    .helpSection h3 {
+      color: #2f241d;
+      margin-bottom: 8px;
+    }
+
+    .returnButton {
+      display: inline-block;
+      padding: 12px 18px;
+      background: #2f241d;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 25px;
+    }
+
+    .returnButton:hover {
+      background: #704214;
+    }
+
+    .small-note {
+      font-size: 14px;
+      color: #555;
+      margin-top: 8px;
+    }
+
+    @media (min-width: 850px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Setlist Architect V3</h1>
+  <p>Build, time, save, and organize performance-ready comedy sets.</p>
+</header>
+
+<nav>
+  <a href="index.html">HOME</a>
+  <a href="about.html">ABOUT</a>
+  <a href="index.html#tools">TOOLBOX</a>
+  <a href="toolbox-contact.html">CONTACT</a>
+  <a href="projects-dashboard.html">PROJECTS</a>
+  <a href="bit-builder-workspace.html">BIT BUILDER</a>
+</nav>
+
+<div class="container">
+
+  <div class="helpBar">
+    <span>Need help building, timing, and saving a performance-ready set?</span>
+    <button class="helpButton" onclick="toggleHelp()">?</button>
+  </div>
+
+  <div id="helpSection" class="helpSection">
+    <h2>How to Use This Tool</h2>
+
+    <h3>Purpose</h3>
+    <p>The Setlist Architect helps you pull saved bits from your comedy projects, arrange them into running order, estimate runtime, save setlists, and print a clean performance copy.</p>
+
+    <h3>When To Use It</h3>
+    <ul>
+      <li>When preparing an open mic, club set, clean show, corporate set, veteran show, festival, or showcase.</li>
+      <li>When you need to test different openers, middles, closers, and running orders.</li>
+      <li>When you want to know how long your set will run before you walk onstage.</li>
+    </ul>
+
+    <h3>How To Use It</h3>
+    <ol>
+      <li>Create bits inside your Projects area first.</li>
+      <li>Open Setlist Architect.</li>
+      <li>Name the setlist and choose the show type.</li>
+      <li>Add notes about audience, venue, opener, or closer.</li>
+      <li>Add available bits to the current set.</li>
+      <li>Move bits up or down into the strongest order.</li>
+      <li>Save or print the finished setlist.</li>
+    </ol>
+
+    <h3>Example Input</h3>
+    <p><strong>Setlist Name:</strong> Tight 5 for Friday Night<br><strong>Show Type:</strong> Comedy Club<br><strong>Bits:</strong> Opener, Grandpa GPS, Aldi Cart, Callback Closer</p>
+
+    <h3>Example Output</h3>
+    <p><strong>Finished Set:</strong> A saved and printable running order with estimated runtime.</p>
+
+    <h3>Comedy Tip</h3>
+    <p>Build a set by energy, not just topic. A good set has a clear opener, a building middle, and a closer that feels intentional.</p>
+  </div>
+
+<section class="panel">
+    <h2>Purpose</h2>
+    <p>
+      Pull bits from your saved comedy projects, arrange them into a show order,
+      estimate runtime, print your running order, and save complete setlists for open mics,
+      clubs, churches, corporate shows, veteran events, or wherever the mule gets booked.
+    </p>
+    <p class="small-note">
+      Note: This tool reads saved project bits from your browser's local storage. If no bits appear,
+      add material inside Projects first.
+    </p>
+  </section>
+
+  <section class="panel">
+    <h2>Create / Edit Current Setlist</h2>
+
+    <input id="setlistName" placeholder="Setlist Name - Example: Tight 5 for Friday Night" />
+
+    <select id="setlistType">
+      <option>Open Mic</option>
+      <option>Comedy Club</option>
+      <option>Clean / Church</option>
+      <option>Corporate</option>
+      <option>Veteran Show</option>
+      <option>Festival</option>
+      <option>Showcase</option>
+    </select>
+
+    <textarea id="setlistNotes" placeholder="Show notes, audience type, opener/closer ideas..."></textarea>
+
+    <div class="summary" id="setSummary">
+      Current Set: 0 bits | Estimated Runtime: 0:00
+    </div>
+
+    <button class="primary-btn" onclick="saveCurrentSetlist()">Save Setlist</button>
+<button class="secondary-btn" onclick="printCurrentSetlist()">Print Setlist</button>
+<button class="secondary-btn" onclick="clearCurrentSetlist()">Clear Current Set</button>
+  </section>
+
+  <div class="grid">
+
+    <section class="panel">
+      <h2>Available Bits From Projects</h2>
+      <div id="availableBits"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Current Set Order</h2>
+      <div id="currentSet"></div>
+    </section>
+
+  </div>
+
+  <section class="panel">
+    <h2>Saved Setlists</h2>
+    <div id="savedSetlists"></div>
+  </section>
+
+  <a href="index.html#tools" class="returnButton">← Return To Toolbox</a>
+
+</div>
+
+<footer style="text-align:center; padding:25px; color:#555;">
+  Comedy Utility Toolbox | Setlist Architect V3
+</footer>
+
+<script>
+  function toggleHelp() {
+    const helpSection = document.getElementById("helpSection");
+
+    if (helpSection.style.display === "block") {
+      helpSection.style.display = "none";
+    } else {
+      helpSection.style.display = "block";
+    }
+  }
+
+  let projects = JSON.parse(localStorage.getItem("comedyProjects")) || [];
+  let savedSetlists = JSON.parse(localStorage.getItem("savedComedySetlists")) || [];
+  let currentSet = [];
+
+  function renderAvailableBits() {
+    const box = document.getElementById("availableBits");
+    box.innerHTML = "";
+
+    let allBits = [];
+
+    projects.forEach(project => {
+      if (project.bits && project.bits.length > 0) {
+        project.bits.forEach(bit => {
+          allBits.push({
+            projectName: project.name,
+            projectCategory: project.category,
+            title: bit.title,
+            status: bit.status,
+            runtime: bit.runtime,
+            notes: bit.notes
+          });
+        });
+      }
+    });
+
+    if (allBits.length === 0) {
+      box.innerHTML = `<div class="empty-message">No project bits found yet. Add bits inside Projects first.</div>`;
+      return;
+    }
+
+    allBits.forEach((bit, index) => {
+      const card = document.createElement("div");
+      card.className = "bit-card";
+
+      card.innerHTML = `
+        <h3>${escapeHTML(bit.title)}</h3>
+        <span class="badge">${escapeHTML(bit.projectName)}</span>
+        <span class="badge">${escapeHTML(bit.status || "No status")}</span>
+        <span class="badge">${escapeHTML(bit.runtime || "No runtime")}</span>
+        <p>${escapeHTML(bit.notes || "No notes added.")}</p>
+        <button class="primary-btn" onclick="addBitToSet(${index})">Add to Set</button>
+      `;
+
+      card.dataset.bit = JSON.stringify(bit);
+      box.appendChild(card);
+    });
+  }
+
+  function getAllAvailableBits() {
+    let allBits = [];
+
+    projects.forEach(project => {
+      if (project.bits && project.bits.length > 0) {
+        project.bits.forEach(bit => {
+          allBits.push({
+            projectName: project.name,
+            projectCategory: project.category,
+            title: bit.title,
+            status: bit.status,
+            runtime: bit.runtime,
+            notes: bit.notes
+          });
+        });
+      }
+    });
+
+    return allBits;
+  }
+
+  function addBitToSet(index) {
+    const allBits = getAllAvailableBits();
+    currentSet.push(allBits[index]);
+    renderCurrentSet();
+  }
+
+  function renderCurrentSet() {
+    const box = document.getElementById("currentSet");
+    box.innerHTML = "";
+
+    if (currentSet.length === 0) {
+      box.innerHTML = `<div class="empty-message">No bits added to this set yet.</div>`;
+      updateSummary();
+      return;
+    }
+
+    currentSet.forEach((bit, index) => {
+      const card = document.createElement("div");
+      card.className = "set-card";
+
+      card.innerHTML = `
+        <h3>${index + 1}. ${escapeHTML(bit.title)}</h3>
+        <span class="badge">${escapeHTML(bit.projectName)}</span>
+        <span class="badge">${escapeHTML(bit.runtime || "No runtime")}</span>
+        <p>${escapeHTML(bit.notes || "No notes added.")}</p>
+
+        <button class="secondary-btn" onclick="moveBitUp(${index})">Move Up</button>
+        <button class="secondary-btn" onclick="moveBitDown(${index})">Move Down</button>
+        <button class="danger-btn" onclick="removeBitFromSet(${index})">Remove</button>
+      `;
+
+      box.appendChild(card);
+    });
+
+    updateSummary();
+  }
+
+  function moveBitUp(index) {
+    if (index === 0) return;
+    [currentSet[index - 1], currentSet[index]] = [currentSet[index], currentSet[index - 1]];
+    renderCurrentSet();
+  }
+
+  function moveBitDown(index) {
+    if (index === currentSet.length - 1) return;
+    [currentSet[index + 1], currentSet[index]] = [currentSet[index], currentSet[index + 1]];
+    renderCurrentSet();
+  }
+
+  function removeBitFromSet(index) {
+    currentSet.splice(index, 1);
+    renderCurrentSet();
+  }
+
+  function parseRuntime(runtime) {
+    if (!runtime) return 0;
+
+    const text = String(runtime).trim();
+
+    if (text.includes(":")) {
+      const parts = text.split(":");
+      const minutes = Number(parts[0]) || 0;
+      const seconds = Number(parts[1]) || 0;
+      return (minutes * 60) + seconds;
+    }
+
+    const numberOnly = Number(text.replace(/[^\d.]/g, ""));
+    if (!numberOnly) return 0;
+
+    return Math.round(numberOnly * 60);
+  }
+
+  function formatSeconds(totalSeconds) {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${String(seconds).padStart(2, "0")}`;
+  }
+
+  function updateSummary() {
+    const totalSeconds = currentSet.reduce((sum, bit) => {
+      return sum + parseRuntime(bit.runtime);
+    }, 0);
+
+    document.getElementById("setSummary").textContent =
+      `Current Set: ${currentSet.length} bit(s) | Estimated Runtime: ${formatSeconds(totalSeconds)}`;
+  }
+
+  function saveCurrentSetlist() {
+    const name = document.getElementById("setlistName").value.trim();
+
+    if (!name) {
+      alert("Please enter a setlist name.");
+      return;
+    }
+
+    if (currentSet.length === 0) {
+      alert("Please add at least one bit to the setlist.");
+      return;
+    }
+
+    const newSetlist = {
+      id: Date.now(),
+      name: name,
+      type: document.getElementById("setlistType").value,
+      notes: document.getElementById("setlistNotes").value.trim(),
+      bits: currentSet,
+      created: new Date().toLocaleDateString()
+    };
+
+    savedSetlists.push(newSetlist);
+    localStorage.setItem("savedComedySetlists", JSON.stringify(savedSetlists));
+
+    renderSavedSetlists();
+    alert("Setlist saved. The show pony is saddled.");
+  }
+
+  function renderSavedSetlists() {
+    const box = document.getElementById("savedSetlists");
+    box.innerHTML = "";
+
+    if (savedSetlists.length === 0) {
+      box.innerHTML = `<div class="empty-message">No saved setlists yet.</div>`;
+      return;
+    }
+
+    savedSetlists.forEach(setlist => {
+      const totalSeconds = setlist.bits.reduce((sum, bit) => {
+        return sum + parseRuntime(bit.runtime);
+      }, 0);
+
+      const card = document.createElement("div");
+      card.className = "set-card";
+
+      card.innerHTML = `
+        <h3>${escapeHTML(setlist.name)}</h3>
+        <span class="badge">${escapeHTML(setlist.type)}</span>
+        <span class="badge">${setlist.bits.length} bit(s)</span>
+        <span class="badge">${formatSeconds(totalSeconds)}</span>
+        <p>${escapeHTML(setlist.notes || "No notes added.")}</p>
+        <p><strong>Created:</strong> ${escapeHTML(setlist.created)}</p>
+
+        <button class="secondary-btn" onclick="loadSavedSetlist(${setlist.id})">Load Setlist</button>
+        <button class="danger-btn" onclick="deleteSavedSetlist(${setlist.id})">Delete Setlist</button>
+      `;
+
+      box.appendChild(card);
+    });
+  }
+
+  function loadSavedSetlist(id) {
+    const setlist = savedSetlists.find(item => item.id === id);
+    if (!setlist) return;
+
+    document.getElementById("setlistName").value = setlist.name;
+    document.getElementById("setlistType").value = setlist.type;
+    document.getElementById("setlistNotes").value = setlist.notes;
+
+    currentSet = [...setlist.bits];
+    renderCurrentSet();
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function deleteSavedSetlist(id) {
+    if (!confirm("Delete this saved setlist?")) {
+      return;
+    }
+
+    savedSetlists = savedSetlists.filter(item => item.id !== id);
+    localStorage.setItem("savedComedySetlists", JSON.stringify(savedSetlists));
+    renderSavedSetlists();
+  }
+
+  function clearCurrentSetlist() {
+    if (!confirm("Clear the current working setlist?")) {
+      return;
+    }
+
+    document.getElementById("setlistName").value = "";
+    document.getElementById("setlistType").value = "Open Mic";
+    document.getElementById("setlistNotes").value = "";
+    currentSet = [];
+
+    renderCurrentSet();
+  }
+    function printCurrentSetlist() {
+  const name = document.getElementById("setlistName").value.trim() || "Untitled Setlist";
+  const type = document.getElementById("setlistType").value;
+  const notes = document.getElementById("setlistNotes").value.trim();
+
+  if (currentSet.length === 0) {
+    alert("Please add at least one bit before printing.");
+    return;
+  }
+
+  const totalSeconds = currentSet.reduce((sum, bit) => {
+    return sum + parseRuntime(bit.runtime);
+  }, 0);
+
+  let printHTML = `
+    <html>
+    <head>
+      <title>${escapeHTML(name)}</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          padding: 30px;
+          color: #222;
+        }
+
+        h1 {
+          margin-bottom: 5px;
+        }
+
+        .subtitle {
+          margin-bottom: 20px;
+          font-weight: bold;
+        }
+
+        .summary {
+          border: 2px solid #222;
+          padding: 12px;
+          margin-bottom: 20px;
+        }
+
+        .bit {
+          border-bottom: 1px solid #999;
+          padding: 12px 0;
+        }
+
+        .bit h2 {
+          margin: 0 0 5px 0;
+          font-size: 20px;
+        }
+
+        .notes {
+          white-space: pre-wrap;
+          margin-top: 8px;
+        }
+
+        .footer {
+          margin-top: 30px;
+          font-size: 12px;
+          color: #555;
+        }
+      </style>
+    </head>
+    <body>
+      <h1>${escapeHTML(name)}</h1>
+      <div class="subtitle">${escapeHTML(type)}</div>
+
+      <div class="summary">
+        <strong>Total Bits:</strong> ${currentSet.length}<br>
+        <strong>Estimated Runtime:</strong> ${formatSeconds(totalSeconds)}<br>
+        <strong>Show Notes:</strong><br>
+        ${escapeHTML(notes || "No notes added.")}
+      </div>
+
+      ${currentSet.map((bit, index) => `
+        <div class="bit">
+          <h2>${index + 1}. ${escapeHTML(bit.title)}</h2>
+          <strong>Project:</strong> ${escapeHTML(bit.projectName || "No project")}<br>
+          <strong>Runtime:</strong> ${escapeHTML(bit.runtime || "No runtime")}<br>
+          <div class="notes">${escapeHTML(bit.notes || "No notes added.")}</div>
+        </div>
+      `).join("")}
+
+      <div class="footer">
+        Printed from Comedy Utility Toolbox | Setlist Architect
+      </div>
+    </body>
+    </html>
+  `;
+
+  const printWindow = window.open("", "_blank");
+  printWindow.document.open();
+  printWindow.document.write(printHTML);
+  printWindow.document.close();
+  printWindow.focus();
+  printWindow.print();
+}
+  function escapeHTML(text) {
+    return String(text)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  renderAvailableBits();
+  renderCurrentSet();
+  renderSavedSetlists();
+</script>
+
+</body>
+</html>

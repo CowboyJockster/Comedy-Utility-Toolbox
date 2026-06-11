@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Callback Seed Planter V3</title>
+
+  <style>
+    .navbar {
+      background: #1d1713;
+      padding: 15px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .navbar a:hover {
+      color: #f1d9a5;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 850px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fafafa;
+      color: #222;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+      color: #2f3e46;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      margin-bottom: 25px;
+      color: #555;
+    }
+
+    .helpBar {
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      color: #2f241d;
+    }
+
+    .helpButton {
+      width: auto;
+      margin: 0;
+      padding: 6px 12px;
+      border-radius: 50%;
+      background: #2f241d;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+    }
+
+    .helpButton:hover {
+      background: #b87b2f;
+    }
+
+    .helpSection {
+      display: none;
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 18px;
+      border-radius: 10px;
+      margin: 20px 0;
+      line-height: 1.5;
+    }
+
+    .helpSection h2 {
+      margin-top: 0;
+    }
+
+    .helpSection h3 {
+      margin-bottom: 5px;
+      color: #2f241d;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 15px;
+      display: block;
+    }
+
+    input, textarea, select, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      box-sizing: border-box;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      font-weight: bold;
+      color: white;
+    }
+
+    .generateButton {
+      background-color: #2E8B57;
+    }
+
+    .generateButton:hover {
+      background-color: #256F47;
+    }
+
+    .clearButton {
+      background-color: #B22222;
+    }
+
+    .clearButton:hover {
+      background-color: #8B1A1A;
+    }
+
+    .result {
+      background: #ffffff;
+      padding: 20px;
+      border-left: 6px solid #2E8B57;
+      border-radius: 10px;
+      margin-top: 25px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      white-space: pre-line;
+    }
+
+    .sectionTitle {
+      font-weight: bold;
+      color: #2f3e46;
+      margin-top: 18px;
+    }
+
+    .footerNote {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #666;
+      font-style: italic;
+    }
+
+    .returnButton {
+      display: inline-block;
+      padding: 12px 18px;
+      background: #2f241d;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 25px;
+    }
+
+    .returnButton:hover {
+      background: #b87b2f;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <a href="index.html">HOME</a>
+    <a href="about.html">ABOUT</a>
+    <a href="index.html#tools">TOOLBOX</a>
+    <a href="toolbox-contact.html">CONTACT</a>
+  </nav>
+
+  <h1>Callback Seed Planter V3</h1>
+
+  <div class="subtitle">
+    Build stronger callbacks by intentionally planting memorable joke details early, then bringing them back later for bigger laughs, stronger audience connection, and tighter comedy structure.
+  </div>
+
+  <div class="helpBar">
+    <span>Need help planting details that pay off later?</span>
+    <button class="helpButton" onclick="toggleHelp()">?</button>
+  </div>
+
+    <div id="helpSection" class="helpSection">
+    <h2>How To Use This Tool</h2>
+
+    <h3>Purpose</h3>
+    <p>The Callback Seed Planter helps you intentionally plant small details, phrases, objects, or character habits early so they can return later as callbacks, tags, running jokes, or closing punchlines.</p>
+
+    <h3>When To Use It</h3>
+    <p>Use this tool when a story has a funny ending but needs stronger setup, when you want a detail to pay off later, or when your bit needs a callback that feels earned instead of stapled on with duct tape.</p>
+
+    <h3>How To Use It</h3>
+    <ol>
+      <li>Enter the main topic or premise.</li>
+      <li>Choose a recurring character.</li>
+      <li>Add a funny object, detail, phrase, or image.</li>
+      <li>Choose the comedy tone.</li>
+      <li>Enter a possible ending or final payoff.</li>
+      <li>Click Plant Callback Seeds.</li>
+      <li>Use the seed line, middle reminder, late callback, and final button to tighten the bit.</li>
+    </ol>
+
+    <h3>Example Input</h3>
+    <p><strong>Main Topic:</strong> Grandpa bought a suspicious tractor at an auction.<br>
+    <strong>Seed Detail:</strong> A glowing wrench in the glove box.<br>
+    <strong>Possible Ending:</strong> The tractor was only haunted because Jimbo left his phone in the glove box.</p>
+
+    <h3>Example Output</h3>
+    <p>The tool suggests where to plant the detail early, how to remind the audience in the middle, and how to bring it back near the end for a stronger payoff.</p>
+
+    <h3>Comedy Tip</h3>
+    <p>A good callback seed should be simple enough for the audience to remember. If they forgot it, you buried the seed too deep.</p>
+  </div>
+
+  <label for="topic">Main Topic / Premise</label>
+  <input type="text" id="topic" placeholder="Example: Grandpa bought a suspicious tractor at an auction">
+
+  <label for="character">Recurring Character</label>
+  <select id="character">
+    <option value="Grandpa">Grandpa</option>
+    <option value="Jimbo">Jimbo</option>
+    <option value="Your Goofy Aunt">Your Goofy Aunt</option>
+    <option value="Your Best Goofy Friend">Your Best Goofy Friend</option>
+    <option value="The Little Lady">The Little Lady</option>
+    <option value="A Mysterious Neighbor">A Mysterious Neighbor</option>
+    <option value="A City Feller">A City Feller</option>
+    <option value="A Rodeo Clown">A Rodeo Clown</option>
+    <option value="A Church Lady">A Church Lady</option>
+    <option value="A Suspicious Cowboy">A Suspicious Cowboy</option>
+  </select>
+
+  <label for="object">Funny Object / Detail</label>
+  <input type="text" id="object" placeholder="Example: a glowing wrench, cursed lunchbox, fake mustache">
+
+  <label for="tone">Comedy Tone</label>
+  <select id="tone">
+    <option value="clean">Clean / Family Friendly</option>
+    <option value="club">Comedy Club / PG-13</option>
+    <option value="rural">Rural Storyteller</option>
+    <option value="surreal">Surreal Grandpa Logic</option>
+    <option value="corporate">Corporate Safe</option>
+    <option value="church">Church Friendly</option>
+  </select>
+
+  <label for="ending">Possible Ending / Final Payoff</label>
+  <textarea id="ending" placeholder="Example: Turns out the tractor was only haunted because Jimbo left his phone in the glove box."></textarea>
+
+  <button class="generateButton" onclick="generateCallbackSeeds()">Plant Callback Seeds</button>
+  <button class="clearButton" onclick="clearForm()">Clear</button>
+
+  <div id="output" class="result" style="display:none;"></div>
+
+  <div class="footerNote">
+    Comedy rule: If the audience remembers it, you can call it back. If they forgot it, you buried the seed too deep.
+  </div>
+
+  <a href="index.html#tools" class="returnButton">← Return To Toolbox</a>
+
+  <script>
+    function toggleHelp() {
+      const helpSection = document.getElementById("helpSection");
+
+      if (helpSection.style.display === "block") {
+        helpSection.style.display = "none";
+      } else {
+        helpSection.style.display = "block";
+      }
+    }
+
+    function randomItem(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function generateCallbackSeeds() {
+      const topic = document.getElementById("topic").value.trim();
+      const character = document.getElementById("character").value;
+      const object = document.getElementById("object").value.trim();
+      const tone = document.getElementById("tone").value;
+      const ending = document.getElementById("ending").value.trim();
+
+      const output = document.getElementById("output");
+
+      if (!topic || !object || !ending) {
+        output.style.display = "block";
+        output.innerText = "Please fill in the main topic, funny object/detail, and possible ending. A callback without a setup is just a feller yelling from the barn.";
+        return;
+      }
+
+      const openers = [
+        `Early in the bit, casually mention that ${character} has always had strong opinions about ${object}.`,
+        `Plant the detail early by saying nobody trusted ${object}, especially ${character}.`,
+        `Introduce ${object} as if it is unimportant, then let the audience discover later it was the whole dang problem.`,
+        `Mention ${object} once in passing, like it is just background clutter. That makes the later callback feel earned.`,
+        `Let ${character} dismiss ${object} early with too much confidence. Comedy loves a confident fool.`
+      ];
+
+      const seedLines = [
+        `"I should have known something was wrong when ${character} said, 'Don't worry, I fixed it with ${object}.'"`,
+        `"There was ${object} sitting there like it had already been questioned by the sheriff."`,
+        `"Nobody paid attention to ${object} at first, which is exactly how most family disasters begin."`,
+        `"${character} looked at ${object} the way a preacher looks at a bingo machine."`,
+        `"That ${object} had no business being there, which naturally meant it was the most important thing there."`,
+        `"I asked what ${object} was for, and ${character} said, 'You'll know when it's too late.'"`,
+        `"Every family has one item nobody explains. In our family, it was ${object}."`
+      ];
+
+      const callbackLines = [
+        `"And that's when I remembered ${object} had been sitting there the whole time, minding everybody else's business."`,
+        `"Turns out ${object} wasn't decoration. It was evidence."`,
+        `"That's when ${character}'s little comment about ${object} came back like a raccoon with a grudge."`,
+        `"The whole story made sense once ${object} returned for its second act."`,
+        `"At that moment, ${object} stopped being a detail and became a witness."`,
+        `"I finally understood why ${character} never turned his back on ${object}.'"`,
+        `"That was the moment ${object} became the family attorney."`
+      ];
+
+      const escalationIdeas = [
+        `First mention ${object} as a throwaway detail.`,
+        `Second mention it when things start getting strange.`,
+        `Third mention it near the end as the reason everything went sideways.`,
+        `Let ${character} deny knowing anything about it.`,
+        `Have another character misunderstand what ${object} is used for.`,
+        `Bring it back after the audience has almost forgotten it.`,
+        `Use it as the final button after the main punchline.`
+      ];
+
+      const toneAdjustments = {
+        clean: `Keep the object silly, harmless, and visual. Let the callback land on surprise, not shock.`,
+        club: `Make the callback sharper and more suspicious. Let the audience feel like they should have seen it coming.`,
+        rural: `Tie the callback to family, tools, livestock, auctions, church basements, Wally World, or barn logic.`,
+        surreal: `Let the callback get weirder each time. By the end, ${object} should feel like it has voting rights.`,
+        corporate: `Keep the callback workplace-safe. Make it about confusion, overconfidence, or bad planning.`,
+        church: `Keep it warm and good-hearted. The callback should feel like a confession with biscuits afterward.`
+      };
+
+      const finalButtonOptions = [
+        `"So the moral is: never ignore ${object}, especially when ${character} says it's probably fine."`,
+        `"And that is why, to this day, nobody in my family touches ${object} without prayer and a witness."`,
+        `"That wasn't a callback. That was ${object} filing a police report."`,
+        `"Some families pass down wisdom. We pass down ${object} and unanswered questions."`,
+        `"The story ended right where it began: with ${character}, bad judgment, and ${object} looking guilty."`
+      ];
+
+      const result =
+`CALLBACK SEED PLANTER RESULTS
+
+Main Premise:
+${topic}
+
+Possible Ending / Payoff:
+${ending}
+
+Seed Strategy:
+${randomItem(openers)}
+
+Early Seed Line:
+${randomItem(seedLines)}
+
+Middle Reminder:
+Bring ${object} back briefly in the middle of the bit. Don't explain it too much. Just tap it once so the audience remembers it.
+
+Example:
+"${character} kept looking at ${object}, and that's when I knew we had moved from problem-solving into family tradition."
+
+Late Callback Line:
+${randomItem(callbackLines)}
+
+Escalation Path:
+1. ${randomItem(escalationIdeas)}
+2. ${randomItem(escalationIdeas)}
+3. ${randomItem(escalationIdeas)}
+
+Tone Guidance:
+${toneAdjustments[tone]}
+
+Final Button:
+${randomItem(finalButtonOptions)}
+
+Writer's Note:
+The trick is to make ${object} seem like a small throwaway detail early, then reveal later that it was the loaded shotgun on the wall — except this shotgun may have been bought at a yard sale by ${character}.`;
+
+      output.style.display = "block";
+      output.innerText = result;
+    }
+
+    function clearForm() {
+      document.getElementById("topic").value = "";
+      document.getElementById("object").value = "";
+      document.getElementById("ending").value = "";
+      document.getElementById("character").selectedIndex = 0;
+      document.getElementById("tone").selectedIndex = 0;
+      document.getElementById("output").style.display = "none";
+      document.getElementById("output").innerText = "";
+    }
+  </script>
+
+</body>
+</html>

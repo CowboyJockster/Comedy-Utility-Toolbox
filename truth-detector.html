@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Truth Detector V3 | Comedy Utility Toolbox</title>
+
+  <style>
+    .navbar {
+      background: #1d1713;
+      padding: 15px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .navbar a:hover {
+      color: #f1d9a5;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 850px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f7f3ea;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    h1 {
+      color: #2f241d;
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    .helpBar {
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      color: #2f241d;
+    }
+
+    .helpButton {
+      width: auto;
+      margin: 0;
+      padding: 6px 12px;
+      border-radius: 50%;
+      background: #2f241d;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+    }
+
+    .helpButton:hover {
+      background: #b87b2f;
+    }
+
+    .helpSection {
+      display: none;
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 18px;
+      border-radius: 10px;
+      margin: 20px 0;
+      line-height: 1.5;
+    }
+
+    .helpSection h2 {
+      margin-top: 0;
+    }
+
+    .helpSection h3 {
+      margin-bottom: 5px;
+      color: #2f241d;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      margin-bottom: 25px;
+      border-top: 6px solid #b87b2f;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-family: Arial, sans-serif;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 18px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .generateButton {
+      background: #2f241d;
+    }
+
+    .generateButton:hover {
+      background: #b87b2f;
+    }
+
+    .clearButton {
+      background: #8b1a1a;
+    }
+
+    .clearButton:hover {
+      background: #b22222;
+    }
+
+    .result {
+      background: #fffdf7;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 20px;
+      border-left: 6px solid #b87b2f;
+      display: none;
+    }
+
+    .result h2 {
+      margin-top: 0;
+      color: #2f241d;
+    }
+
+    .result-section {
+      margin-bottom: 18px;
+    }
+
+    .result-section strong {
+      color: #2f241d;
+    }
+
+    .returnButton {
+      display: inline-block;
+      padding: 12px 18px;
+      background: #2f241d;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .returnButton:hover {
+      background: #b87b2f;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <a href="index.html">HOME</a>
+    <a href="about.html">ABOUT</a>
+    <a href="index.html#tools">TOOLBOX</a>
+    <a href="toolbox-contact.html">CONTACT</a>
+  </nav>
+
+  <h1>Truth Detector V3</h1>
+
+  <p class="subtitle">
+    Find the honest emotional truth hiding underneath a joke idea, story, complaint, or observation.
+  </p>
+
+  <div class="helpBar">
+    <span>Need help finding the truth underneath a joke idea?</span>
+    <button class="helpButton" onclick="toggleHelp()">?</button>
+  </div>
+
+  <div id="helpSection" class="helpSection">
+    <h2>How to Use This Tool</h2>
+
+    <h3>Purpose</h3>
+    <p>The Truth Detector helps uncover the honest emotional truth underneath a joke idea, complaint, story, or observation so the material has stronger roots.</p>
+
+    <h3>When To Use It</h3>
+    <ul>
+      <li>When a premise feels clever but thin.</li>
+      <li>When a complaint needs a more relatable emotional core.</li>
+      <li>When you want to turn frustration, embarrassment, fear, pride, jealousy, or old-school thinking into joke material.</li>
+    </ul>
+
+    <h3>How To Use It</h3>
+    <ol>
+      <li>Enter a premise, observation, complaint, or story idea.</li>
+      <li>Choose a comedy direction.</li>
+      <li>Click Detect Truth.</li>
+      <li>Review the hidden truth, comedy angle, setup, punchline direction, and tag idea.</li>
+      <li>Use the strongest truth as the foundation for jokes, callbacks, or a longer bit.</li>
+    </ol>
+
+    <h3>Example Input</h3>
+    <p><strong>Premise:</strong> I hate self-checkout because it makes me feel like I work at the store.<br><strong>Direction:</strong> Frustrated Truth</p>
+
+    <h3>Example Output</h3>
+    <p><strong>Hidden Truth:</strong> A small inconvenience is making you feel powerless.<br><strong>Comedy Angle:</strong> Treat the machine like a bossy supervisor who forgot to put you on payroll.</p>
+
+    <h3>Comedy Tip</h3>
+    <p>Audiences laugh at exaggeration, but they connect with truth. Find the truth first; then let the punchlines hitch a ride.</p>
+  </div>
+
+<div class="card">
+    <label for="premiseInput">Enter your joke idea, complaint, story, or observation:</label>
+    <textarea id="premiseInput" rows="6" placeholder="Example: I hate self-checkout machines because they make me feel like I work at the store."></textarea>
+
+    <label for="toneSelect">Choose a comedy direction:</label>
+    <select id="toneSelect">
+      <option value="frustrated">Frustrated Truth</option>
+      <option value="embarrassed">Embarrassing Truth</option>
+      <option value="fear">Fear-Based Truth</option>
+      <option value="jealous">Jealous Truth</option>
+      <option value="pride">Prideful Truth</option>
+      <option value="childish">Childish Truth</option>
+      <option value="oldschool">Old-School Truth</option>
+    </select>
+
+    <button class="generateButton" onclick="detectTruth()">Detect Truth</button>
+    <button class="clearButton" onclick="clearTool()">Clear</button>
+
+    <div id="resultBox" class="result">
+      <h2>Truth Detector Results</h2>
+
+      <div class="result-section">
+        <strong>Hidden Truth:</strong>
+        <p id="hiddenTruth"></p>
+      </div>
+
+      <div class="result-section">
+        <strong>Comedy Angle:</strong>
+        <p id="comedyAngle"></p>
+      </div>
+
+      <div class="result-section">
+        <strong>Possible Setup:</strong>
+        <p id="possibleSetup"></p>
+      </div>
+
+      <div class="result-section">
+        <strong>Possible Punchline Direction:</strong>
+        <p id="punchlineDirection"></p>
+      </div>
+
+      <div class="result-section">
+        <strong>Tag Idea:</strong>
+        <p id="tagIdea"></p>
+      </div>
+    </div>
+  </div>
+
+  <a href="index.html#tools" class="returnButton">← Return To Toolbox</a>
+
+  <script>
+    function toggleHelp() {
+    const helpSection = document.getElementById("helpSection");
+
+    if (helpSection.style.display === "block") {
+      helpSection.style.display = "none";
+    } else {
+      helpSection.style.display = "block";
+    }
+  }
+
+    function detectTruth() {
+      const input = document.getElementById("premiseInput").value.trim();
+      const tone = document.getElementById("toneSelect").value;
+
+      if (input === "") {
+        alert("Please enter a joke idea, complaint, story, or observation first.");
+        return;
+      }
+
+      let hiddenTruth = "";
+      let comedyAngle = "";
+      let possibleSetup = "";
+      let punchlineDirection = "";
+      let tagIdea = "";
+
+      const lowerInput = input.toLowerCase();
+
+      if (tone === "frustrated") {
+        hiddenTruth = "You are annoyed because something small is making you feel powerless.";
+        comedyAngle = "Treat the minor inconvenience like a full-blown personal betrayal.";
+        possibleSetup = "I realized something was wrong when " + input;
+        punchlineDirection = "Make the situation sound way more serious than it deserves.";
+        tagIdea = "At some point, it stopped being a problem and became a hostage negotiation.";
+      }
+
+      else if (tone === "embarrassed") {
+        hiddenTruth = "You are trying to act normal while secretly feeling exposed, awkward, or judged.";
+        comedyAngle = "Let the audience see the gap between how confident you want to look and how ridiculous you feel.";
+        possibleSetup = "I tried to play it cool, but " + input;
+        punchlineDirection = "Reveal the embarrassing thought you were trying to hide.";
+        tagIdea = "That's when my dignity left the building without saying goodbye.";
+      }
+
+      else if (tone === "fear") {
+        hiddenTruth = "Under the joke, there is a small fear that something ordinary could go terribly wrong.";
+        comedyAngle = "Turn a normal situation into a survival scenario.";
+        possibleSetup = "Nobody tells you this, but " + input;
+        punchlineDirection = "Exaggerate the danger until it feels absurd but recognizable.";
+        tagIdea = "I wasn't scared. I was just spiritually preparing to be found by search and rescue.";
+      }
+
+      else if (tone === "jealous") {
+        hiddenTruth = "You are bothered because somebody or something seems to have it easier than you.";
+        comedyAngle = "Compare yourself to the thing you're jealous of and admit the petty truth.";
+        possibleSetup = "I didn't think I was jealous until " + input;
+        punchlineDirection = "Confess the unreasonable comparison hiding underneath the joke.";
+        tagIdea = "I'm not proud of it, but emotionally I filed a complaint.";
+      }
+
+      else if (tone === "pride") {
+        hiddenTruth = "You are trying to protect your pride even though the situation makes you look ridiculous.";
+        comedyAngle = "Act overly noble about something that clearly does not deserve dignity.";
+        possibleSetup = "I handled it with maturity and grace, right up until " + input;
+        punchlineDirection = "Let the punchline expose how fragile your pride really is.";
+        tagIdea = "That's not failure. That's character development with witnesses.";
+      }
+
+      else if (tone === "childish") {
+        hiddenTruth = "Part of you knows better, but another part still wants to react like a stubborn kid.";
+        comedyAngle = "Let your inner child argue with adult responsibility.";
+        possibleSetup = "The adult in me understood the situation, but the kid in me saw " + input;
+        punchlineDirection = "Make the immature reaction feel painfully honest.";
+        tagIdea = "I didn't throw a tantrum. I just had a very emotional staff meeting with myself.";
+      }
+
+      else if (tone === "oldschool") {
+        hiddenTruth = "You believe things used to make more sense, even if the old way was harder.";
+        comedyAngle = "Compare modern nonsense with old-school common sense.";
+        possibleSetup = "Back in the day, we didn't have to deal with " + input;
+        punchlineDirection = "Use plainspoken, old-school logic to expose how silly the modern situation feels.";
+        tagIdea = "Grandpa would've fixed it with duct tape, a warning, and no customer service survey.";
+      }
+
+      if (lowerInput.includes("self-checkout") || lowerInput.includes("checkout")) {
+        tagIdea = "I don't mind helping out, but if I'm scanning groceries, I want an employee discount and a nametag.";
+      }
+
+      if (lowerInput.includes("phone") || lowerInput.includes("text")) {
+        tagIdea = "Technology didn't improve communication. It just gave everybody a smaller screen to misunderstand each other on.";
+      }
+
+      if (lowerInput.includes("grandpa")) {
+        tagIdea = "Grandpa didn't call it emotional truth. He called it finally saying what everybody else was too polite to admit.";
+      }
+
+      document.getElementById("hiddenTruth").textContent = hiddenTruth;
+      document.getElementById("comedyAngle").textContent = comedyAngle;
+      document.getElementById("possibleSetup").textContent = possibleSetup;
+      document.getElementById("punchlineDirection").textContent = punchlineDirection;
+      document.getElementById("tagIdea").textContent = tagIdea;
+
+      document.getElementById("resultBox").style.display = "block";
+    }
+
+    function clearTool() {
+      document.getElementById("premiseInput").value = "";
+      document.getElementById("toneSelect").selectedIndex = 0;
+      document.getElementById("resultBox").style.display = "none";
+
+      document.getElementById("hiddenTruth").textContent = "";
+      document.getElementById("comedyAngle").textContent = "";
+      document.getElementById("possibleSetup").textContent = "";
+      document.getElementById("punchlineDirection").textContent = "";
+      document.getElementById("tagIdea").textContent = "";
+    }
+  </script>
+
+</body>
+</html>

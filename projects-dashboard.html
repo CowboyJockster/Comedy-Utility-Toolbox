@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>My Comedy Projects</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f1e8;
+      color: #222;
+    }
+
+    header {
+      background: #2f3e2f;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    nav {
+      background: #1f2a1f;
+      padding: 12px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 12px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .intro,
+    .project-form,
+    .project-card,
+    .details-panel,
+    .bit-card,
+    .performance-card {
+      background: white;
+      padding: 22px;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+      margin-bottom: 20px;
+    }
+
+    h2, h3, h4 {
+      margin-top: 0;
+      color: #2f3e2f;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 12px;
+      margin-bottom: 5px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #bbb;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    button {
+      border: none;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 6px 6px 6px 0;
+    }
+
+    .primary-btn {
+      background: #2f6f3e;
+      color: white;
+    }
+
+    .secondary-btn {
+      background: #704214;
+      color: white;
+    }
+
+    .danger-btn {
+      background: #a83232;
+      color: white;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .project-card {
+      cursor: pointer;
+      border-left: 6px solid #2f6f3e;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #e9dfc7;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+      margin: 4px 4px 4px 0;
+    }
+
+    .details-panel {
+      display: none;
+      border-left: 6px solid #704214;
+    }
+
+    .bit-card {
+      border-left: 6px solid #2f6f3e;
+    }
+
+    .performance-section {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 2px solid #e9dfc7;
+    }
+
+    .performance-card {
+      background: #fffdf7;
+      border-left: 6px solid #704214;
+      box-shadow: none;
+      padding: 15px;
+    }
+
+    .performance-form {
+      background: #f5f1e8;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+
+    .empty-message {
+      background: #fffdf7;
+      padding: 18px;
+      border-left: 6px solid #704214;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+	.save-status {
+  background: #fffdf7;
+  border-left: 6px solid #2f6f3e;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #555;
+      font-size: 14px;
+    }
+
+    @media (min-width: 750px) {
+      .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  
+    .helpBar {
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      color: #2f241d;
+      gap: 15px;
+    }
+
+    .helpButton {
+      width: auto;
+      margin: 0;
+      padding: 6px 12px;
+      border-radius: 50%;
+      background: #2f241d;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+      flex-shrink: 0;
+    }
+
+    .helpButton:hover {
+      background: #b87b2f;
+    }
+
+    .helpSection {
+      display: none;
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 18px;
+      border-radius: 10px;
+      margin: 20px 0;
+      line-height: 1.6;
+    }
+
+    .helpSection h2 {
+      margin-top: 0;
+      color: #2f241d;
+    }
+
+    .helpSection h3 {
+      margin-bottom: 5px;
+      color: #2f241d;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>My Comedy Projects</h1>
+  <p>Organize projects, bits, notes, performance logs, and comedy livestock.</p>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="bit-builder-workspace.html">Bit Builder</a>
+  <a href="setlist-architect.html">Setlist Architect</a>
+  <a href="callback-search-engine.html">Callback Search</a>
+</nav>
+
+<div class="container">
+
+  <div class="helpBar">
+    <span>Need help organizing comedy projects, bits, and performance notes?</span>
+    <button class="helpButton" onclick="toggleHelp()">?</button>
+  </div>
+
+  <div id="helpSection" class="helpSection">
+    <h2>How to Use This Tool</h2>
+
+    <h3>Purpose</h3>
+    <p>The Projects Dashboard helps you store comedy projects, add bits inside each project, and track performance history so your material stays organized instead of scattered across napkins, notebooks, and mysterious voice memos.</p>
+
+    <h3>When To Use It</h3>
+    <ul>
+      <li>When you want to organize several bits under one larger project.</li>
+      <li>When you need to track bit status, runtime, notes, and live performance results.</li>
+      <li>When you want your writing notes and show results in one place.</li>
+    </ul>
+
+    <h3>How To Use It</h3>
+    <ol>
+      <li>Create a project name and choose a category.</li>
+      <li>Add general project notes.</li>
+      <li>Open the saved project card.</li>
+      <li>Add individual bits inside that project.</li>
+      <li>Add performance logs after live shows.</li>
+      <li>Review what is working, what needs rewriting, and what should move into a setlist.</li>
+    </ol>
+
+    <h3>Example Input</h3>
+    <p><strong>Project:</strong> Grandpa Stories<br><strong>Bit:</strong> Grandpa Refuses GPS<br><strong>Performance Note:</strong> Worked well with older crowd; tighten the middle.</p>
+
+    <h3>Example Output</h3>
+    <p><strong>Organized Result:</strong> One saved project containing bits, notes, runtimes, and live performance history.</p>
+
+    <h3>Comedy Tip</h3>
+    <p>Update performance notes soon after the show. Your memory lies after midnight and becomes a full-blown fiction writer by breakfast.</p>
+  </div>
+
+
+  <section class="intro">
+    <h2>Purpose</h2>
+    <p>
+      This dashboard stores comedy projects. Each project can hold multiple bits,
+      and each bit can now track performance history: venue, crowd type, result,
+      date, and field notes from the actual show.
+    </p>
+  </section>
+
+  <section class="project-form">
+    <h2>Create a New Comedy Project</h2>
+
+    <label>Project Name</label>
+    <input id="projectName" placeholder="Example: Grandpa Stories" />
+
+    <label>Category</label>
+    <select id="projectCategory">
+      <option>General</option>
+      <option>Club Material</option>
+      <option>Clean / Church</option>
+      <option>Corporate</option>
+      <option>Veteran Show</option>
+      <option>Grandpa Stories</option>
+      <option>Crowd Work</option>
+      <option>Open Mic Experiments</option>
+    </select>
+
+    <label>Status</label>
+    <select id="projectStatus">
+      <option>Raw Idea</option>
+      <option>Under Construction</option>
+      <option>Working in Clubs</option>
+      <option>Tight 5</option>
+      <option>Feature Ready</option>
+      <option>Headliner Material</option>
+      <option>Clean</option>
+      <option>PG-13</option>
+      <option>Corporate Safe</option>
+    </select>
+
+    <label>Project Notes</label>
+    <textarea id="projectNotes" placeholder="General notes for this project..."></textarea>
+
+    <button class="primary-btn" onclick="addProject()">Add Project</button>
+    <button class="secondary-btn" onclick="clearForm()">Clear Form</button>
+  </section>
+
+  <section>
+    <h2>Saved Comedy Projects</h2>
+    <div id="projectList" class="project-grid"></div>
+  </section>
+
+  <section id="detailsPanel" class="details-panel">
+    <h2>Edit Selected Project</h2>
+
+    <input type="hidden" id="editProjectId" />
+
+    <label>Project Name</label>
+    <input id="editProjectName" />
+
+    <label>Category</label>
+    <select id="editProjectCategory">
+      <option>General</option>
+      <option>Club Material</option>
+      <option>Clean / Church</option>
+      <option>Corporate</option>
+      <option>Veteran Show</option>
+      <option>Grandpa Stories</option>
+      <option>Crowd Work</option>
+      <option>Open Mic Experiments</option>
+    </select>
+
+    <label>Status</label>
+    <select id="editProjectStatus">
+      <option>Raw Idea</option>
+      <option>Under Construction</option>
+      <option>Working in Clubs</option>
+      <option>Tight 5</option>
+      <option>Feature Ready</option>
+      <option>Headliner Material</option>
+      <option>Clean</option>
+      <option>PG-13</option>
+      <option>Corporate Safe</option>
+    </select>
+
+    <label>Project Notes</label>
+    <textarea id="editProjectNotes"></textarea>
+
+    <button class="primary-btn" onclick="saveProjectEdits()">Save Project Changes</button>
+    <button class="secondary-btn" onclick="openWorkspaceFromProject()">Open Project in Workspace</button>
+    <button class="danger-btn" onclick="deleteProject()">Delete Project</button>
+    <div id="saveStatus" class="save-status">
+  Save Status: Not saved yet.
+</div>
+
+    <hr />
+
+    <h2>Bits Inside This Project</h2>
+
+    <label>Bit Title</label>
+    <input id="bitTitle" placeholder="Example: Two Cart Lengths at Aldi" />
+
+    <label>Bit Status</label>
+    <select id="bitStatus">
+      <option>Raw Idea</option>
+      <option>Under Construction</option>
+      <option>Testing</option>
+      <option>Working</option>
+      <option>Tight</option>
+      <option>Ready</option>
+    </select>
+
+    <label>Estimated Runtime</label>
+    <input id="bitRuntime" placeholder="Example: 2:30" />
+
+    <label>Bit Notes</label>
+    <textarea id="bitNotes" placeholder="Premise, tags, punchlines, callbacks, act-outs..."></textarea>
+
+    <button class="primary-btn" onclick="addBitToProject()">Add Bit</button>
+
+    <div id="bitList"></div>
+  </section>
+
+</div>
+
+<footer>
+  Comedy Utility Toolbox | My Comedy Projects V3
+</footer>
+
+<script>
+  function toggleHelp() {
+    const helpSection = document.getElementById("helpSection");
+
+    if (helpSection.style.display === "block") {
+      helpSection.style.display = "none";
+    } else {
+      helpSection.style.display = "block";
+    }
+  }
+
+  let projects = JSON.parse(localStorage.getItem("comedyProjects")) || [];
+
+  projects.forEach(project => {
+    if (!project.bits) {
+      project.bits = [];
+    }
+
+    project.bits.forEach(bit => {
+      if (!bit.performances) {
+        bit.performances = [];
+      }
+    });
+  });
+
+  saveProjectsToStorage();
+
+  function saveProjectsToStorage() {
+    localStorage.setItem("comedyProjects", JSON.stringify(projects));
+  }
+
+  function addProject() {
+    const name = document.getElementById("projectName").value.trim();
+
+    if (!name) {
+      alert("Please enter a project name.");
+      return;
+    }
+
+    const newProject = {
+      id: Date.now(),
+      name: name,
+      category: document.getElementById("projectCategory").value,
+      status: document.getElementById("projectStatus").value,
+      notes: document.getElementById("projectNotes").value.trim(),
+      created: new Date().toLocaleDateString(),
+      bits: []
+    };
+
+    projects.push(newProject);
+    saveProjectsToStorage();
+    renderProjects();
+    clearForm();
+  }
+
+  function renderProjects() {
+    const projectList = document.getElementById("projectList");
+    projectList.innerHTML = "";
+
+    if (projects.length === 0) {
+      projectList.innerHTML = `<div class="empty-message">No saved projects yet.</div>`;
+      return;
+    }
+
+    projects.forEach(project => {
+      const totalPerformances = project.bits.reduce((total, bit) => {
+        return total + (bit.performances ? bit.performances.length : 0);
+      }, 0);
+
+      const card = document.createElement("div");
+      card.className = "project-card";
+      card.onclick = () => loadProjectForEditing(project.id);
+
+      card.innerHTML = `
+        <h3>${escapeHTML(project.name)}</h3>
+        <span class="badge">${escapeHTML(project.category)}</span>
+        <span class="badge">${escapeHTML(project.status)}</span>
+        <span class="badge">${project.bits.length} bit(s)</span>
+        <span class="badge">${totalPerformances} performance log(s)</span>
+        <p>${escapeHTML(project.notes || "No notes added yet.")}</p>
+        <p><strong>Created:</strong> ${escapeHTML(project.created)}</p>
+      `;
+
+      projectList.appendChild(card);
+    });
+  }
+
+  function loadProjectForEditing(id) {
+    const project = projects.find(item => item.id === id);
+    if (!project) return;
+
+    document.getElementById("detailsPanel").style.display = "block";
+
+    document.getElementById("editProjectId").value = project.id;
+    document.getElementById("editProjectName").value = project.name;
+    document.getElementById("editProjectCategory").value = project.category;
+    document.getElementById("editProjectStatus").value = project.status;
+    document.getElementById("editProjectNotes").value = project.notes;
+
+    clearBitForm();
+    renderBits(project);
+
+    document.getElementById("detailsPanel").scrollIntoView({ behavior: "smooth" });
+  }
+
+  function saveProjectEdits() {
+    const id = Number(document.getElementById("editProjectId").value);
+    const project = projects.find(item => item.id === id);
+    if (!project) return;
+
+    project.name = document.getElementById("editProjectName").value.trim();
+    project.category = document.getElementById("editProjectCategory").value;
+    project.status = document.getElementById("editProjectStatus").value;
+    project.notes = document.getElementById("editProjectNotes").value.trim();
+
+    if (!project.name) {
+      alert("Project name cannot be empty.");
+      return;
+    }
+
+    saveProjectsToStorage();
+    renderProjects();
+    updateSaveStatus("Project saved successfully");
+  }
+
+  function deleteProject() {
+    const id = Number(document.getElementById("editProjectId").value);
+
+    if (!confirm("Delete this entire project, all bits, and all performance logs inside it?")) {
+      return;
+    }
+
+    projects = projects.filter(item => item.id !== id);
+    saveProjectsToStorage();
+    renderProjects();
+
+    document.getElementById("detailsPanel").style.display = "none";
+  }
+
+  function addBitToProject() {
+    const id = Number(document.getElementById("editProjectId").value);
+    const project = projects.find(item => item.id === id);
+    if (!project) return;
+
+    const title = document.getElementById("bitTitle").value.trim();
+
+    if (!title) {
+      alert("Please enter a bit title.");
+      return;
+    }
+
+    const newBit = {
+      id: Date.now(),
+      title: title,
+      status: document.getElementById("bitStatus").value,
+      runtime: document.getElementById("bitRuntime").value.trim(),
+      notes: document.getElementById("bitNotes").value.trim(),
+      created: new Date().toLocaleDateString(),
+      performances: []
+    };
+
+    project.bits.push(newBit);
+    saveProjectsToStorage();
+    renderProjects();
+    renderBits(project);
+    clearBitForm();
+    updateSaveStatus("Bit saved successfully");
+  }
+
+  function renderBits(project) {
+    const bitList = document.getElementById("bitList");
+    bitList.innerHTML = "";
+
+    if (!project.bits || project.bits.length === 0) {
+      bitList.innerHTML = `<div class="empty-message">No bits inside this project yet.</div>`;
+      return;
+    }
+
+    project.bits.forEach(bit => {
+      if (!bit.performances) {
+        bit.performances = [];
+      }
+
+      const bitCard = document.createElement("div");
+      bitCard.className = "bit-card";
+
+      bitCard.innerHTML = `
+        <h3>${escapeHTML(bit.title)}</h3>
+        <span class="badge">${escapeHTML(bit.status)}</span>
+        <span class="badge">${escapeHTML(bit.runtime || "No runtime")}</span>
+        <span class="badge">${bit.performances.length} performance log(s)</span>
+        <p>${escapeHTML(bit.notes || "No notes added.")}</p>
+        <p><strong>Created:</strong> ${escapeHTML(bit.created)}</p>
+
+        <button class="secondary-btn" onclick="openBitInWorkspace(${project.id}, ${bit.id})">
+          Open Bit in Workspace
+        </button>
+
+        <button class="danger-btn" onclick="deleteBit(${project.id}, ${bit.id})">
+          Delete Bit
+        </button>
+
+        <div class="performance-section">
+          <h4>Performance Tracker</h4>
+
+          <div class="performance-form">
+            <label>Date</label>
+            <input id="performanceDate-${project.id}-${bit.id}" type="date" value="${getTodayDate()}" />
+
+            <label>Venue</label>
+            <input id="performanceVenue-${project.id}-${bit.id}" placeholder="Example: Stevie Ray's Comedy Cabaret" />
+
+            <label>Crowd Type</label>
+            <select id="performanceCrowd-${project.id}-${bit.id}">
+              <option>Open Mic</option>
+              <option>Comedy Club</option>
+              <option>Clean / Church</option>
+              <option>Corporate</option>
+              <option>Veteran Show</option>
+              <option>Rodeo / Fair</option>
+              <option>Mixed Crowd</option>
+              <option>Family Crowd</option>
+            </select>
+
+            <label>Result</label>
+            <select id="performanceResult-${project.id}-${bit.id}">
+              <option>Untested</option>
+              <option>Bombed</option>
+              <option>Meh</option>
+              <option>Worked</option>
+              <option>Crushed</option>
+            </select>
+
+            <label>Performance Notes</label>
+            <textarea id="performanceNotes-${project.id}-${bit.id}" placeholder="Example: Cargo escort line hit. Pause longer before Wally World callback. Cut second tag."></textarea>
+
+            <button class="primary-btn" onclick="addPerformanceEntry(${project.id}, ${bit.id})">
+              Add Performance Log
+            </button>
+          </div>
+
+          <div>
+            ${renderPerformanceEntries(project.id, bit)}
+          </div>
+        </div>
+      `;
+
+      bitList.appendChild(bitCard);
+    });
+  }
+
+  function renderPerformanceEntries(projectId, bit) {
+    if (!bit.performances || bit.performances.length === 0) {
+      return `<div class="empty-message">No performance logs for this bit yet.</div>`;
+    }
+
+    return bit.performances.map(entry => `
+      <div class="performance-card">
+        <h4>${escapeHTML(entry.date || "No date")}</h4>
+        <span class="badge">${escapeHTML(entry.venue || "No venue")}</span>
+        <span class="badge">${escapeHTML(entry.crowd || "No crowd type")}</span>
+        <span class="badge">${escapeHTML(entry.result || "No result")}</span>
+        <p>${escapeHTML(entry.notes || "No notes added.")}</p>
+
+        <button class="danger-btn" onclick="deletePerformanceEntry(${projectId}, ${bit.id}, ${entry.id})">
+          Delete Performance Log
+        </button>
+      </div>
+    `).join("");
+  }
+
+  function addPerformanceEntry(projectId, bitId) {
+    const project = projects.find(item => item.id === projectId);
+    if (!project) return;
+
+    const bit = project.bits.find(item => item.id === bitId);
+    if (!bit) return;
+
+    if (!bit.performances) {
+      bit.performances = [];
+    }
+
+    const venue = document.getElementById(`performanceVenue-${projectId}-${bitId}`).value.trim();
+    const notes = document.getElementById(`performanceNotes-${projectId}-${bitId}`).value.trim();
+
+    const newEntry = {
+      id: Date.now(),
+      date: document.getElementById(`performanceDate-${projectId}-${bitId}`).value,
+      venue: venue,
+      crowd: document.getElementById(`performanceCrowd-${projectId}-${bitId}`).value,
+      result: document.getElementById(`performanceResult-${projectId}-${bitId}`).value,
+      notes: notes
+    };
+
+    bit.performances.unshift(newEntry);
+
+    saveProjectsToStorage();
+    renderProjects();
+    renderBits(project);
+  }
+
+  function deletePerformanceEntry(projectId, bitId, entryId) {
+    const project = projects.find(item => item.id === projectId);
+    if (!project) return;
+
+    const bit = project.bits.find(item => item.id === bitId);
+    if (!bit) return;
+
+    if (!confirm("Delete this performance log?")) {
+      return;
+    }
+
+    bit.performances = bit.performances.filter(entry => entry.id !== entryId);
+
+    saveProjectsToStorage();
+    renderProjects();
+    renderBits(project);
+  }
+
+  function deleteBit(projectId, bitId) {
+    const project = projects.find(item => item.id === projectId);
+    if (!project) return;
+
+    if (!confirm("Delete this bit and all performance logs attached to it?")) {
+      return;
+    }
+
+    project.bits = project.bits.filter(bit => bit.id !== bitId);
+    saveProjectsToStorage();
+    renderProjects();
+    renderBits(project);
+  }
+
+  function openWorkspaceFromProject() {
+    const projectData = {
+      name: document.getElementById("editProjectName").value,
+      category: document.getElementById("editProjectCategory").value,
+      status: document.getElementById("editProjectStatus").value,
+      notes: document.getElementById("editProjectNotes").value
+    };
+
+    localStorage.setItem("workspaceProjectTransfer", JSON.stringify(projectData));
+    window.location.href = "bit-builder-workspace.html";
+  }
+
+  function openBitInWorkspace(projectId, bitId) {
+    const project = projects.find(item => item.id === projectId);
+    if (!project) return;
+
+    const bit = project.bits.find(item => item.id === bitId);
+    if (!bit) return;
+
+    const projectData = {
+      name: bit.title,
+      category: project.category,
+      status: bit.status,
+      notes: bit.notes,
+      runtime: bit.runtime,
+      projectName: project.name
+    };
+
+    localStorage.setItem("workspaceProjectTransfer", JSON.stringify(projectData));
+    window.location.href = "bit-builder-workspace.html";
+  }
+
+  function clearForm() {
+    document.getElementById("projectName").value = "";
+    document.getElementById("projectCategory").value = "General";
+    document.getElementById("projectStatus").value = "Raw Idea";
+    document.getElementById("projectNotes").value = "";
+  }
+
+  function clearBitForm() {
+    document.getElementById("bitTitle").value = "";
+    document.getElementById("bitStatus").value = "Raw Idea";
+    document.getElementById("bitRuntime").value = "";
+    document.getElementById("bitNotes").value = "";
+  }
+
+  function getTodayDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  }
+	function updateSaveStatus(message) {
+  const statusBox = document.getElementById("saveStatus");
+
+  if (!statusBox) {
+    return;
+  }
+
+  const now = new Date();
+  const time = now.toLocaleTimeString([], {
+    hour: "numeric",
+    minute: "2-digit"
+  });
+
+  statusBox.textContent = `${message} | Last Saved: ${time}`;
+}
+  function escapeHTML(text) {
+    return String(text)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  renderProjects();
+</script>
+
+</body>
+</html>

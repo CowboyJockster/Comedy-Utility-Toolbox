@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Callback Search Engine</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f1e8;
+      color: #222;
+    }
+
+    header {
+      background: #2f3e2f;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    nav {
+      background: #1f2a1f;
+      padding: 12px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 12px;
+      font-weight: bold;
+    }
+
+
+    .helpBar {
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      color: #2f241d;
+    }
+
+    .helpButton {
+      width: auto;
+      margin: 0;
+      padding: 6px 12px;
+      border-radius: 50%;
+      background: #2f241d;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+    }
+
+    .helpButton:hover {
+      background: #b87b2f;
+    }
+
+    .helpSection {
+      display: none;
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 18px;
+      border-radius: 10px;
+      margin: 20px 0;
+      line-height: 1.6;
+    }
+
+    .helpSection h2 {
+      margin-top: 0;
+    }
+
+    .helpSection h3 {
+      margin-bottom: 5px;
+      color: #2f241d;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .panel, .result-card {
+      background: white;
+      padding: 22px;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+      margin-bottom: 20px;
+    }
+
+    h2, h3 {
+      color: #2f3e2f;
+      margin-top: 0;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      font-size: 18px;
+      border: 1px solid #bbb;
+      border-radius: 8px;
+      box-sizing: border-box;
+      margin-bottom: 12px;
+    }
+
+    button {
+      border: none;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 5px 5px 5px 0;
+    }
+
+    .primary-btn {
+      background: #2f6f3e;
+      color: white;
+    }
+
+    .secondary-btn {
+      background: #704214;
+      color: white;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #e9dfc7;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+      margin: 4px 4px 4px 0;
+    }
+
+    .result-card {
+      border-left: 6px solid #2f6f3e;
+    }
+
+    .empty-message {
+      background: #fffdf7;
+      padding: 18px;
+      border-left: 6px solid #704214;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .match-text {
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+
+    mark {
+      background: #ffe28a;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #555;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Callback Search Engine</h1>
+  <p>Find repeated phrases, tags, callbacks, and lost comedy gold.</p>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="projects-dashboard.html">Projects</a>
+  <a href="bit-builder-workspace.html">Bit Builder</a>
+  <a href="setlist-architect.html">Setlist Architect</a>
+</nav>
+
+<div class="container">
+
+  <div class="helpBar">
+    <span>Need help finding callbacks, repeated phrases, or lost comedy gold?</span>
+    <button class="helpButton" onclick="toggleHelp()">?</button>
+  </div>
+
+  <div id="helpSection" class="helpSection">
+    <h2>How To Use This Tool</h2>
+
+    <h3>Purpose</h3>
+    <p>The Callback Search Engine helps you search your saved comedy projects, notes, bits, and setlists to find repeated phrases, themes, tags, callbacks, and forgotten punchlines.</p>
+
+    <h3>When To Use It</h3>
+    <p>Use this tool when you remember part of a joke but not where you saved it, when you want to find callback opportunities, or when you want to see whether a phrase, character, or theme already appears in your material.</p>
+
+    <h3>How To Use It</h3>
+    <ol>
+      <li>Type a phrase, word, character name, topic, or callback idea into the search box.</li>
+      <li>Click Search or press Enter.</li>
+      <li>Review the matching projects, bits, notes, and setlists.</li>
+      <li>Use the highlighted matches to decide where a phrase or idea can return later.</li>
+      <li>Click Clear when you want to start a new search.</li>
+    </ol>
+
+    <h3>Example Input</h3>
+    <p><strong>Search Phrase:</strong> cargo escort<br>
+    <strong>Other Examples:</strong> Grandpa, Aldi, mule, Wally World, two cart lengths, suspicious tractor.</p>
+
+    <h3>Example Output</h3>
+    <p>The tool lists matching projects, bits, saved setlists, and notes. Each result shows where the phrase was found and highlights the matching text so you can spot callback opportunities quickly.</p>
+
+    <h3>Comedy Tip</h3>
+    <p>Search for short, repeatable phrases. If a phrase shows up in more than one place, that may be your next callback.</p>
+  </div>
+
+
+  <section class="panel">
+    <h2>Purpose</h2>
+    <p>
+      Search across your saved comedy projects, project notes, bits, bit notes,
+      and saved setlists. Use this to find callback phrases, repeated themes,
+      forgotten punchlines, or anything that wandered off into the weeds.
+    </p>
+  </section>
+
+  <section class="panel">
+    <h2>Search Your Comedy Material</h2>
+
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="Example: cargo escort, Grandpa, Aldi, mule, two cart lengths..."
+      onkeydown="handleEnter(event)"
+    />
+
+    <button class="primary-btn" onclick="runSearch()">Search</button>
+    <button class="secondary-btn" onclick="clearSearch()">Clear</button>
+
+    <p id="searchSummary"><strong>Results:</strong> Enter a phrase to search.</p>
+  </section>
+
+  <section>
+    <div id="resultsBox"></div>
+  </section>
+
+</div>
+
+<footer>
+  Comedy Utility Toolbox | Callback Search Engine V1
+</footer>
+
+<script>
+  const projects = JSON.parse(localStorage.getItem("comedyProjects")) || [];
+  const savedSetlists = JSON.parse(localStorage.getItem("savedComedySetlists")) || [];
+
+  function toggleHelp() {
+    const helpSection = document.getElementById("helpSection");
+
+    if (helpSection.style.display === "block") {
+      helpSection.style.display = "none";
+    } else {
+      helpSection.style.display = "block";
+    }
+  }
+
+  function handleEnter(event) {
+    if (event.key === "Enter") {
+      runSearch();
+    }
+  }
+
+  function runSearch() {
+    const query = document.getElementById("searchInput").value.trim().toLowerCase();
+    const resultsBox = document.getElementById("resultsBox");
+    const summary = document.getElementById("searchSummary");
+
+    resultsBox.innerHTML = "";
+
+    if (!query) {
+      summary.innerHTML = "<strong>Results:</strong> Enter a phrase to search.";
+      resultsBox.innerHTML = "";
+      return;
+    }
+
+    let results = [];
+
+    projects.forEach(project => {
+      searchItem({
+        type: "Project",
+        title: project.name,
+        location: project.category || "No category",
+        status: project.status || "No status",
+        text: project.notes || "",
+        query: query,
+        results: results
+      });
+
+      if (project.bits && project.bits.length > 0) {
+        project.bits.forEach(bit => {
+          searchItem({
+            type: "Bit",
+            title: bit.title,
+            location: project.name,
+            status: bit.status || "No status",
+            text: bit.notes || "",
+            runtime: bit.runtime || "",
+            query: query,
+            results: results
+          });
+        });
+      }
+    });
+
+    savedSetlists.forEach(setlist => {
+      searchItem({
+        type: "Setlist",
+        title: setlist.name,
+        location: setlist.type || "No type",
+        status: "Saved Setlist",
+        text: setlist.notes || "",
+        query: query,
+        results: results
+      });
+
+      if (setlist.bits && setlist.bits.length > 0) {
+        setlist.bits.forEach(bit => {
+          searchItem({
+            type: "Setlist Bit",
+            title: bit.title,
+            location: setlist.name,
+            status: bit.status || "No status",
+            text: bit.notes || "",
+            runtime: bit.runtime || "",
+            query: query,
+            results: results
+          });
+        });
+      }
+    });
+
+    summary.innerHTML =
+      `<strong>Results:</strong> ${results.length} match(es) found for "<em>${escapeHTML(query)}</em>".`;
+
+    if (results.length === 0) {
+      resultsBox.innerHTML =
+        `<div class="empty-message">No matches found. That callback may still be hiding under the porch.</div>`;
+      return;
+    }
+
+    results.forEach(result => {
+      const card = document.createElement("div");
+      card.className = "result-card";
+
+      card.innerHTML = `
+        <h3>${escapeHTML(result.title)}</h3>
+        <span class="badge">${escapeHTML(result.type)}</span>
+        <span class="badge">${escapeHTML(result.location)}</span>
+        <span class="badge">${escapeHTML(result.status)}</span>
+        ${result.runtime ? `<span class="badge">${escapeHTML(result.runtime)}</span>` : ""}
+
+        <p class="match-text">${highlightMatch(escapeHTML(result.text), query)}</p>
+      `;
+
+      resultsBox.appendChild(card);
+    });
+  }
+
+  function searchItem(item) {
+    const haystack =
+      `${item.title || ""} ${item.location || ""} ${item.status || ""} ${item.text || ""} ${item.runtime || ""}`
+        .toLowerCase();
+
+    if (haystack.includes(item.query)) {
+      item.results.push(item);
+    }
+  }
+
+  function highlightMatch(text, query) {
+    const escapedQuery = escapeRegExp(query);
+    const regex = new RegExp(`(${escapedQuery})`, "gi");
+    return text.replace(regex, "<mark>$1</mark>");
+  }
+
+  function clearSearch() {
+    document.getElementById("searchInput").value = "";
+    document.getElementById("searchSummary").innerHTML =
+      "<strong>Results:</strong> Enter a phrase to search.";
+    document.getElementById("resultsBox").innerHTML = "";
+  }
+
+  function escapeHTML(text) {
+    return String(text)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function escapeRegExp(text) {
+    return String(text).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+</script>
+
+</body>
+</html>

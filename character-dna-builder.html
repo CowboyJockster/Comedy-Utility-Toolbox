@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Character DNA Builder V3</title>
+
+  <style>
+    .navbar {
+      background: #1d1713;
+      padding: 15px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .navbar a:hover {
+      color: #f1d9a5;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fafafa;
+      color: #222;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+      color: #222;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    .helpBar {
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      color: #2f241d;
+    }
+
+    .helpButton {
+      width: auto;
+      margin: 0;
+      padding: 6px 12px;
+      border-radius: 50%;
+      background: #2f241d;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+    }
+
+    .helpButton:hover {
+      background: #b87b2f;
+    }
+
+    .helpSection {
+      display: none;
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 18px;
+      border-radius: 10px;
+      margin: 20px 0;
+      line-height: 1.6;
+    }
+
+    .helpSection h2 {
+      margin-top: 0;
+    }
+
+    .helpSection h3 {
+      margin-bottom: 5px;
+      color: #2f241d;
+    }
+
+    .toolBox {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 15px;
+      margin-bottom: 6px;
+    }
+
+    input, textarea, select, button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      margin-bottom: 12px;
+    }
+
+    textarea {
+      min-height: 85px;
+      resize: vertical;
+    }
+
+    button {
+      cursor: pointer;
+      font-weight: bold;
+      border: none;
+      color: white;
+      margin-top: 10px;
+    }
+
+    .generateButton {
+      background-color: #2E8B57;
+    }
+
+    .generateButton:hover {
+      background-color: #256F47;
+    }
+
+    .clearButton {
+      background-color: #B22222;
+    }
+
+    .clearButton:hover {
+      background-color: #8B1A1A;
+    }
+
+    .result {
+      margin-top: 25px;
+      background: #f2f2f2;
+      border-left: 5px solid #2E8B57;
+      padding: 18px;
+      border-radius: 8px;
+      line-height: 1.5;
+    }
+
+    .dnaBlock {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .blockTitle {
+      font-weight: bold;
+      color: #2E8B57;
+      margin-bottom: 5px;
+    }
+
+    .promptText {
+      margin-top: 7px;
+      color: #444;
+    }
+
+    .notes {
+      margin-top: 20px;
+      padding: 15px;
+      background: #fff8dc;
+      border-left: 5px solid #DAA520;
+      border-radius: 8px;
+      color: #333;
+    }
+
+    .footerNote {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    ul {
+      padding-left: 22px;
+    }
+
+    .returnButton {
+      display: inline-block;
+      padding: 12px 18px;
+      background: #2f241d;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 25px;
+    }
+
+    .returnButton:hover {
+      background: #b87b2f;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <a href="index.html">HOME</a>
+    <a href="about.html">ABOUT</a>
+    <a href="index.html#tools">TOOLBOX</a>
+    <a href="toolbox-contact.html">CONTACT</a>
+  </nav>
+
+  <h1>Character DNA Builder V3</h1>
+
+  <div class="subtitle">
+    Build a comedy character from the inside out: flaws, wants, fears, habits, worldview, contradictions, and punchline behavior.
+  </div>
+
+  <div class="helpBar">
+    <span>Need help building a comedy character from the inside out?</span>
+    <button class="helpButton" onclick="toggleHelp()">?</button>
+  </div>
+
+    <div id="helpSection" class="helpSection">
+    <h2>How To Use This Tool</h2>
+
+    <h3>Purpose</h3>
+    <p>The Character DNA Builder helps you create memorable comedy characters by identifying their flaws, wants, fears, habits, contradictions, blind spots, and repeatable behaviors.</p>
+
+    <h3>When To Use It</h3>
+    <p>Use this tool when you are building a recurring character, developing a stage persona, strengthening storytelling material, or trying to figure out why a character is funny beyond one punchline.</p>
+
+    <h3>How To Use It</h3>
+    <ol>
+      <li>Enter a character name or type.</li>
+      <li>Add a short character description.</li>
+      <li>Select the character's world.</li>
+      <li>Select the character's comedy function.</li>
+      <li>Choose the tone that fits the material.</li>
+      <li>Click Build Character DNA.</li>
+      <li>Look for contradictions, flaws, and repeatable traits that can become jokes or callbacks.</li>
+    </ol>
+
+    <h3>Example Input</h3>
+    <p><strong>Character:</strong> Grandpa.<br>
+    <strong>Description:</strong> A retired rancher who does not trust modern technology but secretly wants to look smart using it.<br>
+    <strong>Comedy Function:</strong> The Old-School Traditionalist.</p>
+
+    <h3>Example Output</h3>
+    <p>The tool produces character prompts for core want, core fear, main flaw, contradiction, worldview, speech pattern, blind spot, conflict trigger, and repeatable callback traits.</p>
+
+    <h3>Comedy Tip</h3>
+    <p>Strong comedy characters are built on contradictions. The bigger the contradiction, the more joke doors it opens.</p>
+  </div>
+
+  <div class="toolBox">
+    <label for="characterName">Character Name or Type:</label>
+    <input id="characterName" type="text" placeholder="Example: Grandpa, Jimbo, Your Goofy Aunt, Nervous Boss, Small-Town Mayor" />
+
+    <label for="characterSeed">Short Character Description:</label>
+    <textarea id="characterSeed" placeholder="Example: A retired rancher who does not trust modern technology but secretly wants to look smart using it."></textarea>
+
+    <label for="characterWorld">Choose Character World:</label>
+    <select id="characterWorld">
+      <option value="family">Family</option>
+      <option value="rural">Small Town / Rural</option>
+      <option value="work">Workplace</option>
+      <option value="relationship">Relationships</option>
+      <option value="technology">Technology</option>
+      <option value="public">Public Places</option>
+      <option value="open">Open World</option>
+    </select>
+
+    <label for="comedyFunction">Choose Comedy Function:</label>
+    <select id="comedyFunction">
+      <option value="misunderstander">The Misunderstander</option>
+      <option value="overreactor">The Overreactor</option>
+      <option value="knowitall">The Know-It-All</option>
+      <option value="innocent">The Innocent Troublemaker</option>
+      <option value="traditionalist">The Old-School Traditionalist</option>
+      <option value="schemer">The Bad Planner</option>
+      <option value="truthTeller">The Accidental Truth Teller</option>
+    </select>
+
+    <label for="tone">Choose Comedy Tone:</label>
+    <select id="tone">
+      <option value="clean">Clean</option>
+      <option value="pg13">PG-13</option>
+      <option value="club">Comedy Club</option>
+      <option value="church">Church / Family Friendly</option>
+      <option value="corporate">Corporate Friendly</option>
+    </select>
+
+    <button class="generateButton" onclick="buildCharacterDNA()">Build Character DNA</button>
+    <button class="clearButton" onclick="clearTool()">Clear</button>
+
+    <div id="output" class="result" style="display:none;"></div>
+
+    <div class="notes">
+      <strong>Purpose:</strong> This tool helps comedians build repeatable comedy characters by identifying what a character wants, fears, misunderstands, exaggerates, believes, and accidentally reveals.
+    </div>
+
+    <div class="footerNote">Comedy Utility Toolbox — Character DNA Builder V3</div>
+  </div>
+
+  <a href="index.html#tools" class="returnButton">← Return To Toolbox</a>
+
+  <script>
+    const dnaCategories = [
+      "Core Want",
+      "Core Fear",
+      "Main Flaw",
+      "Hidden Contradiction",
+      "Worldview",
+      "Signature Behavior",
+      "Speech Pattern",
+      "Comedy Blind Spot",
+      "Conflict Trigger",
+      "Repeatable Callback Trait"
+    ];
+
+    const functionGuides = {
+      misunderstander: {
+        label: "The Misunderstander",
+        description: "This character hears the wrong meaning, trusts the wrong logic, or solves the wrong problem with full confidence.",
+        prompts: [
+          "What does this character want badly enough to misread the situation?",
+          "What are they afraid will happen if they admit they do not understand?",
+          "What simple idea do they consistently get wrong?",
+          "What do they think they understand better than everyone else?",
+          "What rule of life do they follow that causes confusion?",
+          "What wrong action do they take with total confidence?",
+          "What words, phrases, or sayings do they slightly misuse?",
+          "What obvious thing can everyone see except this character?",
+          "What situation instantly exposes their confusion?",
+          "What misunderstanding could return later as a callback?"
+        ]
+      },
+      overreactor: {
+        label: "The Overreactor",
+        description: "This character treats small problems like emergencies and turns mild inconvenience into a town meeting.",
+        prompts: [
+          "What tiny thing matters way too much to this character?",
+          "What small embarrassment or loss do they fear most?",
+          "What flaw makes them escalate instead of calm down?",
+          "What do they claim is no big deal while clearly panicking?",
+          "What do they believe is always one step from disaster?",
+          "What dramatic habit gives them away?",
+          "What intense phrase do they use for ordinary trouble?",
+          "What do they never realize they are overdoing?",
+          "What everyday event makes them go full emergency mode?",
+          "What overreaction can become a running joke?"
+        ]
+      },
+      knowitall: {
+        label: "The Know-It-All",
+        description: "This character is loudest when least informed and treats every half-fact like a college degree.",
+        prompts: [
+          "What do they need to feel smarter than everyone else?",
+          "What topic makes them terrified of being corrected?",
+          "What do they confidently explain wrong?",
+          "What do they secretly not understand at all?",
+          "What personal rule do they treat like science?",
+          "How do they interrupt, lecture, or demonstrate expertise badly?",
+          "What favorite phrase makes them sound official?",
+          "What fact are they blind to because pride is driving?",
+          "What situation proves they are not the expert?",
+          "What false expertise can return as a callback?"
+        ]
+      },
+      innocent: {
+        label: "The Innocent Troublemaker",
+        description: "This character causes chaos without meaning to and somehow makes the mess worse by trying to help.",
+        prompts: [
+          "What good thing are they trying to accomplish?",
+          "What consequence are they too innocent to anticipate?",
+          "What flaw hides underneath their good intentions?",
+          "What do they accidentally reveal about themselves?",
+          "What simple belief makes them dangerous in a harmless way?",
+          "How do they help in exactly the wrong direction?",
+          "What sweet or harmless phrase makes the chaos funnier?",
+          "What obvious danger do they not recognize?",
+          "What situation lets kindness become a problem?",
+          "What innocent mistake could return later?"
+        ]
+      },
+      traditionalist: {
+        label: "The Old-School Traditionalist",
+        description: "This character trusts old ways, distrusts new ones, and tries to fix modern life with yesterday's tools.",
+        prompts: [
+          "What old value are they trying to protect?",
+          "What modern change secretly scares or annoys them?",
+          "What new thing do they refuse to learn?",
+          "What do they secretly enjoy but pretend to reject?",
+          "What old saying explains their entire life?",
+          "What outdated solution do they keep using?",
+          "What phrase makes them sound like a porch with opinions?",
+          "What modern thing do they misunderstand completely?",
+          "What situation forces them into the modern world?",
+          "What old-school habit could become a callback?"
+        ]
+      },
+      schemer: {
+        label: "The Bad Planner",
+        description: "This character always has a plan, and the plan is usually the reason everybody else needs a second plan.",
+        prompts: [
+          "What are they trying to get away with, avoid, win, or shortcut?",
+          "What do they fear will happen if they do it the honest way?",
+          "What flaw makes their plan doomed from the start?",
+          "What part of the plan do they pretend is brilliant?",
+          "What do they believe about luck, rules, or loopholes?",
+          "What unnecessary step makes the plan worse?",
+          "What phrase do they say right before everything falls apart?",
+          "What obvious problem did they forget?",
+          "What situation tempts them into scheming again?",
+          "What failed plan detail can return later?"
+        ]
+      },
+      truthTeller: {
+        label: "The Accidental Truth Teller",
+        description: "This character says the quiet part out loud and does not understand why everyone got tense.",
+        prompts: [
+          "What truth do they feel compelled to say?",
+          "What social consequence do they not fear enough?",
+          "What flaw makes them honest at the wrong time?",
+          "What do they think they are helping by saying?",
+          "What personal rule makes politeness optional?",
+          "How do they drop truth into the worst possible moment?",
+          "What plainspoken phrase cuts through the room?",
+          "What emotional cue do they miss?",
+          "What setting makes their honesty dangerous?",
+          "What blunt observation could return as a callback?"
+        ]
+      }
+    };
+
+    const worldAngles = {
+      family: [
+        "What family role does this character always fall into?",
+        "What old family story explains their behavior?",
+        "What holiday, dinner, reunion, or phone call exposes them?"
+      ],
+      rural: [
+        "What would this character do at the diner, hardware store, church basement, barn, or Wally World?",
+        "What small-town reputation follows them around?",
+        "What old-fashioned habit makes them funnier?"
+      ],
+      work: [
+        "What workplace rule do they misunderstand, bend, or over-enforce?",
+        "What meeting would expose this character instantly?",
+        "What email, policy, boss, or coworker makes them worse?"
+      ],
+      relationship: [
+        "What would make this character hard to date, marry, forgive, or explain?",
+        "What argument do they keep having?",
+        "What small habit becomes a relationship issue?"
+      ],
+      technology: [
+        "What device, password, app, update, or remote control defeats them?",
+        "What modern convenience do they treat like a personal attack?",
+        "What old solution do they apply to a new problem?"
+      ],
+      public: [
+        "What store, airport, waiting room, restaurant, or public line exposes them?",
+        "What do strangers notice before the character does?",
+        "What public rule do they accidentally challenge?"
+      ],
+      open: [
+        "What world makes this character's flaw loudest?",
+        "Where would this character cause the most useful comedy trouble?",
+        "What situation naturally reveals who they are?"
+      ]
+    };
+
+    const toneGuides = {
+      clean: "Keep the character usable in mixed company with clear behavior and no dirty shortcuts.",
+      pg13: "Allow attitude, sharper frustration, and adult edge without getting filthy.",
+      club: "Push the character harder with stronger flaws, sharper opinions, and bigger consequences.",
+      church: "Keep the character warm, human, family-safe, and gently self-aware.",
+      corporate: "Keep the character professional, broadly relatable, and safe for business settings."
+    };
+
+    const extraQuestions = [
+      "What does this character always want?",
+      "What do they never admit?",
+      "What makes them defensive?",
+      "What do they misunderstand every time?",
+      "What phrase sounds exactly like them?",
+      "What would they do that no normal person would do?",
+      "What makes them lovable even when they are wrong?",
+      "What recurring object, habit, or saying could become a callback?",
+      "What situation brings out their worst best self?",
+      "What is the final visual image of this character in trouble?"
+    ];
+
+    function toggleHelp() {
+      const helpSection = document.getElementById("helpSection");
+
+      if (helpSection.style.display === "block") {
+        helpSection.style.display = "none";
+      } else {
+        helpSection.style.display = "block";
+      }
+    }
+
+    function buildCharacterDNA() {
+      const characterName = document.getElementById("characterName").value.trim();
+      const characterSeed = document.getElementById("characterSeed").value.trim();
+      const characterWorld = document.getElementById("characterWorld").value;
+      const comedyFunction = document.getElementById("comedyFunction").value;
+      const tone = document.getElementById("tone").value;
+      const output = document.getElementById("output");
+
+      if (!characterName && !characterSeed) {
+        output.style.display = "block";
+        output.innerHTML = "Please enter a character name, type, or short description first. Even a comedy character needs boots before walking into the scene.";
+        return;
+      }
+
+      const displayName = characterName ? characterName : "Unnamed Character";
+      const seedText = characterSeed ? characterSeed : "No description entered yet. Use the prompts below to discover the character.";
+      const functionData = functionGuides[comedyFunction];
+
+      let html = "";
+      html += `<h2>Character DNA for:</h2>`;
+      html += `<p><strong>${escapeHTML(displayName)}</strong></p>`;
+      html += `<p><strong>Description:</strong> ${escapeHTML(seedText)}</p>`;
+      html += `<p><strong>Comedy Function:</strong> ${functionData.label}</p>`;
+      html += `<p>${functionData.description}</p>`;
+      html += `<p><strong>Tone Guide:</strong> ${toneGuides[tone]}</p>`;
+      html += `<hr>`;
+
+      dnaCategories.forEach((category, index) => {
+        html += `<div class="dnaBlock">`;
+        html += `<div class="blockTitle">${category}</div>`;
+        html += `<div>${getCategoryDescription(category)}</div>`;
+        html += `<div class="promptText"><em>Writing Prompt:</em> ${functionData.prompts[index]}</div>`;
+        html += `</div>`;
+      });
+
+      html += `<h3>World Pressure Angles</h3>`;
+      html += `<ul>`;
+      worldAngles[characterWorld].forEach(angle => {
+        html += `<li>${angle}</li>`;
+      });
+      html += `</ul>`;
+
+      html += `<h3>Extra Character Discovery Questions</h3>`;
+      html += `<ul>`;
+      extraQuestions.forEach(question => {
+        html += `<li>${question}</li>`;
+      });
+      html += `</ul>`;
+
+      html += `<h3>Working Note</h3>`;
+      html += `<p>A strong comedy character is not just weird. A strong comedy character is consistent. The audience should eventually know what this person will do wrong before they do it — and still enjoy watching it happen.</p>`;
+
+      output.innerHTML = html;
+      output.style.display = "block";
+    }
+
+    function getCategoryDescription(category) {
+      const descriptions = {
+        "Core Want": "The thing this character is always chasing, protecting, proving, avoiding, or trying to control.",
+        "Core Fear": "The thing this character does not want others to know, see, change, question, or take away.",
+        "Main Flaw": "The repeatable weakness that keeps causing comedy trouble.",
+        "Hidden Contradiction": "The gap between what the character says they are and what they actually do.",
+        "Worldview": "The personal rulebook this character uses to explain life, whether it is correct or not.",
+        "Signature Behavior": "The physical action, habit, or decision pattern that makes the character recognizable.",
+        "Speech Pattern": "The words, phrases, rhythm, exaggerations, or sayings that make the character sound specific.",
+        "Comedy Blind Spot": "The obvious thing the audience sees but the character keeps missing.",
+        "Conflict Trigger": "The situation, person, rule, or object that activates the character's funniest behavior.",
+        "Repeatable Callback Trait": "The character detail that can return later for a bigger laugh."
+      };
+
+      return descriptions[category];
+    }
+
+    function clearTool() {
+      document.getElementById("characterName").value = "";
+      document.getElementById("characterSeed").value = "";
+      document.getElementById("characterWorld").selectedIndex = 0;
+      document.getElementById("comedyFunction").selectedIndex = 0;
+      document.getElementById("tone").selectedIndex = 0;
+      document.getElementById("output").style.display = "none";
+      document.getElementById("output").innerHTML = "";
+    }
+
+    function escapeHTML(str) {
+      return str.replace(/[&<>'"]/g, function(tag) {
+        const charsToReplace = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        };
+        return charsToReplace[tag] || tag;
+      });
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comedy Detective Board V3</title>
+
+  <style>
+    .navbar {
+      background: #1d1713;
+      padding: 15px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .navbar a:hover {
+      color: #f1d9a5;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1150px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f2f2f2;
+      color: #222;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      color: #555;
+      margin-bottom: 25px;
+      font-size: 18px;
+    }
+
+    .box, .result {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    }
+
+    textarea, input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      font-size: 18px;
+      box-sizing: border-box;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    button {
+      border: none;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .helpBar {
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      color: #2f241d;
+    }
+
+    .helpButton {
+      width: auto;
+      margin: 0;
+      padding: 6px 12px;
+      border-radius: 50%;
+      background: #2f241d;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+    }
+
+    .helpButton:hover {
+      background: #b87b2f;
+    }
+
+    .helpSection {
+      display: none;
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 18px;
+      border-radius: 10px;
+      margin: 20px 0;
+      line-height: 1.6;
+    }
+
+    .helpSection h2 {
+      margin-top: 0;
+    }
+
+    .helpSection h3 {
+      margin-bottom: 5px;
+      color: #2f241d;
+    }
+
+    .generate {
+      background: #2E8B57;
+    }
+
+    .generate:hover {
+      background: #246B46;
+    }
+
+    .random {
+      background: #4169E1;
+    }
+
+    .random:hover {
+      background: #2F4FB2;
+    }
+
+    .clear {
+      background: #B22222;
+    }
+
+    .clear:hover {
+      background: #8B1A1A;
+    }
+
+    .section {
+      background: #fafafa;
+      padding: 15px;
+      margin-top: 18px;
+      border-left: 5px solid #2E8B57;
+      border-radius: 8px;
+    }
+
+    .section h3 {
+      margin-top: 0;
+    }
+
+    .caseFile {
+      background: #fff8dc;
+      border-left: 5px solid #DAA520;
+      padding: 14px;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      font-weight: bold;
+    }
+
+    ul, ol {
+      padding-left: 25px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      line-height: 1.45;
+    }
+
+    .score {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .score label {
+      font-weight: bold;
+    }
+
+    .returnButton {
+      display: inline-block;
+      padding: 12px 18px;
+      background: #2f241d;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 30px;
+    }
+
+    .returnButton:hover {
+      background: #b87b2f;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #666;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 750px) {
+      .score {
+        grid-template-columns: 1fr;
+      }
+
+      .navbar a {
+        display: inline-block;
+        margin: 6px 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <a href="index.html">HOME</a>
+    <a href="about.html">ABOUT</a>
+    <a href="index.html#tools">TOOLBOX</a>
+    <a href="toolbox-contact.html">CONTACT</a>
+  </nav>
+
+  <h1>Comedy Detective Board V3</h1>
+
+  <p class="subtitle">
+    Investigate premises. Find tension. Discover hidden comedy clues.
+  </p>
+
+  <div class="helpBar">
+    <span>Need help investigating a premise?</span>
+    <button class="helpButton" onclick="toggleHelp()">?</button>
+  </div>
+
+  <div id="helpSection" class="helpSection">
+    <h2>How to Use This Tool</h2>
+
+    <h3>Purpose</h3>
+    <p>
+      The Comedy Detective Board helps comedians investigate a topic, story, or premise before writing jokes.
+      It uncovers contradictions, emotional pressure, hidden rules, character tension, and overlooked joke angles.
+    </p>
+
+    <h3>When To Use It</h3>
+    <p>
+      Use this tool when an idea feels interesting but not fully funny yet, when a story needs more tension,
+      or when you want to understand why a situation feels strange, frustrating, unfair, or ridiculous.
+    </p>
+
+    <h3>How To Use It</h3>
+    <ol>
+      <li>Enter a topic, story, situation, or premise.</li>
+      <li>Click Open Investigation.</li>
+      <li>Work through each detective section.</li>
+      <li>Look for contradictions, hidden truths, emotional pressure, and broken social rules.</li>
+      <li>Use the clues to build punchlines, tags, callbacks, characters, or longer stories.</li>
+    </ol>
+
+    <h3>Example Input</h3>
+    <p>
+      <strong>Premise:</strong><br>
+      Modern trucks have too many buttons.
+    </p>
+
+    <h3>Example Output</h3>
+    <p>
+      <strong>Detective Clue:</strong><br>
+      The truck is supposed to make life easier, but now the driver needs flight training.<br><br>
+      <strong>Possible Joke Path:</strong><br>
+      Compare the dashboard to an airplane cockpit, a NASA launch panel, or a suspicious casino machine.
+    </p>
+
+    <h3>Comedy Tip</h3>
+    <p>
+      Do not hunt for funny first. Hunt for what is strange, frustrating, confusing, unfair, or unexpected.
+      That is usually where the comedy is hiding with a fake mustache on.
+    </p>
+  </div>
+
+  <div class="box">
+    <label for="premise"><strong>Premise / Topic / Story Seed</strong></label>
+    <textarea id="premise" placeholder="Example: Modern trucks have too many buttons..."></textarea>
+
+    <button class="generate" onclick="investigate()">Open Investigation</button>
+    <button class="random" onclick="randomFill()">Surprise Me</button>
+    <button class="clear" onclick="clearTool()">Clear</button>
+
+    <p class="note">
+      Tip: Enter the situation as plainly as possible. The Detective Board will help you find where the comedy pressure lives.
+    </p>
+  </div>
+
+  <div id="output"></div>
+
+  <a href="index.html#tools" class="returnButton">← Return To Toolbox</a>
+
+  <script>
+    const surprisePremises = [
+      "Modern trucks have too many buttons",
+      "Grandpa refuses to trust GPS directions",
+      "Self-checkout machines are judging people",
+      "Family reunions need referees",
+      "My wife sends me to the store with unclear instructions",
+      "Online banking feels like a trap",
+      "A smart TV is too smart for its own good",
+      "The doctor's office asks too many personal questions",
+      "Retirement is just being busy without a paycheck"
+    ];
+
+    function toggleHelp() {
+      const helpSection = document.getElementById("helpSection");
+
+      if (helpSection.style.display === "block") {
+        helpSection.style.display = "none";
+      } else {
+        helpSection.style.display = "block";
+      }
+    }
+
+    function investigate() {
+      const premise = document.getElementById("premise").value.trim();
+      const output = document.getElementById("output");
+
+      if (!premise) {
+        output.innerHTML = "<div class='result'>Enter a premise first, detective. Even Columbo needed a cigar and a case file.</div>";
+        return;
+      }
+
+      output.innerHTML = `
+        <div class="result">
+          <h2>Comedy Case File</h2>
+
+          <div class="caseFile">
+            Case Under Investigation: ${escapeHTML(premise)}
+          </div>
+
+          <div class="section">
+            <h3>Contradiction Magnifier</h3>
+            <ul>
+              <li>What do people say about this situation?</li>
+              <li>What do people actually do?</li>
+              <li>Where is the gap between the official story and the real behavior?</li>
+              <li>What part of this feels hypocritical, backwards, or oddly accepted?</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h3>What Broke Engine</h3>
+            <ul>
+              <li>What stopped working the way it should?</li>
+              <li>What became harder than it needed to be?</li>
+              <li>What feels unfair, overcomplicated, or suspicious?</li>
+              <li>Who is pretending this is normal?</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h3>Stakes Ladder</h3>
+            <ul>
+              <li>Small inconvenience</li>
+              <li>Embarrassment</li>
+              <li>Loss of pride</li>
+              <li>Identity crisis</li>
+              <li>Absurd disaster</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h3>Emotional Crime Lab</h3>
+            <ul>
+              <li>Pride: Who feels challenged?</li>
+              <li>Fear: What could go wrong?</li>
+              <li>Frustration: What keeps happening?</li>
+              <li>Confusion: What does not make sense?</li>
+              <li>Status: Who looks foolish, powerful, helpless, or out of place?</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h3>Who Suffers Most?</h3>
+            <ul>
+              <li>Old timers</li>
+              <li>Young people</li>
+              <li>Workers</li>
+              <li>Customers</li>
+              <li>Families</li>
+              <li>Spouses</li>
+              <li>Authority figures</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h3>Unwritten Rules Detector</h3>
+            <ul>
+              <li>What social rule is everyone expected to follow?</li>
+              <li>What happens if someone breaks that rule?</li>
+              <li>Who enforces the rule?</li>
+              <li>What is the punishment: shame, confusion, silence, yelling, or a look from your wife?</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h3>Lie We Tell Ourselves</h3>
+            <ul>
+              <li>What do people pretend is true?</li>
+              <li>What is the reality underneath?</li>
+              <li>What polite phrase hides the ugly truth?</li>
+              <li>What would someone say if they were finally honest?</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h3>Absurdity Accelerator</h3>
+            <ul>
+              <li>Normal: What is the everyday version?</li>
+              <li>Bigger: What makes it more inconvenient?</li>
+              <li>Ridiculous: What makes it visually funny?</li>
+              <li>Completely absurd: What final image takes it over the top?</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h3>Scene Builder</h3>
+            <ul>
+              <li>Who is in the scene?</li>
+              <li>Where does it happen?</li>
+              <li>What is the problem?</li>
+              <li>What obstacle prevents an easy fix?</li>
+              <li>What physical action, object, or image could make it more stage-friendly?</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h3>Punchline Direction Clues</h3>
+            <ul>
+              <li>Could this become a reversal?</li>
+              <li>Could this become a paraprosdokian ending?</li>
+              <li>Could this become a character flaw reveal?</li>
+              <li>Could this become a callback anchor?</li>
+              <li>Could this become a bigger visual escalation?</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h3>Comedy Heat Map</h3>
+            <div class="score">
+              <label>Conflict
+                <select>
+                  <option>⭐</option>
+                  <option>⭐⭐</option>
+                  <option selected>⭐⭐⭐</option>
+                  <option>⭐⭐⭐⭐</option>
+                  <option>⭐⭐⭐⭐⭐</option>
+                </select>
+              </label>
+
+              <label>Recognition
+                <select>
+                  <option>⭐</option>
+                  <option>⭐⭐</option>
+                  <option selected>⭐⭐⭐</option>
+                  <option>⭐⭐⭐⭐</option>
+                  <option>⭐⭐⭐⭐⭐</option>
+                </select>
+              </label>
+
+              <label>Escalation
+                <select>
+                  <option>⭐</option>
+                  <option>⭐⭐</option>
+                  <option selected>⭐⭐⭐</option>
+                  <option>⭐⭐⭐⭐</option>
+                  <option>⭐⭐⭐⭐⭐</option>
+                </select>
+              </label>
+
+              <label>Originality
+                <select>
+                  <option>⭐</option>
+                  <option>⭐⭐</option>
+                  <option selected>⭐⭐⭐</option>
+                  <option>⭐⭐⭐⭐</option>
+                  <option>⭐⭐⭐⭐⭐</option>
+                </select>
+              </label>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function randomFill() {
+      const randomPremise = surprisePremises[Math.floor(Math.random() * surprisePremises.length)];
+      document.getElementById("premise").value = randomPremise;
+    }
+
+    function clearTool() {
+      document.getElementById("premise").value = "";
+      document.getElementById("output").innerHTML = "";
+    }
+
+    function escapeHTML(str) {
+      return String(str).replace(/[&<>'"]/g, function(tag) {
+        const charsToReplace = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        };
+
+        return charsToReplace[tag] || tag;
+      });
+    }
+  </script>
+
+</body>
+</html>

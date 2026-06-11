@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comedy Premise Collision Generator V3</title>
+
+  <style>
+    .navbar {
+      background: #1d1713;
+      padding: 15px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .navbar a:hover {
+      color: #f1d9a5;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fafafa;
+      color: #222;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    .helpBar {
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      color: #2f241d;
+    }
+
+    .helpButton {
+      width: auto;
+      margin: 0;
+      padding: 6px 12px;
+      border-radius: 50%;
+      background: #2f241d;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+    }
+
+    .helpButton:hover {
+      background: #b87b2f;
+    }
+
+    .helpSection {
+      display: none;
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 18px;
+      border-radius: 10px;
+      margin: 20px 0;
+      line-height: 1.5;
+    }
+
+    .helpSection h2 {
+      margin-top: 0;
+    }
+
+    .helpSection h3 {
+      margin-bottom: 5px;
+      color: #2f241d;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 15px;
+      display: block;
+    }
+
+    input, select, button {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      margin: 8px 0 14px;
+      font-size: 18px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      cursor: pointer;
+      font-weight: bold;
+      border: none;
+      color: white;
+    }
+
+    .generateButton {
+      background-color: #2E8B57;
+    }
+
+    .generateButton:hover {
+      background-color: #256F47;
+    }
+
+    .randomButton {
+      background-color: #4169E1;
+    }
+
+    .randomButton:hover {
+      background-color: #3152B7;
+    }
+
+    .clearButton {
+      background-color: #B22222;
+    }
+
+    .clearButton:hover {
+      background-color: #8B1A1A;
+    }
+
+    .result {
+      background: white;
+      padding: 15px;
+      margin-top: 12px;
+      border-radius: 8px;
+      border-left: 6px solid #2E8B57;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .setup {
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .angle {
+      color: #444;
+    }
+
+    .hint {
+      font-size: 15px;
+      color: #666;
+      margin-top: -5px;
+    }
+
+    .returnButton {
+      display: inline-block;
+      padding: 12px 18px;
+      background: #2f241d;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 25px;
+    }
+
+    .returnButton:hover {
+      background: #b87b2f;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <a href="index.html">HOME</a>
+    <a href="about.html">ABOUT</a>
+    <a href="index.html#tools">TOOLBOX</a>
+    <a href="toolbox-contact.html">CONTACT</a>
+  </nav>
+
+  <h1>Premise Collision Generator V3</h1>
+
+  <p class="subtitle">
+    Smash two unrelated ideas together and see if comedy falls out. If not, blame the second idea.
+  </p>
+
+  <div class="helpBar">
+  <span>Need help smashing two ideas into one comedy premise?</span>
+  <button class="helpButton" onclick="toggleHelp()">?</button>
+</div>
+
+  <div id="helpSection" class="helpSection">
+  <h2>How to Use This Tool</h2>
+
+  <h3>Purpose</h3>
+  <p>
+    The Premise Collision Generator combines two unrelated ideas to create unexpected comedy premises, unusual comparisons, and fresh joke setups.
+  </p>
+
+  <h3>When To Use It</h3>
+  <p>
+    Use this tool when you need a new premise, when your writing feels predictable, or when you want to force two worlds together and see where the conflict, confusion, or absurdity appears.
+  </p>
+
+  <h3>How To Use It</h3>
+  <ol>
+    <li>Enter the first idea.</li>
+    <li>Enter the second idea.</li>
+    <li>Choose a comedy tone.</li>
+    <li>Click Generate Premises.</li>
+    <li>Look for conflict, confusion, frustration, misunderstanding, or absurdity.</li>
+    <li>Use the strongest collision as a joke, story, bit, sketch, or writing prompt.</li>
+  </ol>
+
+  <h3>Example Input</h3>
+  <p>
+    <strong>First Idea:</strong> Grandpa<br><strong>Second Idea:</strong> Self-checkout<br><strong>Tone:</strong> Rural / Old-Timer
+  </p>
+
+  <h3>Example Output</h3>
+  <p>
+    <strong>Collision Angle:</strong> What happens when Grandpa treats a self-checkout machine like a lazy cashier who needs discipline?
+  </p>
+
+  <h3>Comedy Tip</h3>
+  <p>
+    Do not hunt for punchlines first. Hunt for conflict. Conflict is the old tractor engine; punchlines are what happens once it finally fires up.
+  </p>
+</div>
+
+<label for="ideaOne">First idea</label>
+  <input id="ideaOne" placeholder="Example: rodeo, church, grandpa, military...">
+
+  <label for="ideaTwo">Second idea</label>
+  <input id="ideaTwo" placeholder="Example: technology, dating apps, Wally World...">
+
+  <label for="tone">Comedy tone</label>
+  <select id="tone">
+    <option value="general">General Comedy</option>
+    <option value="clean">Clean / Church Friendly</option>
+    <option value="club">Comedy Club / Rougher</option>
+    <option value="rural">Rural / Old-Timer</option>
+    <option value="absurd">Absurd / Surreal</option>
+  </select>
+
+  <button class="generateButton" onclick="generatePremises()">Generate Premises</button>
+  <button class="randomButton" onclick="randomFill()">Surprise Me</button>
+  <button class="clearButton" onclick="clearFields()">Clear</button>
+
+  <div id="output"></div>
+
+  <a href="index.html#tools" class="returnButton">← Return To Toolbox</a>
+
+  <script>
+    const randomIdeas = [
+      "rodeo",
+      "church potluck",
+      "Grandpa's advice",
+      "military boot camp",
+      "Wally World",
+      "dating apps",
+      "self-checkout",
+      "smart phones",
+      "AI robots",
+      "fishing trip",
+      "family reunion",
+      "biker bar",
+      "small town gossip",
+      "county fair",
+      "retirement",
+      "cattle auction",
+      "GPS directions",
+      "weather alerts",
+      "handyman projects",
+      "government paperwork"
+    ];
+
+    function toggleHelp() {
+      const helpBox = document.getElementById("helpBox");
+
+      if (helpSection.style.display === "block") {
+        helpSection.style.display = "none";
+      } else {
+        helpSection.style.display = "block";
+      }
+    }
+
+    function generatePremises() {
+      const ideaOne = document.getElementById("ideaOne").value.trim();
+      const ideaTwo = document.getElementById("ideaTwo").value.trim();
+      const tone = document.getElementById("tone").value;
+      const output = document.getElementById("output");
+
+      if (!ideaOne || !ideaTwo) {
+        output.innerHTML = "<div class='result'>Please enter two ideas first. This contraption needs two horses to pull the wagon.</div>";
+        return;
+      }
+
+      const templates = getTemplatesByTone(tone, ideaOne, ideaTwo);
+
+      output.innerHTML = "";
+
+      templates.forEach(function(item) {
+        output.innerHTML += `
+          <div class="result">
+            <div class="setup">${item.setup}</div>
+            <div class="angle">${item.angle}</div>
+          </div>
+        `;
+      });
+    }
+
+    function getTemplatesByTone(tone, ideaOne, ideaTwo) {
+      const commonTemplates = [
+        {
+          setup: "Role Reversal",
+          angle: `What if ${escapeHTML(ideaOne)} had to follow the rules of ${escapeHTML(ideaTwo)}?`
+        },
+        {
+          setup: "Misunderstanding",
+          angle: `What would happen if a person from ${escapeHTML(ideaOne)} completely misunderstood ${escapeHTML(ideaTwo)}?`
+        },
+        {
+          setup: "Fish Out of Water",
+          angle: `Imagine explaining ${escapeHTML(ideaTwo)} to someone who only understands ${escapeHTML(ideaOne)}.`
+        },
+        {
+          setup: "Overreaction",
+          angle: `What if ${escapeHTML(ideaOne)} treated ${escapeHTML(ideaTwo)} like a life-or-death emergency?`
+        },
+        {
+          setup: "Bad Solution",
+          angle: `What would be the dumbest possible way ${escapeHTML(ideaOne)} could solve a problem in ${escapeHTML(ideaTwo)}?`
+        },
+        {
+          setup: "World Collision",
+          angle: `What if ${escapeHTML(ideaTwo)} invaded the world of ${escapeHTML(ideaOne)}?`
+        },
+        {
+          setup: "Complaint Angle",
+          angle: `How would an old-timer from ${escapeHTML(ideaOne)} complain about ${escapeHTML(ideaTwo)}?`
+        }
+      ];
+
+      const toneTemplates = {
+        clean: [
+          {
+            setup: "Church Clean Angle",
+            angle: `What lesson would someone from ${escapeHTML(ideaOne)} learn after getting humbled by ${escapeHTML(ideaTwo)}?`
+          },
+          {
+            setup: "Wholesome Confusion",
+            angle: `How would a Sunday school teacher explain ${escapeHTML(ideaTwo)} using only examples from ${escapeHTML(ideaOne)}?`
+          }
+        ],
+        club: [
+          {
+            setup: "Frustration Angle",
+            angle: `What about ${escapeHTML(ideaTwo)} would make someone from ${escapeHTML(ideaOne)} lose their last good nerve?`
+          },
+          {
+            setup: "Embarrassment Angle",
+            angle: `What is the most publicly humiliating way ${escapeHTML(ideaOne)} could collide with ${escapeHTML(ideaTwo)}?`
+          }
+        ],
+        rural: [
+          {
+            setup: "Old-Timer Logic",
+            angle: `How would Grandpa fix ${escapeHTML(ideaTwo)} using tools from ${escapeHTML(ideaOne)}?`
+          },
+          {
+            setup: "Small Town Version",
+            angle: `What would ${escapeHTML(ideaTwo)} look like if it had to operate by small-town ${escapeHTML(ideaOne)} rules?`
+          }
+        ],
+        absurd: [
+          {
+            setup: "Surreal Escalation",
+            angle: `What if ${escapeHTML(ideaOne)} and ${escapeHTML(ideaTwo)} accidentally created a government agency nobody understands?`
+          },
+          {
+            setup: "Impossible Premise",
+            angle: `What if ${escapeHTML(ideaTwo)} became the official religion, sport, or emergency protocol of ${escapeHTML(ideaOne)}?`
+          }
+        ],
+        general: []
+      };
+
+      return commonTemplates.concat(toneTemplates[tone]);
+    }
+
+    function randomFill() {
+      let firstIdea = randomIdeas[Math.floor(Math.random() * randomIdeas.length)];
+      let secondIdea = randomIdeas[Math.floor(Math.random() * randomIdeas.length)];
+
+      while (secondIdea === firstIdea) {
+        secondIdea = randomIdeas[Math.floor(Math.random() * randomIdeas.length)];
+      }
+
+      document.getElementById("ideaOne").value = firstIdea;
+      document.getElementById("ideaTwo").value = secondIdea;
+      generatePremises();
+    }
+
+    function clearFields() {
+      document.getElementById("ideaOne").value = "";
+      document.getElementById("ideaTwo").value = "";
+      document.getElementById("tone").selectedIndex = 0;
+      document.getElementById("output").innerHTML = "";
+    }
+
+    function escapeHTML(str) {
+      return str.replace(/[&<>'"]/g, function(tag) {
+        const charsToReplace = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        };
+
+        return charsToReplace[tag] || tag;
+      });
+    }
+  </script>
+
+</body>
+</html>

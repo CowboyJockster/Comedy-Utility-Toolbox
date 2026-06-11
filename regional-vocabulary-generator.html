@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Regional Vocabulary Generator V3</title>
+
+<style>
+.navbar {
+  background: #1d1713;
+  padding: 15px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 18px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.navbar a:hover {
+  color: #f1d9a5;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #f3f3f3;
+}
+
+h1 {
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  color: #555;
+  margin-bottom: 25px;
+}
+
+.helpBar {
+  background: #fff8e8;
+  border: 2px solid #b87b2f;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  color: #2f241d;
+}
+
+.helpButton {
+  width: auto;
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: 50%;
+  background: #2f241d;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  border: none;
+}
+
+.helpButton:hover {
+  background: #b87b2f;
+}
+
+.helpSection {
+  display: none;
+  background: #fff8e8;
+  border: 2px solid #b87b2f;
+  padding: 18px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.helpSection h2 {
+  margin-top: 0;
+}
+
+.helpSection h3 {
+  margin-bottom: 5px;
+  color: #2f241d;
+}
+
+.box, .result {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+
+textarea, select, button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  font-size: 18px;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+button {
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+}
+
+.generate {
+  background: #2E8B57;
+}
+
+.generate:hover {
+  background: #246B46;
+}
+
+.random {
+  background: #4169E1;
+}
+
+.random:hover {
+  background: #3152B7;
+}
+
+.clear {
+  background: #B22222;
+}
+
+.clear:hover {
+  background: #8B1A1A;
+}
+
+.section {
+  background: #fafafa;
+  padding: 15px;
+  margin-top: 18px;
+  border-left: 5px solid #2E8B57;
+  border-radius: 8px;
+}
+
+ul {
+  padding-left: 25px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+.voice {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  background: #FFF8DC;
+  padding: 12px;
+  border-left: 5px solid #DAA520;
+  border-radius: 8px;
+}
+
+.returnButton {
+  display: inline-block;
+  padding: 12px 18px;
+  background: #2f241d;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-top: 25px;
+}
+
+.returnButton:hover {
+  background: #b87b2f;
+}
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+  <a href="index.html">HOME</a>
+  <a href="about.html">ABOUT</a>
+  <a href="index.html#tools">TOOLBOX</a>
+  <a href="toolbox-contact.html">CONTACT</a>
+</nav>
+
+<h1>Regional Vocabulary Generator V3</h1>
+
+<p class="subtitle">
+Translate ordinary wording into regional flavor, character voice, and lived-in language.
+</p>
+
+  <div class="helpBar">
+    <span>Need help adding local flavor and character voice?</span>
+    <button class="helpButton" onclick="toggleHelp()">?</button>
+  </div>
+
+  <div id="helpSection" class="helpSection">
+    <h2>How to Use This Tool</h2>
+
+    <h3>Purpose</h3>
+    <p>The Regional Vocabulary Generator helps turn plain wording into local, specific, character-driven language without burying the joke under too much slang.</p>
+
+    <h3>When To Use It</h3>
+    <ul>
+      <li>When a premise sounds generic or too plain.</li>
+      <li>When you want stronger rural, Midwestern, blue-collar, church, military, or character flavor.</li>
+      <li>When you need wording that sounds more like a real person talking.</li>
+    </ul>
+
+    <h3>How To Use It</h3>
+    <ol>
+      <li>Type in a plain phrase, sentence, or comedy idea.</li>
+      <li>Choose a region, crowd, or character logic style.</li>
+      <li>Click Generate Regional Flavor.</li>
+      <li>Review the translated line, word swaps, and flavor notes.</li>
+      <li>Use one or two strong phrases in your actual bit.</li>
+    </ol>
+
+    <h3>Example Input</h3>
+    <p><strong>Plain Phrase:</strong> The GPS gave bad directions.<br><strong>Region:</strong> Rural Midwest</p>
+
+    <h3>Example Output</h3>
+    <p><strong>Regional Flavor:</strong> The GPS sent me so far out in the weeds even the cows looked concerned.</p>
+
+    <h3>Comedy Tip</h3>
+    <p>Use regional language like seasoning. A little gives the joke flavor. Too much turns it into verbal chili powder.</p>
+  </div>
+
+<div class="box">
+
+<textarea
+id="phrase"
+placeholder="Example: He walked into Walmart angry...">
+</textarea>
+
+<select id="region">
+<option>Rural Midwest</option>
+<option>Texas Ranch</option>
+<option>Small Town America</option>
+<option>Blue Collar</option>
+<option>Church Crowd</option>
+<option>County Fair Crowd</option>
+<option>Military</option>
+<option>Corporate</option>
+<option>Upper Midwest</option>
+<option>Goofy Aunt Logic</option>
+<option>Your Best Goofy Friend Logic</option>
+</select>
+
+<button class="generate" onclick="translatePhrase()">
+Generate Regional Flavor
+</button>
+
+<button class="random" onclick="randomPhrase()">
+Surprise Me
+</button>
+
+<button class="clear" onclick="clearTool()">
+Clear
+</button>
+
+</div>
+
+<div id="output"></div>
+
+<a href="index.html#tools" class="returnButton">
+← Return To Toolbox
+</a>
+
+<script>
+function toggleHelp() {
+    const helpSection = document.getElementById("helpSection");
+
+    if (helpSection.style.display === "block") {
+      helpSection.style.display = "none";
+    } else {
+      helpSection.style.display = "block";
+    }
+  }
+
+const examples = [
+  "He walked into Walmart angry",
+  "It was cold outside",
+  "The GPS gave bad directions",
+  "The truck quit working",
+  "People trust technology too much",
+  "The family reunion got awkward",
+  "The neighbor watches everything",
+  "Customer service got complicated"
+];
+
+function translatePhrase() {
+  const phrase =
+  document
+  .getElementById("phrase")
+  .value
+  .trim();
+
+  const region =
+  document
+  .getElementById("region")
+  .value;
+
+  const output =
+  document
+  .getElementById("output");
+
+  if (!phrase) {
+    output.innerHTML =
+    "<div class='result'>Type something first.</div>";
+
+    return;
+  }
+
+  output.innerHTML =
+  `
+  <div class="result">
+
+  <div class="section">
+  <h3>Original Phrase</h3>
+  <div class="voice">
+  ${phrase}
+  </div>
+  </div>
+
+  <div class="section">
+  <h3>${region} Translation</h3>
+  <div class="voice">
+  ${regionalVersion(phrase, region)}
+  </div>
+  </div>
+
+  <div class="section">
+  <h3>Word Swap Ideas</h3>
+  <ul>
+  ${wordSwaps(region)}
+  </ul>
+  </div>
+
+  <div class="section">
+  <h3>Regional Flavor Notes</h3>
+  <ul>
+  ${flavorNotes(region)}
+  </ul>
+  </div>
+
+  <div class="section">
+  <h3>Voice Stretch</h3>
+  <ul>
+  <li>Can it sound older?</li>
+  <li>Can it sound rougher?</li>
+  <li>Can it sound more local?</li>
+  <li>Can it sound more personal?</li>
+  </ul>
+  </div>
+
+  </div>
+  `;
+}
+
+function regionalVersion(phrase, region) {
+  const versions = {
+    "Rural Midwest":
+    `Feller says: "${phrase}" and somehow it feels colder, louder, and farther from town.`,
+
+    "Texas Ranch":
+    `Cowboy version: "${phrase}" but now there's dust, cattle, and stubbornness involved.`,
+
+    "Small Town America":
+    `"${phrase}" and everybody heard about it before supper.`,
+
+    "Blue Collar":
+    `"${phrase}" and somebody immediately blamed the engineer.`,
+
+    "Church Crowd":
+    `"${phrase}" and somehow patience became today's sermon.`,
+
+    "County Fair Crowd":
+    `"${phrase}" and somebody spilled lemonade watching it happen.`,
+
+    "Military":
+    `"${phrase}" but now somebody needs a chain of command.`,
+
+    "Corporate":
+    `"${phrase}" and now there's a committee meeting.`,
+
+    "Upper Midwest":
+    `"${phrase}" and people still apologized politely.`,
+
+    "Goofy Aunt Logic":
+    `"${phrase}" and your goofy aunt somehow blames microwaves.`,
+
+    "Your Best Goofy Friend Logic":
+    `"${phrase}" and your goofy friend confidently made it worse.`
+  };
+
+  return versions[region];
+}
+
+function wordSwaps(region) {
+  const swaps = {
+    "Rural Midwest":
+    "<li>Angry → hotter than fence wire</li><li>Cold → cold enough to freeze ambition</li>",
+
+    "Texas Ranch":
+    "<li>Mad → wound tighter than saddle leather</li><li>Busy → busier than branding season</li>",
+
+    "Small Town America":
+    "<li>Gossip → local weather report</li><li>Neighbor → unofficial mayor</li>",
+
+    "Blue Collar":
+    "<li>Broken → quit workin'</li><li>Complicated → engineer problem</li>",
+
+    "Church Crowd":
+    "<li>Argument → fellowship opportunity</li><li>Stubborn → prayer request</li>",
+
+    "County Fair Crowd":
+    "<li>Crowded → elbow to elbow</li><li>Busy → fair-week busy</li>",
+
+    "Military":
+    "<li>Mess → situation</li><li>Problem → operational issue</li>",
+
+    "Corporate":
+    "<li>Mistake → process opportunity</li><li>Confusing → workflow issue</li>",
+
+    "Upper Midwest":
+    "<li>Cold → brisk</li><li>Awful → not ideal</li>",
+
+    "Goofy Aunt Logic":
+    "<li>Technology → blinking nonsense</li><li>Password → government conspiracy</li>",
+
+    "Your Best Goofy Friend Logic":
+    "<li>Plan → bad idea with confidence</li><li>Shortcut → future problem</li>"
+  };
+
+  return swaps[region];
+}
+
+function flavorNotes(region) {
+  return `
+  <li>What phrases sound lived-in?</li>
+  <li>What does this crowd complain about?</li>
+  <li>What comparisons would this crowd naturally make?</li>
+  <li>What local references fit?</li>
+  `;
+}
+
+function randomPhrase() {
+  document
+  .getElementById("phrase")
+  .value =
+  examples[
+    Math.floor(
+      Math.random() * examples.length
+    )
+  ];
+}
+
+function clearTool() {
+  document
+  .getElementById("phrase")
+  .value = "";
+
+  document
+  .getElementById("output")
+  .innerHTML = "";
+}
+</script>
+
+</body>
+</html>

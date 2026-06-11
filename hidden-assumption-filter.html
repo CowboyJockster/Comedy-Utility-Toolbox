@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hidden Assumption Filter V3</title>
+
+  <style>
+    .navbar {
+      background: #1d1713;
+      padding: 15px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .navbar a:hover {
+      color: #f1d9a5;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1050px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f4f4f4;
+      color: #222;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    .helpBar {
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      color: #2f241d;
+    }
+
+    .helpButton {
+      width: auto;
+      margin: 0;
+      padding: 6px 12px;
+      border-radius: 50%;
+      background: #2f241d;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+    }
+
+    .helpButton:hover {
+      background: #b87b2f;
+    }
+
+    .helpSection {
+      display: none;
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 18px;
+      border-radius: 10px;
+      margin: 20px 0;
+      line-height: 1.5;
+    }
+
+    .helpSection h2 {
+      margin-top: 0;
+    }
+
+    .helpSection h3 {
+      margin-bottom: 5px;
+      color: #2f241d;
+    }
+
+    .toolBox,
+    .resultCard {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.1);
+      margin-bottom: 20px;
+    }
+
+    textarea,
+    button {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      margin-top: 10px;
+      font-size: 18px;
+      border-radius: 8px;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+      border: 1px solid #ccc;
+      font-family: Arial, sans-serif;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      color: white;
+    }
+
+    .generate {
+      background: #2E8B57;
+    }
+
+    .generate:hover {
+      background: #246B46;
+    }
+
+    .random {
+      background: #4169E1;
+    }
+
+    .random:hover {
+      background: #2F4FB2;
+    }
+
+    .clear {
+      background: #B22222;
+    }
+
+    .clear:hover {
+      background: #8B1A1A;
+    }
+
+    .section {
+      margin-top: 18px;
+      padding: 15px;
+      background: #f8f8f8;
+      border-left: 5px solid #2E8B57;
+      border-radius: 8px;
+    }
+
+    .section h3 {
+      margin-top: 0;
+    }
+
+    ul {
+      padding-left: 25px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .meter {
+      font-size: 18px;
+      margin: 8px 0;
+    }
+
+    .star {
+      color: #B8860B;
+    }
+
+    .returnButton {
+      display: inline-block;
+      padding: 12px 18px;
+      background: #2f241d;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 25px;
+    }
+
+    .returnButton:hover {
+      background: #b87b2f;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <a href="index.html">HOME</a>
+    <a href="about.html">ABOUT</a>
+    <a href="index.html#tools">TOOLBOX</a>
+    <a href="toolbox-contact.html">CONTACT</a>
+  </nav>
+
+  <h1>Hidden Assumption Filter V3</h1>
+
+  <p class="subtitle">
+    Find invisible assumptions hiding inside premises.
+  </p>
+
+  <div class="helpBar">
+  <span>Need help finding the invisible assumption inside a premise?</span>
+  <button class="helpButton" onclick="toggleHelp()">?</button>
+</div>
+
+  <div id="helpSection" class="helpSection">
+  <h2>How to Use This Tool</h2>
+
+  <h3>Purpose</h3>
+  <p>
+    The Hidden Assumption Filter helps comedians uncover the invisible beliefs, expectations, and unspoken rules hiding underneath a premise.
+  </p>
+
+  <h3>When To Use It</h3>
+  <p>
+    Use this tool when a premise feels obvious, flat, too familiar, or stuck. It helps reveal the quiet belief people accept as normal so you can challenge it, reverse it, or exaggerate it.
+  </p>
+
+  <h3>How To Use It</h3>
+  <ol>
+    <li>Enter a comedy premise or observation.</li>
+    <li>Click Analyze Assumptions.</li>
+    <li>Review the surface assumptions.</li>
+    <li>Use the pressure questions to find conflict.</li>
+    <li>Look for pride, fear, control, status, comfort, or identity underneath the premise.</li>
+    <li>Turn the strongest assumption into a joke angle, tag, bit, or callback.</li>
+  </ol>
+
+  <h3>Example Input</h3>
+  <p>
+    <strong>Premise:</strong> Self-checkout machines are getting smarter.
+  </p>
+
+  <h3>Example Output</h3>
+  <p>
+    <strong>Hidden Assumption:</strong> Stores assume customers are willing to work for free as long as the machine says thank you.<br><strong>Comedy Angle:</strong> Treat self-checkout like an unpaid job with no training and a judgmental robot supervisor.
+  </p>
+
+  <h3>Comedy Tip</h3>
+  <p>
+    A hidden assumption is often where the laugh is hiding. Once you expose what everyone accepts without questioning, common sense starts wearing a clown nose.
+  </p>
+</div>
+
+<div class="toolBox">
+    <textarea id="premise" placeholder="Example: Self checkout machines are getting smarter..."></textarea>
+
+    <button class="generate" onclick="analyzePremise()">
+      Analyze Assumptions
+    </button>
+
+    <button class="random" onclick="randomPremise()">
+      Surprise Me
+    </button>
+
+    <button class="clear" onclick="clearTool()">
+      Clear
+    </button>
+  </div>
+
+  <div id="output"></div>
+
+  <a href="index.html#tools" class="returnButton">← Return To Toolbox</a>
+
+  <script>
+    const randomPremises = [
+      "GPS directions are getting too bossy",
+      "People trust technology too much",
+      "Self checkout machines are smarter now",
+      "Online reviews control buying decisions",
+      "Dating apps changed relationships",
+      "Customer service has become harder",
+      "Modern trucks have too many buttons",
+      "People trust apps more than instincts",
+      "Weather alerts feel dramatic",
+      "Family reunions need referees"
+    ];
+
+    function toggleHelp() {
+      const helpBox = document.getElementById("helpBox");
+
+      if (helpSection.style.display === "block") {
+        helpSection.style.display = "none";
+      } else {
+        helpSection.style.display = "block";
+      }
+    }
+
+    function analyzePremise() {
+      const premise = document.getElementById("premise").value.trim();
+      const output = document.getElementById("output");
+
+      if (!premise) {
+        output.innerHTML = "<div class='resultCard'>Enter a premise first.</div>";
+        return;
+      }
+
+      output.innerHTML = `
+        <div class="resultCard">
+          <div class="section">
+            <h3>Surface Assumptions</h3>
+            <ul>
+              ${buildAssumptions(premise)}
+            </ul>
+          </div>
+
+          <div class="section">
+            <h3>Pressure Test</h3>
+            <ul>
+              <li>Easier for who?</li>
+              <li>Compared to what?</li>
+              <li>What happens when it fails?</li>
+              <li>Who secretly dislikes this?</li>
+              <li>Who benefits?</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h3>Blind Spot Miner</h3>
+            <ul>
+              <li>What is nobody talking about?</li>
+              <li>Who gets ignored?</li>
+              <li>What inconvenience became normal?</li>
+              <li>What truth feels obvious but unstated?</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h3>Say The Quiet Part Out Loud</h3>
+            <ul>
+              <li>What does everyone think but not say?</li>
+              <li>What social rule is hiding here?</li>
+              <li>What pride or embarrassment exists?</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h3>Hidden Stakes Detector</h3>
+            <ul>
+              <li>Pride</li>
+              <li>Fear</li>
+              <li>Control</li>
+              <li>Status</li>
+              <li>Comfort</li>
+              <li>Identity</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h3>Assumption Collision Engine</h3>
+            <ul>
+              <li>Old Way vs New Way</li>
+              <li>Convenience vs Frustration</li>
+              <li>Human vs Machine</li>
+              <li>Confidence vs Reality</li>
+              <li>Pride vs Truth</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h3>Recognition Meter</h3>
+
+            <div class="meter">
+              Originality
+              <span class="star">${stars()}</span>
+            </div>
+
+            <div class="meter">
+              Conflict
+              <span class="star">${stars()}</span>
+            </div>
+
+            <div class="meter">
+              Hidden Tension
+              <span class="star">${stars()}</span>
+            </div>
+
+            <div class="meter">
+              Comedy Potential
+              <span class="star">${stars()}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function buildAssumptions(premise) {
+      return `
+        <li>People assume "${escapeHTML(premise)}" exists for a good reason.</li>
+        <li>People assume newer means better.</li>
+        <li>People assume common sense still applies.</li>
+        <li>People assume people behave rationally.</li>
+        <li>People assume convenience improves life.</li>
+      `;
+    }
+
+    function stars() {
+      let amount = Math.floor(Math.random() * 3) + 3;
+      return "★".repeat(amount);
+    }
+
+    function randomPremise() {
+      document.getElementById("premise").value =
+      randomPremises[Math.floor(Math.random() * randomPremises.length)];
+    }
+
+    function clearTool() {
+      document.getElementById("premise").value = "";
+      document.getElementById("output").innerHTML = "";
+    }
+
+    function escapeHTML(str) {
+      return str.replace(/[&<>'"]/g, function(tag) {
+        const charsToReplace = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        };
+        return charsToReplace[tag] || tag;
+      });
+    }
+  </script>
+
+</body>
+</html>

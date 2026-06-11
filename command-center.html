@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comedy Command Center V1.1</title>
+
+  <style>
+
+	.beta-info {
+    background: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.beta-info h2 {
+    margin-top: 0;
+}
+
+.beta-info h3 {
+    margin-top: 20px;
+}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f7f3ea;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    .navbar {
+      background: #1d1713;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: bold;
+    }
+
+    header {
+      background: #2f241d;
+      color: white;
+      padding: 45px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    header h2 {
+      color: #f1d9a5;
+      font-weight: normal;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .panel {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      border-left: 8px solid #b87b2f;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0 16px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      min-height: 120px;
+    }
+
+    button {
+      background: #2f241d;
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 8px;
+    }
+
+    button:hover {
+      background: #b87b2f;
+    }
+
+    .delete-btn {
+      background: #8b1a1a;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: #fff8e8;
+      padding: 20px;
+      border-radius: 12px;
+      border-left: 6px solid #2E8B57;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .project-card h3 {
+      margin-top: 0;
+      color: #2f241d;
+    }
+
+    .category {
+      font-weight: bold;
+      color: #2E8B57;
+    }
+
+    footer {
+      text-align: center;
+      background: #2f241d;
+      color: white;
+      padding: 25px;
+      margin-top: 40px;
+    }
+	.filter-buttons {
+  margin-bottom: 20px;
+}
+
+.filter-buttons button {
+  margin: 6px 6px 6px 0;
+  background: #2E8B57;
+}
+
+.filter-buttons button:hover {
+  background: #256f47;
+}
+	#projectSearch {
+  margin-bottom: 25px;
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.status-idea {
+  background: #fff0c7;
+  color: #6b4b00;
+}
+
+.status-working {
+  background: #dcecff;
+  color: #174a7c;
+}
+
+.status-tested {
+  background: #e8e1ff;
+  color: #4b2a86;
+}
+
+.status-ready {
+  background: #dff5df;
+  color: #1f6b2a;
+}
+
+.status-retired {
+  background: #eeeeee;
+  color: #555;
+}
+.project-details {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #ccc;
+}
+.tag-pill {
+  display: inline-block;
+  background: #ececec;
+  color: #333;
+  padding: 5px 9px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 4px 4px 8px 0;
+}
+.reaction-pill {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 4px 4px 10px 0;
+}
+
+.reaction-not-tested {
+  background: #eeeeee;
+  color: #555;
+}
+
+.reaction-killed {
+  background: #dff5df;
+  color: #1f6b2a;
+}
+
+.reaction-strong {
+  background: #e8f4ec;
+  color: #2E8B57;
+}
+
+.reaction-mixed {
+  background: #fff0c7;
+  color: #6b4b00;
+}
+
+.reaction-weak {
+  background: #ffe0c2;
+  color: #8a4b00;
+}
+
+.reaction-bombed {
+  background: #ffe0e0;
+  color: #8b1a1a;
+}
+.setlist-pill {
+  display: inline-block;
+  background: #2f241d;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 4px 4px 10px 0;
+}
+.print-setlist-box {
+  background: #fff8e8;
+  padding: 18px;
+  border-radius: 12px;
+  border-left: 6px solid #2f241d;
+  margin-bottom: 25px;
+}
+
+.print-setlist-box button {
+  margin-top: 5px;
+}
+	.version-footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+
+    .helpBar {
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin: 25px auto;
+      max-width: 1100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      color: #2f241d;
+      box-sizing: border-box;
+    }
+
+    .helpButton {
+      width: auto;
+      margin: 0;
+      padding: 6px 12px;
+      border-radius: 50%;
+      background: #2f241d;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+    }
+
+    .helpButton:hover {
+      background: #b87b2f;
+    }
+
+    .helpSection {
+      display: none;
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 22px;
+      border-radius: 10px;
+      margin: 20px auto 30px;
+      max-width: 1100px;
+      line-height: 1.6;
+      box-sizing: border-box;
+    }
+
+    .helpSection h2 {
+      margin-top: 0;
+      color: #2f241d;
+    }
+
+    .helpSection h3 {
+      color: #2f241d;
+      margin-bottom: 6px;
+    }
+
+    .helpSection ul, .helpSection ol {
+      padding-left: 24px;
+    }
+
+    .helpSection li {
+      margin-bottom: 6px;
+    }
+
+    .returnButton {
+      display: inline-block;
+      padding: 12px 18px;
+      background: #2f241d;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      margin: 20px 0 0;
+    }
+
+    .returnButton:hover {
+      background: #b87b2f;
+    }
+
+    @media (max-width: 750px) {
+      .navbar a {
+        display: inline-block;
+        margin: 6px 10px;
+      }
+
+      .helpBar {
+        margin-left: 20px;
+        margin-right: 20px;
+        gap: 12px;
+      }
+
+      button {
+        margin-bottom: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+  <a href="index.html">HOME</a>
+  <a href="about.html">ABOUT</a>
+  <a href="index.html#tools">TOOLBOX</a>
+  <a href="command-center.html">Command Center</a>
+</nav>
+
+<header>
+  <h1>Comedy Command Center</h1>
+     <h2>Organize bits, ideas, setlists, callbacks, and works-in-progress.</h2>
+</header>
+
+<div class="helpBar">
+  <span>Need help organizing your comedy projects, setlists, and stage notes?</span>
+  <button class="helpButton" onclick="toggleHelp()">?</button>
+</div>
+
+<div id="helpSection" class="helpSection">
+  <h2>How to Use This Tool</h2>
+
+  <h3>Purpose</h3>
+  <p>
+    The Comedy Command Center helps comedians organize bits, premises, callbacks, setlists,
+    stage notes, crowd reactions, tags, and works-in-progress in one place.
+  </p>
+
+  <h3>When To Use It</h3>
+  <p>
+    Use this tool when you want to track comedy projects, prepare setlists, save rewrite notes,
+    mark crowd reactions, or keep stage-ready material separate from rough ideas.
+  </p>
+
+  <h3>How To Use It</h3>
+  <ol>
+    <li>Create a project title for each bit, story, premise, callback, or setlist idea.</li>
+    <li>Choose a category and status so the material is easier to sort later.</li>
+    <li>Add crowd reaction after testing the material live.</li>
+    <li>Assign the project to a setlist when it is ready for a show.</li>
+    <li>Add estimated time, tags, writing notes, and stage notes.</li>
+    <li>Use filters, search, stars, statistics, and print options to manage your material.</li>
+  </ol>
+
+  <h3>Example Input</h3>
+  <p>
+    <strong>Project Title:</strong> Grandpa Refuses GPS<br>
+    <strong>Category:</strong> Grandpa Material<br>
+    <strong>Status:</strong> Working<br>
+    <strong>Crowd Reaction:</strong> Strong<br>
+    <strong>Assigned Setlist:</strong> Club 10<br>
+    <strong>Tags:</strong> grandpa, technology, callback, closer
+  </p>
+
+  <h3>Example Output</h3>
+  <p>
+    The project appears as a saved card that can be searched, filtered, updated, starred, assigned to a setlist, and included in a printed running order.
+  </p>
+
+  <h3>Comedy Tip</h3>
+  <p>
+    After every live show, update the crowd reaction and stage notes while the memory is fresh.
+    A joke that gets a laugh once is interesting. A joke that keeps getting laughs deserves a saddle.
+  </p>
+
+  <h3>Storage Note</h3>
+  <p>
+    Your projects are saved locally in this browser. Clearing browser data may erase saved material,
+    so back up important notes regularly.
+  </p>
+</div>
+
+  <section class="beta-info">
+
+<h2>Comedy Command Center - Beta V1.0</h2>
+
+<p>
+Welcome to the Comedy Command Center Beta Test.
+This tool was designed to help comedians organize, track,
+develop, and manage stand-up comedy material.
+</p>
+
+<h3>Quick Start</h3>
+
+<ol>
+<li>Create a new project.</li>
+<li>Add category, status, reactions, tags, and estimated time.</li>
+<li>Add material to a setlist.</li>
+<li>Arrange running order using the Up and Down buttons.</li>
+<li>Print your setlist and running order.</li>
+<li>Track estimated performance time.</li>
+</ol>
+
+<h3>Important Notes</h3>
+
+<ul>
+<li>Your data is stored locally in your browser.</li>
+<li>Clearing browser data may erase saved projects.</li>
+<li>Back up important material regularly.</li>
+<li>This tool assists organization and development.</li>
+<li>The comedian remains responsible for all written material.</li>
+</ul>
+
+<h3>Beta Testing Goal</h3>
+
+<p>
+Please use the system normally and report any bugs,
+confusing behavior, missing features, or unexpected results.
+Your feedback will help improve future versions.
+</p>
+
+</section>
+<main class="container">
+
+  <section class="panel">
+    <h2>Add A Comedy Project</h2>
+
+    <label>Project Title</label>
+    <input type="text" id="projectTitle" placeholder="Example: Jimbo Biker Bar Bit">
+<label>Category</label>
+
+<select id="projectCategory">
+  <option>Active Bit</option>
+  <option>Setlist</option>
+  <option>Callback Idea</option>
+  <option>Story Premise</option>
+  <option>Character Idea</option>
+  <option>Church / Clean Set</option>
+  <option>Corporate Set</option>
+  <option>Military Material</option>
+  <option>Grandpa Material</option>
+</select>
+
+<label>Status</label>
+
+<select id="projectStatus">
+  <option>Idea</option>
+  <option>Working</option>
+  <option>Tested</option>
+  <option>Stage Ready</option>
+  <option>Retired</option>
+</select>
+	<label>Crowd Reaction</label>
+
+<select id="crowdReaction">
+  <option>Not Tested Yet</option>
+  <option>Killed</option>
+  <option>Strong</option>
+  <option>Mixed</option>
+  <option>Weak</option>
+  <option>Bombed</option>
+</select>
+<label>Assigned Setlist</label>
+
+<select id="assignedSetlist">
+  <option>Not Assigned</option>
+  <option>Open Mic Set</option>
+  <option>Club 10</option>
+  <option>Club 20</option>
+  <option>Church Clean 20</option>
+  <option>Corporate Set</option>
+  <option>Veteran Fundraiser</option>
+  <option>County Fair</option>
+  <option>Late Show</option>
+</select>
+<label>Estimated Time In Minutes</label>
+<input
+  type="number"
+  id="projectTime"
+  placeholder="Example: 5"
+  min="0">
+    <label>Tags</label>
+<input
+  type="text"
+  id="projectTags"
+  placeholder="Example: callback, ranch, biker bar, opener, church">
+
+<label>Writing Notes</label>
+<textarea id="projectNotes" placeholder="Write the rough idea, setup, punchline direction, callbacks, or next rewrite step..."></textarea>
+
+<label>Stage Notes</label>
+<textarea id="stageNotes" placeholder="After testing live: crowd reaction, what worked, what bombed, rewrite reminders..."></textarea>
+    <button onclick="saveProject()">Save Project</button>
+    <button onclick="clearForm()">Clear Form</button>
+  </section>
+<section class="panel">
+  <h2>Project Statistics Dashboard</h2>
+
+  <div id="statsDashboard" class="project-grid"></div>
+</section>
+<section class="panel">
+  <h2>Saved Comedy Projects</h2>
+  <p>Your projects are saved in this browser on this computer.</p>
+   <div class="print-setlist-box">
+  <h3>Print A Clean Setlist</h3>
+  <p>Select a setlist and print only the projects assigned to it.</p>
+
+  <label>Choose Setlist To Print</label>
+  <select id="printSetlistSelect">
+    <option>Open Mic Set</option>
+    <option>Club 10</option>
+    <option>Club 20</option>
+    <option>Church Clean 20</option>
+    <option>Corporate Set</option>
+    <option>Veteran Fundraiser</option>
+    <option>County Fair</option>
+    <option>Late Show</option>
+  </select>
+
+  <button onclick="printSelectedSetlist()">Print Setlist</button>
+</div>
+
+  <div class="filter-buttons">
+    <button onclick="filterProjects('All')">All</button>
+    <button onclick="filterProjects('Active Bit')">Active Bits</button>
+    <button onclick="filterProjects('Setlist')">Setlists</button>
+    <button onclick="filterProjects('Callback Idea')">Callbacks</button>
+    <button onclick="filterProjects('Story Premise')">Stories</button>
+    <button onclick="filterProjects('Grandpa Material')">Grandpa</button>
+    <button onclick="filterProjects('Military Material')">Military</button>
+  </div>
+	<div class="filter-buttons">
+  <button onclick="filterStatus('All')">All Statuses</button>
+  <button onclick="filterStatus('Idea')">Idea</button>
+  <button onclick="filterStatus('Working')">Working</button>
+  <button onclick="filterStatus('Tested')">Tested</button>
+  <button onclick="filterStatus('Stage Ready')">Stage Ready</button>
+  <button onclick="filterStatus('Retired')">Retired</button>
+</div>
+   <div class="filter-buttons">
+  <button onclick="filterSetlist('All')">All Setlists</button>
+  <button onclick="filterSetlist('Open Mic Set')">Open Mic</button>
+  <button onclick="filterSetlist('Club 10')">Club 10</button>
+  <button onclick="filterSetlist('Club 20')">Club 20</button>
+  <button onclick="filterSetlist('Church Clean 20')">Church</button>
+  <button onclick="filterSetlist('Corporate Set')">Corporate</button>
+  <button onclick="filterSetlist('Veteran Fundraiser')">Veteran</button>
+  <button onclick="filterSetlist('County Fair')">County Fair</button>
+  <button onclick="filterSetlist('Late Show')">Late Show</button>
+</div>
+<div class="filter-buttons">
+  <button onclick="filterFavorites('All')">All Projects</button>
+  <button onclick="filterFavorites('Favorites')">⭐ Favorites</button>
+</div>
+	<input
+  type="text"
+  id="projectSearch"
+  placeholder="Search saved comedy projects..."
+  onkeyup="displayProjects()">
+
+  <div id="projectList" class="project-grid"></div>
+</section>
+  
+  <a href="index.html#tools" class="returnButton">← Return To Toolbox</a>
+</main>
+
+<footer>
+  <p>© 2026 Comedy Utility Toolbox — Keep the jokes organized before they wander into the pasture.</p>
+</footer>
+<footer class="version-footer">
+Comedy Command Center Beta V1.1<br>Help System Update
+</footer>
+<script>
+  let comedyProjects = JSON.parse(localStorage.getItem("comedyProjects")) || [];
+  let editingProjectId = null;
+  let currentFilter = "All";
+  let currentStatusFilter = "All";
+  let currentSetlistFilter = "All";
+  let currentFavoriteFilter = "All";
+  function toggleHelp() {
+    const helpSection = document.getElementById("helpSection");
+
+    if (helpSection.style.display === "block") {
+      helpSection.style.display = "none";
+    } else {
+      helpSection.style.display = "block";
+    }
+  }
+
+  function getStatusClass(status) {
+    if (status === "Idea") return "status-idea";
+    if (status === "Working") return "status-working";
+    if (status === "Tested") return "status-tested";
+    if (status === "Stage Ready") return "status-ready";
+    if (status === "Retired") return "status-retired";
+    return "status-idea";
+  }
+
+  function getReactionClass(reaction) {
+    if (reaction === "Killed") return "reaction-killed";
+    if (reaction === "Strong") return "reaction-strong";
+    if (reaction === "Mixed") return "reaction-mixed";
+    if (reaction === "Weak") return "reaction-weak";
+    if (reaction === "Bombed") return "reaction-bombed";
+    return "reaction-not-tested";
+  }
+
+  function formatTags(tags) {
+    if (!tags) return "";
+
+    const tagArray = tags
+      .split(",")
+      .map(function(tag) {
+        return tag.trim();
+      })
+      .filter(function(tag) {
+        return tag !== "";
+      });
+
+    let html = "";
+
+    tagArray.forEach(function(tag) {
+      html += `<span class="tag-pill">${escapeHTML(tag)}</span>`;
+    });
+
+    return html;
+  }
+function saveProject() {
+
+  const title = document.getElementById("projectTitle").value.trim();
+  const category = document.getElementById("projectCategory").value;
+  const status = document.getElementById("projectStatus").value;
+  const reaction = document.getElementById("crowdReaction").value;
+  const setlist = document.getElementById("assignedSetlist").value;
+  const time = document.getElementById("projectTime").value.trim();
+  const tags = document.getElementById("projectTags").value.trim();
+  const notes = document.getElementById("projectNotes").value.trim();
+  const stageNotes = document.getElementById("stageNotes").value.trim();
+
+  if (title === "" || notes === "") {
+    alert("Please add a project title and writing notes.");
+    return;
+  }
+
+  if (editingProjectId) {
+
+    comedyProjects = comedyProjects.map(function(project) {
+
+      if (project.id === editingProjectId) {
+
+        return {
+          id: project.id,
+          title: title,
+          category: category,
+          status: status,
+          reaction: reaction,
+          setlist: setlist,
+time: time,
+favorite: project.favorite || false,
+          tags: tags,
+          notes: notes,
+          stageNotes: stageNotes,
+          date: project.date,
+          updated: new Date().toLocaleDateString()
+        };
+
+      }
+
+      return project;
+
+    });
+
+    editingProjectId = null;
+
+  } else {
+
+    comedyProjects.push({
+  id: Date.now(),
+  title: title,
+  category: category,
+  status: status,
+  reaction: reaction,
+  setlist: setlist,
+  time: time,
+  favorite: false,
+      tags: tags,
+      notes: notes,
+      stageNotes: stageNotes,
+      date: new Date().toLocaleDateString(),
+      updated: null
+    });
+
+  }
+
+  localStorage.setItem("comedyProjects", JSON.stringify(comedyProjects));
+
+  clearForm();
+  displayProjects();
+
+}
+  function updateStatsDashboard() {
+  const statsDashboard = document.getElementById("statsDashboard");
+
+  const total = comedyProjects.length;
+
+  const ideas = comedyProjects.filter(project => (project.status || "Idea") === "Idea").length;
+  const working = comedyProjects.filter(project => project.status === "Working").length;
+  const tested = comedyProjects.filter(project => project.status === "Tested").length;
+  const ready = comedyProjects.filter(project => project.status === "Stage Ready").length;
+  const retired = comedyProjects.filter(project => project.status === "Retired").length;
+
+  const killed = comedyProjects.filter(project => project.reaction === "Killed").length;
+  const strong = comedyProjects.filter(project => project.reaction === "Strong").length;
+  const mixed = comedyProjects.filter(project => project.reaction === "Mixed").length;
+  const weak = comedyProjects.filter(project => project.reaction === "Weak").length;
+  const bombed = comedyProjects.filter(project => project.reaction === "Bombed").length;
+
+  statsDashboard.innerHTML = `
+    <div class="project-card">
+      <h3>Total Projects</h3>
+      <p><strong>${total}</strong> saved comedy projects</p>
+    </div>
+
+    <div class="project-card">
+      <h3>Status Breakdown</h3>
+      <p><strong>Ideas:</strong> ${ideas}</p>
+      <p><strong>Working:</strong> ${working}</p>
+      <p><strong>Tested:</strong> ${tested}</p>
+      <p><strong>Stage Ready:</strong> ${ready}</p>
+      <p><strong>Retired:</strong> ${retired}</p>
+    </div>
+
+    <div class="project-card">
+      <h3>Crowd Reaction</h3>
+      <p><strong>Killed:</strong> ${killed}</p>
+      <p><strong>Strong:</strong> ${strong}</p>
+      <p><strong>Mixed:</strong> ${mixed}</p>
+      <p><strong>Weak:</strong> ${weak}</p>
+      <p><strong>Bombed:</strong> ${bombed}</p>
+    </div>
+  `;
+}
+
+function printSelectedSetlist() {
+  const selectedSetlist = document.getElementById("printSetlistSelect").value;
+   
+  const setlistProjects = comedyProjects.filter(function(project) {
+  return (project.setlist || "Not Assigned") === selectedSetlist;
+});
+
+const totalMinutes = setlistProjects.reduce(function(total, project) {
+  return total + Number(project.time || 0);
+}, 0);
+
+if (setlistProjects.length === 0) {
+    alert("No projects are assigned to this setlist yet.");
+    return;
+  }
+
+  let printHtml = `
+    <html>
+    <head>
+      <title>${escapeHTML(selectedSetlist)}</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          padding: 30px;
+          color: #222;
+        }
+
+        h1 {
+          border-bottom: 3px solid #222;
+          padding-bottom: 10px;
+        }
+
+        .bit {
+          margin-bottom: 25px;
+          padding-bottom: 15px;
+          border-bottom: 1px solid #ccc;
+        }
+
+        .bit h2 {
+          margin-bottom: 5px;
+        }
+
+        .meta {
+          font-weight: bold;
+          color: #555;
+        }
+
+        .notes {
+          white-space: pre-wrap;
+        }
+    
+
+    .helpBar {
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin: 25px auto;
+      max-width: 1100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      color: #2f241d;
+      box-sizing: border-box;
+    }
+
+    .helpButton {
+      width: auto;
+      margin: 0;
+      padding: 6px 12px;
+      border-radius: 50%;
+      background: #2f241d;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+    }
+
+    .helpButton:hover {
+      background: #b87b2f;
+    }
+
+    .helpSection {
+      display: none;
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 22px;
+      border-radius: 10px;
+      margin: 20px auto 30px;
+      max-width: 1100px;
+      line-height: 1.6;
+      box-sizing: border-box;
+    }
+
+    .helpSection h2 {
+      margin-top: 0;
+      color: #2f241d;
+    }
+
+    .helpSection h3 {
+      color: #2f241d;
+      margin-bottom: 6px;
+    }
+
+    .helpSection ul, .helpSection ol {
+      padding-left: 24px;
+    }
+
+    .helpSection li {
+      margin-bottom: 6px;
+    }
+
+    .returnButton {
+      display: inline-block;
+      padding: 12px 18px;
+      background: #2f241d;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      margin: 20px 0 0;
+    }
+
+    .returnButton:hover {
+      background: #b87b2f;
+    }
+
+    @media (max-width: 750px) {
+      .navbar a {
+        display: inline-block;
+        margin: 6px 10px;
+      }
+
+      .helpBar {
+        margin-left: 20px;
+        margin-right: 20px;
+        gap: 12px;
+      }
+
+      button {
+        margin-bottom: 8px;
+      }
+    }
+  </style>
+    </head>
+    <body>
+      <h1>${escapeHTML(selectedSetlist)}</h1>
+<h2>Running Order</h2>
+<p><strong>Printed:</strong> ${new Date().toLocaleDateString()}</p>
+<p><strong>Total Estimated Time:</strong> ${totalMinutes} minutes</p>
+  `;
+
+  setlistProjects.forEach(function(project, index) {
+    printHtml += `
+      <div class="bit">
+        <h2>#${index + 1} — ${escapeHTML(project.title)}</h2>
+        <p class="meta">
+          Category: ${escapeHTML(project.category)} |
+          Status: ${escapeHTML(project.status || "Idea")} |
+          Crowd: ${escapeHTML(project.reaction || "Not Tested Yet")} |
+Time: ${escapeHTML(project.time || "Not set")} min
+        </p>
+
+        <h3>Writing Notes</h3>
+        <p class="notes">${escapeHTML(project.notes)}</p>
+
+        <h3>Stage Notes</h3>
+        <p class="notes">${escapeHTML(project.stageNotes || "No stage notes yet.")}</p>
+      </div>
+    `;
+  });
+
+  printHtml += `
+    </body>
+    </html>
+  `;
+
+  const printWindow = window.open("", "_blank");
+  printWindow.document.write(printHtml);
+  printWindow.document.close();
+  printWindow.print();
+}
+   
+  function displayProjects() {
+    const projectList = document.getElementById("projectList");
+	updateStatsDashboard();
+
+    let visibleProjects = comedyProjects;
+
+    if (currentFilter !== "All") {
+      visibleProjects = visibleProjects.filter(function(project) {
+        return project.category === currentFilter;
+      });
+    }
+
+    if (currentStatusFilter !== "All") {
+      visibleProjects = visibleProjects.filter(function(project) {
+        return (project.status || "Idea") === currentStatusFilter;
+      });
+    }
+    if (currentSetlistFilter !== "All") {
+  visibleProjects = visibleProjects.filter(function(project) {
+    return (project.setlist || "Not Assigned") === currentSetlistFilter;
+  });
+}
+    if (currentFavoriteFilter === "Favorites") {
+  visibleProjects = visibleProjects.filter(function(project) {
+    return project.favorite === true;
+  });
+}
+    const searchInput = document
+      .getElementById("projectSearch")
+      .value
+      .toLowerCase();
+
+    if (searchInput !== "") {
+      visibleProjects = visibleProjects.filter(function(project) {
+        const status = project.status || "Idea";
+        const reaction = project.reaction || "Not Tested Yet";
+        const tags = project.tags || "";
+        const stageNotes = project.stageNotes || "";
+
+        return (
+          project.title.toLowerCase().includes(searchInput) ||
+          project.notes.toLowerCase().includes(searchInput) ||
+          project.category.toLowerCase().includes(searchInput) ||
+          status.toLowerCase().includes(searchInput) ||
+          reaction.toLowerCase().includes(searchInput) ||
+          tags.toLowerCase().includes(searchInput) ||
+          stageNotes.toLowerCase().includes(searchInput)
+        );
+      });
+    }
+
+    if (visibleProjects.length === 0) {
+      projectList.innerHTML = "<p>No matching comedy projects found.</p>";
+      return;
+    }
+
+    let html = "";
+
+    visibleProjects.forEach(function(project) {
+      const status = project.status || "Idea";
+      const statusClass = getStatusClass(status);
+
+      const reaction = project.reaction || "Not Tested Yet";
+      const reactionClass = getReactionClass(reaction);
+
+      const tagsHtml = formatTags(project.tags || "");
+      const stageNotes = project.stageNotes || "No stage notes yet.";
+       const projectTime = project.time || "Not set";
+
+      html += `
+        <div class="project-card">
+          <h3>#${visibleProjects.indexOf(project) + 1} — ${escapeHTML(project.title)}</h3>
+
+	  <button onclick="toggleFavorite(${project.id})">
+  ${project.favorite ? "⭐ Starred" : "☆ Star"}
+</button>
+          <p class="category">${project.category}</p>
+
+          <span class="status-pill ${statusClass}">
+            ${status}
+          </span>
+
+          <span class="reaction-pill ${reactionClass}">
+            Crowd: ${reaction}
+          </span>
+	  <span class="setlist-pill">
+  ${project.setlist || "Not Assigned"}
+</span>
+
+<p><strong>Estimated Time:</strong> ${projectTime} min</p>
+
+          <div>
+            ${tagsHtml}
+          </div>
+
+          <button onclick="toggleDetails(${project.id})">
+            Open Project
+          </button>
+
+          <div id="details-${project.id}" class="project-details" style="display:none;">
+            <h4>Writing Notes</h4>
+            <p>${escapeHTML(project.notes)}</p>
+
+            <h4>Stage Notes</h4>
+            <p>${escapeHTML(stageNotes)}</p>
+          </div>
+
+          <p><strong>Saved:</strong> ${project.date}</p>
+
+          ${project.updated ? `<p><strong>Updated:</strong> ${project.updated}</p>` : ""}
+
+          <button onclick="moveProjectUp(${project.id})">↑ Up</button>
+
+<button onclick="moveProjectDown(${project.id})">↓ Down</button>
+
+<button onclick="editProject(${project.id})">Edit</button>
+
+<button class="delete-btn" onclick="deleteProject(${project.id})">Delete</button>
+        </div>
+      `;
+    });
+
+    projectList.innerHTML = html;
+  }
+
+  function filterProjects(category) {
+    currentFilter = category;
+    displayProjects();
+  }
+
+  function filterStatus(status) {
+    currentStatusFilter = status;
+    displayProjects();
+  }
+   function filterSetlist(setlist) {
+  currentSetlistFilter = setlist;
+  displayProjects();
+}
+  function filterFavorites(filter) {
+  currentFavoriteFilter = filter;
+  displayProjects();
+}
+
+function toggleFavorite(id) {
+
+  comedyProjects = comedyProjects.map(function(project) {
+
+    if (project.id === id) {
+
+      return {
+        ...project,
+        favorite: !project.favorite
+      };
+
+    }
+
+    return project;
+
+  });
+
+  localStorage.setItem(
+    "comedyProjects",
+    JSON.stringify(comedyProjects)
+  );
+
+  displayProjects();
+
+}
+   function moveProjectUp(id) {
+
+  const index = comedyProjects.findIndex(function(project) {
+    return project.id === id;
+  });
+
+  if (index <= 0) return;
+
+  const temp = comedyProjects[index];
+
+  comedyProjects[index] = comedyProjects[index - 1];
+
+  comedyProjects[index - 1] = temp;
+
+  localStorage.setItem(
+    "comedyProjects",
+    JSON.stringify(comedyProjects)
+  );
+
+  displayProjects();
+
+}
+
+function moveProjectDown(id) {
+
+  const index = comedyProjects.findIndex(function(project) {
+    return project.id === id;
+  });
+
+  if (index === -1 || index >= comedyProjects.length - 1) return;
+
+  const temp = comedyProjects[index];
+
+  comedyProjects[index] = comedyProjects[index + 1];
+
+  comedyProjects[index + 1] = temp;
+
+  localStorage.setItem(
+    "comedyProjects",
+    JSON.stringify(comedyProjects)
+  );
+
+  displayProjects();
+
+}
+  function editProject(id) {
+    const project = comedyProjects.find(function(project) {
+      return project.id === id;
+    });
+
+    if (!project) return;
+
+    document.getElementById("projectTitle").value = project.title;
+    document.getElementById("projectCategory").value = project.category;
+    document.getElementById("projectStatus").value = project.status || "Idea";
+    document.getElementById("crowdReaction").value = project.reaction || "Not Tested Yet";
+    document.getElementById("assignedSetlist").value = project.setlist || "Not Assigned";
+document.getElementById("projectTime").value = project.time || "";
+document.getElementById("projectTags").value = project.tags || "";
+    document.getElementById("projectNotes").value = project.notes;
+    document.getElementById("stageNotes").value = project.stageNotes || "";
+
+    editingProjectId = id;
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+  function deleteProject(id) {
+    comedyProjects = comedyProjects.filter(function(project) {
+      return project.id !== id;
+    });
+
+    localStorage.setItem("comedyProjects", JSON.stringify(comedyProjects));
+    displayProjects();
+  }
+
+  function toggleDetails(id) {
+    const details = document.getElementById(`details-${id}`);
+
+    if (details.style.display === "none") {
+      details.style.display = "block";
+    } else {
+      details.style.display = "none";
+    }
+  }
+
+  function clearForm() {
+    document.getElementById("projectTitle").value = "";
+    document.getElementById("projectNotes").value = "";
+    document.getElementById("stageNotes").value = "";
+    document.getElementById("projectTags").value = "";
+    document.getElementById("projectCategory").selectedIndex = 0;
+    document.getElementById("projectStatus").selectedIndex = 0;
+    document.getElementById("crowdReaction").selectedIndex = 0;
+     document.getElementById("assignedSetlist").selectedIndex = 0;
+document.getElementById("projectTime").value = "";
+editingProjectId = null;  
+  }
+
+  displayProjects();
+</script>
+
+
+</body>
+</html>

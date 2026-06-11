@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comedy Perspective Rotator V3</title>
+
+  <style>
+    .navbar {
+      background: #1d1713;
+      padding: 15px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .navbar a:hover {
+      color: #f1d9a5;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1050px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f4f4f4;
+      color: #222;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+    }
+
+    h2, h3 {
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #555;
+      margin-bottom: 25px;
+      font-size: 18px;
+    }
+
+    .helpBar {
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      color: #2f241d;
+    }
+
+    .helpButton {
+      width: auto;
+      margin: 0;
+      padding: 6px 12px;
+      border-radius: 50%;
+      background: #2f241d;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+    }
+
+    .helpButton:hover {
+      background: #b87b2f;
+    }
+
+    .helpSection {
+      display: none;
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 18px;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+
+    .helpSection h2 {
+      margin-top: 0;
+    }
+
+    .helpSection h3 {
+      margin-bottom: 5px;
+      color: #2f241d;
+    }
+
+    .toolBox, .resultCard, .favoriteBox {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
+
+    textarea, select, button {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      margin-top: 8px;
+      font-size: 18px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    button {
+      cursor: pointer;
+      font-weight: bold;
+      color: white;
+      border: none;
+      margin-top: 12px;
+    }
+
+    .generateButton { background: #2E8B57; }
+    .generateButton:hover { background: #246B46; }
+
+    .driftButton { background: #663399; }
+    .driftButton:hover { background: #4B2475; }
+
+    .randomButton { background: #4169E1; }
+    .randomButton:hover { background: #2F4FB2; }
+
+    .clearButton { background: #B22222; }
+    .clearButton:hover { background: #8B1A1A; }
+
+    .favoriteButton {
+      background: #DAA520;
+      color: white;
+      font-size: 16px;
+      padding: 10px;
+    }
+
+    .favoriteButton:hover {
+      background: #B8860B;
+    }
+
+    .section {
+      margin-top: 18px;
+      padding: 15px;
+      background: #f8f8f8;
+      border-radius: 10px;
+      border-left: 5px solid #2E8B57;
+    }
+
+    .voiceLine {
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 1.4;
+      color: #333;
+    }
+
+    ul, ol {
+      margin-top: 8px;
+      padding-left: 25px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      line-height: 1.45;
+    }
+
+    .meterRow {
+      margin: 8px 0;
+      font-size: 17px;
+    }
+
+    .stars {
+      color: #B8860B;
+      letter-spacing: 2px;
+    }
+
+    .favoriteItem {
+      background: #fff8dc;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border-left: 5px solid #DAA520;
+      line-height: 1.5;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #666;
+      margin-top: 8px;
+    }
+
+    .returnButton {
+      display: inline-block;
+      padding: 12px 18px;
+      background: #2f241d;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 25px;
+    }
+
+    .returnButton:hover {
+      background: #b87b2f;
+    }
+  </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+  <a href="index.html">HOME</a>
+  <a href="about.html">ABOUT</a>
+  <a href="index.html#tools">TOOLBOX</a>
+  <a href="toolbox-contact.html">CONTACT</a>
+</nav>
+
+<h1>Comedy Perspective Rotator V3</h1>
+
+<p class="subtitle">
+A deeper perspective comedy tool for finding voice, tension, escalation, tags, and punchline direction.
+</p>
+
+<div class="helpBar">
+  <span>Need help finding a fresher angle or voice?</span>
+  <button class="helpButton" onclick="toggleHelp()">?</button>
+</div>
+
+<div id="helpSection" class="helpSection">
+  <h2>How to Use This Tool</h2>
+
+  <h3>Purpose</h3>
+  <p>
+    The Perspective Generator helps you view the same premise through different personalities, backgrounds, occupations, and emotional filters so new punchlines and attitudes can appear.
+  </p>
+
+  <h3>When To Use It</h3>
+  <p>
+    Use this tool when a premise feels stale, when every punchline sounds the same, or when you need a stronger character voice, audience filter, tag path, or callback angle.
+  </p>
+
+  <h3>How To Use It</h3>
+  <ol>
+    <li>Enter a premise.</li>
+    <li>Choose the audience filter.</li>
+    <li>Choose a perspective.</li>
+    <li>Choose an emotion.</li>
+    <li>Click Generate V3 Comedy Breakdown.</li>
+    <li>Use Perspective Drift to see the same idea through several viewpoints.</li>
+    <li>Save any breakdown that gives you a strong voice, tag, or callback path.</li>
+  </ol>
+
+  <h3>Example Input</h3>
+  <p>
+    <strong>Premise:</strong> Self-checkout machines are getting too smart.<br><strong>Perspective:</strong> Grandpa<br><strong>Emotion:</strong> Suspicious
+  </p>
+
+  <h3>Example Output</h3>
+  <p>
+    <strong>Possible Angle:</strong> Grandpa treats the self-checkout machine like a lazy cashier, a government witness, or a slot machine that judges groceries.
+  </p>
+
+  <h3>Comedy Tip</h3>
+  <p>
+    When a premise feels dead, do not always change the premise. Change who is talking about it. A new voice can drag a tired idea out of the ditch.
+  </p>
+</div>
+
+<div class="toolBox">
+  <label for="premise">Premise</label>
+  <textarea id="premise" placeholder="Example: Self-checkout machines are getting too smart..."></textarea>
+
+  <label for="audience">Audience Filter</label>
+  <select id="audience">
+    <option>Comedy Club</option>
+    <option>Clean / Church Friendly</option>
+    <option>Corporate Event</option>
+    <option>Rural Fair Crowd</option>
+    <option>Veteran Crowd</option>
+    <option>Blue Collar Crowd</option>
+    <option>Family Event</option>
+  </select>
+
+  <label for="perspective">Perspective</label>
+  <select id="perspective">
+    <option>Grandpa</option>
+    <option>Grandma</option>
+    <option>Aunt Molly</option>
+    <option>Mother</option>
+    <option>Father</option>
+    <option>Neighbor</option>
+    <option>Police Officer</option>
+    <option>Drunk</option>
+    <option>Teacher</option>
+    <option>Pastor</option>
+    <option>Military Veteran</option>
+    <option>Drill Sergeant</option>
+    <option>Truck Driver</option>
+    <option>Mechanic</option>
+    <option>Farmer</option>
+    <option>Rancher</option>
+    <option>Know-It-All</option>
+    <option>Conspiracy Theorist</option>
+    <option>Cheap Person</option>
+    <option>Nervous Person</option>
+    <option>Small Town Gossip</option>
+    <option>Person Who Refuses Technology</option>
+    <option>Guy Who Fixes Everything With Duct Tape</option>
+  </select>
+
+  <label for="emotion">Emotion Filter</label>
+  <select id="emotion">
+    <option>Suspicious</option>
+    <option>Confused</option>
+    <option>Angry</option>
+    <option>Overconfident</option>
+    <option>Embarrassed</option>
+    <option>Proud</option>
+    <option>Jealous</option>
+    <option>Bitter</option>
+    <option>Excited</option>
+    <option>Exhausted</option>
+  </select>
+
+  <button class="generateButton" onclick="generateV3()">Generate V3 Comedy Breakdown</button>
+  <button class="driftButton" onclick="perspectiveDrift()">Perspective Drift</button>
+  <button class="randomButton" onclick="randomPremise()">Surprise Me</button>
+  <button class="clearButton" onclick="clearTool()">Clear</button>
+
+  <p class="note">
+    Use “Generate” for a full breakdown. Use “Perspective Drift” to see the same premise through several different people.
+  </p>
+</div>
+
+<div id="output"></div>
+
+<div class="favoriteBox">
+  <h2>Saved Favorite Breakdowns</h2>
+  <div id="favorites"></div>
+</div>
+
+<a href="index.html#tools" class="returnButton">← Return To Toolbox</a>
+
+<script>
+  const surprisePremises = [
+    "Self-checkout machines are getting too smart",
+    "GPS directions are getting too bossy",
+    "Dating apps have ruined old-fashioned romance",
+    "Modern trucks have too many buttons",
+    "Every appliance now wants a password",
+    "Online banking feels suspicious",
+    "AI robots are getting too comfortable",
+    "Weather alerts are too dramatic",
+    "Family reunions need referees",
+    "Retirement is busier than working",
+    "Wally World is the modern town square",
+    "People trust apps more than common sense",
+    "Customer service has become a test of faith",
+    "County fairs are more complicated than they used to be",
+    "Smart phones are making people too dependent"
+  ];
+
+  const driftPerspectives = [
+    "Grandpa",
+    "Police Officer",
+    "Drunk",
+    "Neighbor",
+    "Conspiracy Theorist",
+    "Teacher",
+    "Mechanic",
+    "Pastor",
+    "Truck Driver",
+    "Small Town Gossip"
+  ];
+
+  function toggleHelp() {
+    const helpBox = document.getElementById("helpBox");
+
+    if (helpSection.style.display === "block") {
+      helpSection.style.display = "none";
+    } else {
+      helpSection.style.display = "block";
+    }
+  }
+
+  function generateV3() {
+    const premise = getPremise();
+    const audience = document.getElementById("audience").value;
+    const perspective = document.getElementById("perspective").value;
+    const emotion = document.getElementById("emotion").value;
+    const output = document.getElementById("output");
+
+    if (!premise) {
+      output.innerHTML = "<div class='resultCard'>Enter a premise first. Even a punchline needs a place to sleep.</div>";
+      return;
+    }
+
+    output.innerHTML = buildFullBreakdown(premise, audience, perspective, emotion);
+  }
+
+  function buildFullBreakdown(premise, audience, perspective, emotion) {
+    const voice = buildVoiceLine(premise, perspective, emotion, audience);
+    const tensions = buildTensions(premise, perspective);
+    const escalation = buildEscalation(premise, perspective);
+    const punchDirections = buildPunchDirections(premise, perspective);
+    const tags = buildTags(premise, perspective, audience);
+    const callbacks = buildCallbacks(premise, perspective);
+    const energy = buildEnergyMeter();
+
+    const safeData = escapeQuotes(`${perspective} | ${premise} | ${voice}`);
+
+    return `
+      <div class="resultCard">
+        <h2>${perspective} Perspective</h2>
+        <p><strong>Premise:</strong> ${premise}</p>
+        <p><strong>Audience:</strong> ${audience}</p>
+        <p><strong>Emotion:</strong> ${emotion}</p>
+
+        <div class="section">
+          <h3>Voice Authenticity Engine</h3>
+          <div class="voiceLine">“${voice}”</div>
+        </div>
+
+        <div class="section">
+          <h3>Tension Finder</h3>
+          <ul>${listItems(tensions)}</ul>
+        </div>
+
+        <div class="section">
+          <h3>Escalation Builder</h3>
+          <ol>${listItems(escalation)}</ol>
+        </div>
+
+        <div class="section">
+          <h3>Punchline Direction Layer</h3>
+          <ul>${listItems(punchDirections)}</ul>
+        </div>
+
+        <div class="section">
+          <h3>Tag Generator</h3>
+          <ul>${listItems(tags)}</ul>
+        </div>
+
+        <div class="section">
+          <h3>Callback Tracker Starter</h3>
+          <ul>${listItems(callbacks)}</ul>
+        </div>
+
+        <div class="section">
+          <h3>Energy Meter</h3>
+          ${energy}
+        </div>
+
+        <button class="favoriteButton" onclick="saveFavorite('${safeData}')">Save Favorite Breakdown</button>
+      </div>
+    `;
+  }
+
+  function buildVoiceLine(premise, perspective, emotion, audience) {
+    const intros = {
+      "Grandpa": `Back in my day, ${premise.toLowerCase()} would have been settled with common sense and maybe a socket wrench`,
+      "Grandma": `Honey, ${premise.toLowerCase()} sounds like something that needs a casserole and a stern look`,
+      "Aunt Molly": `${premise} is exactly what happens when people quit listening to common sense and start trusting things with blinking lights`,
+      "Mother": `I don't care who started ${premise.toLowerCase()}, somebody is cleaning it up`,
+      "Father": `${premise} is exactly why I keep receipts, duct tape, and a bad attitude`,
+      "Neighbor": `I wasn't snooping, but I did notice ${premise.toLowerCase()} before everybody else did`,
+      "Police Officer": `Sir, I need you and ${premise.toLowerCase()} to remain calm and keep your hands where I can see them`,
+      "Drunk": `${premise}? I understand it emotionally, but not legally`,
+      "Teacher": `Class, today ${premise.toLowerCase()} will be on the test, mostly because nobody listened the first time`,
+      "Pastor": `There is a lesson in ${premise.toLowerCase()}, and unfortunately most of us are the example`,
+      "Military Veteran": `${premise} needs discipline, a chain of command, and somebody who knows where the coffee is`,
+      "Drill Sergeant": `${premise} will stand at attention until it learns respect`,
+      "Truck Driver": `${premise} sounds like something that starts with bad directions and ends at a truck stop`,
+      "Mechanic": `${premise} probably just needs oil, patience, and somebody who quits touching buttons`,
+      "Farmer": `${premise} is what happens when people forget that gates, weather, and animals do not care about your plan`,
+      "Rancher": `${premise} better prove it can open a gate before it starts giving advice`,
+      "Know-It-All": `Actually, ${premise.toLowerCase()} is simple if everyone would stop being wrong around me`,
+      "Conspiracy Theorist": `${premise} is not an accident. Follow the money and check the batteries`,
+      "Cheap Person": `${premise} better come with a coupon or I am not emotionally participating`,
+      "Nervous Person": `${premise} feels like the first warning sign before a documentary`,
+      "Small Town Gossip": `I don't want to talk about ${premise.toLowerCase()}, but I already know three versions of it`,
+      "Person Who Refuses Technology": `${premise} is exactly why I still own a flip phone and trust paper maps`,
+      "Guy Who Fixes Everything With Duct Tape": `${premise} ain't broken until duct tape refuses to help`
+    };
+
+    let base = intros[perspective] || `${perspective} reacts to ${premise.toLowerCase()} with ${emotion.toLowerCase()} confidence`;
+
+    if (audience === "Clean / Church Friendly") {
+      base += `, and somehow turns it into a lesson about patience`;
+    } else if (audience === "Comedy Club") {
+      base += `, right before admitting everybody involved made it worse`;
+    } else if (audience === "Corporate Event") {
+      base += `, then accidentally creates a committee about it`;
+    } else if (audience === "Rural Fair Crowd") {
+      base += `, preferably near a livestock barn with a funnel cake in hand`;
+    } else if (audience === "Veteran Crowd") {
+      base += `, because apparently nobody briefed the civilians`;
+    } else if (audience === "Blue Collar Crowd") {
+      base += `, then fixes the wrong problem with the right tool`;
+    } else if (audience === "Family Event") {
+      base += `, and somehow everybody's aunt gets blamed`;
+    }
+
+    return base;
+  }
+
+  function buildTensions(premise, perspective) {
+    return [
+      `Old way vs. new way: ${perspective} tries to force familiar logic onto “${premise}.”`,
+      `Control vs. confusion: the character wants certainty, but the premise creates chaos.`,
+      `Pride vs. reality: the character thinks they understand the situation better than they do.`,
+      `Human instinct vs. modern systems: common sense crashes into unnecessary complication.`
+    ];
+  }
+
+  function buildEscalation(premise, perspective) {
+    return [
+      `${perspective} notices the problem and tries to handle it normally.`,
+      `${perspective} applies the wrong life experience to “${premise}.”`,
+      `The solution creates a bigger problem than the original premise.`,
+      `${perspective} becomes weirdly proud of the disaster.`,
+      `Final escalation: the character treats the whole mess like a tradition, rule, or emergency protocol.`
+    ];
+  }
+
+  function buildPunchDirections(premise, perspective) {
+    return [
+      `Literal interpretation: take one part of “${premise}” way too seriously.`,
+      `False confidence: let ${perspective} be completely wrong but fully committed.`,
+      `Rule of three: two normal reactions, then one ridiculous reaction.`,
+      `Understatement: describe a major disaster like it is just mildly inconvenient.`,
+      `Callback opportunity: repeat one strong phrase later in the bit with a new meaning.`
+    ];
+  }
+
+  function buildTags(premise, perspective, audience) {
+    return [
+      `${perspective} says this is why nobody should update anything after 1978.`,
+      `Somebody asks one simple question and ${perspective} turns it into a town meeting.`,
+      `The situation gets so bad even the instructions start looking embarrassed.`,
+      `${perspective} solves it by blaming young people, the government, or whoever touched it last.`,
+      `For a ${audience.toLowerCase()}, make the final tag cleaner, sharper, or more personal to that crowd.`
+    ];
+  }
+
+  function buildCallbacks(premise, perspective) {
+    return [
+      `Reusable phrase: “That’s how they get you.”`,
+      `Reusable phrase: “Back in my day, this had a handle.”`,
+      `Callback idea: bring ${premise.toLowerCase()} back later as proof the character was almost right.`,
+      `Callback idea: let ${perspective} use the same bad solution on a completely different problem.`
+    ];
+  }
+
+  function buildEnergyMeter() {
+    const conflict = randomStars(3, 5);
+    const escalation = randomStars(3, 5);
+    const callback = randomStars(2, 5);
+    const voice = randomStars(3, 5);
+
+    return `
+      <div class="meterRow"><strong>Conflict:</strong> <span class="stars">${conflict}</span></div>
+      <div class="meterRow"><strong>Escalation Potential:</strong> <span class="stars">${escalation}</span></div>
+      <div class="meterRow"><strong>Callback Potential:</strong> <span class="stars">${callback}</span></div>
+      <div class="meterRow"><strong>Voice Strength:</strong> <span class="stars">${voice}</span></div>
+    `;
+  }
+
+  function perspectiveDrift() {
+    const premise = getPremise();
+    const audience = document.getElementById("audience").value;
+    const emotion = document.getElementById("emotion").value;
+    const output = document.getElementById("output");
+
+    if (!premise) {
+      output.innerHTML = "<div class='resultCard'>Enter a premise first. Drifting without a premise is just wandering around the yard.</div>";
+      return;
+    }
+
+    const selected = shuffleArray([...driftPerspectives]).slice(0, 5);
+
+    let html = `<div class="resultCard"><h2>Perspective Drift</h2><p><strong>Premise:</strong> ${premise}</p>`;
+
+    selected.forEach(function(person, index) {
+      const voice = buildVoiceLine(premise, person, emotion, audience);
+      html += `
+        <div class="section">
+          <h3>Drift ${index + 1}: ${person}</h3>
+          <div class="voiceLine">“${voice}”</div>
+        </div>
+      `;
+    });
+
+    html += `</div>`;
+    output.innerHTML = html;
+  }
+
+  function saveFavorite(data) {
+    const favorites = document.getElementById("favorites");
+    favorites.innerHTML += `<div class="favoriteItem">${data}</div>`;
+  }
+
+  function randomPremise() {
+    document.getElementById("premise").value = randomItem(surprisePremises);
+  }
+
+  function clearTool() {
+    document.getElementById("premise").value = "";
+    document.getElementById("output").innerHTML = "";
+  }
+
+  function getPremise() {
+    return document.getElementById("premise").value.trim();
+  }
+
+  function listItems(array) {
+    return array.map(function(item) {
+      return `<li>${item}</li>`;
+    }).join("");
+  }
+
+  function randomStars(min, max) {
+    const number = Math.floor(Math.random() * (max - min + 1)) + min;
+    let stars = "";
+
+    for (let i = 0; i < number; i++) {
+      stars += "★";
+    }
+
+    return stars;
+  }
+
+  function randomItem(array) {
+    return array[Math.floor(Math.random() * array.length)];
+  }
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+
+    return array;
+  }
+
+  function escapeQuotes(text) {
+    return text
+      .replace(/'/g, "&#39;")
+      .replace(/"/g, "&quot;");
+  }
+</script>
+
+</body>
+</html>

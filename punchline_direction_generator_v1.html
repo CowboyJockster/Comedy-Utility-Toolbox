@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Punchline Direction Generator V1</title>
+
+  <style>
+    .navbar {
+      background: #1d1713;
+      padding: 15px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .navbar a:hover {
+      color: #f1d9a5;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1150px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f2f2f2;
+      color: #222;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      color: #555;
+      margin-bottom: 25px;
+      font-size: 18px;
+    }
+
+    .helpBar {
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      color: #2f241d;
+    }
+
+    .helpButton {
+      width: auto;
+      margin: 0;
+      padding: 6px 12px;
+      border-radius: 50%;
+      background: #2f241d;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+    }
+
+    .helpButton:hover {
+      background: #b87b2f;
+    }
+
+    .helpSection {
+      display: none;
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 18px;
+      border-radius: 10px;
+      margin: 20px 0;
+      line-height: 1.5;
+    }
+
+    .helpSection h2 {
+      margin-top: 0;
+    }
+
+    .helpSection h3 {
+      margin-bottom: 5px;
+      color: #2f241d;
+    }
+
+    .box, .result, .favoriteBox {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
+
+    textarea, input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      font-size: 18px;
+      box-sizing: border-box;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    textarea {
+      min-height: 95px;
+      resize: vertical;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      color: white;
+      margin-top: 12px;
+    }
+
+    .generate {
+      background: #2E8B57;
+    }
+
+    .generate:hover {
+      background: #246B46;
+    }
+
+    .random {
+      background: #4169E1;
+    }
+
+    .random:hover {
+      background: #2F4FB2;
+    }
+
+    .clear {
+      background: #B22222;
+    }
+
+    .clear:hover {
+      background: #8B1A1A;
+    }
+
+    .save {
+      background: #DAA520;
+    }
+
+    .save:hover {
+      background: #B8860B;
+    }
+
+    .section {
+      background: #fafafa;
+      padding: 15px;
+      margin-top: 18px;
+      border-left: 5px solid #2E8B57;
+      border-radius: 8px;
+    }
+
+    .section h3 {
+      margin-top: 0;
+    }
+
+    .directionCard {
+      background: #fff8dc;
+      padding: 14px;
+      margin-top: 12px;
+      border-radius: 8px;
+      border-left: 5px solid #DAA520;
+      line-height: 1.45;
+    }
+
+    .directionCard h4 {
+      margin: 0 0 8px 0;
+      color: #2f241d;
+      font-size: 20px;
+    }
+
+    .promptLine {
+      font-size: 19px;
+      font-weight: bold;
+      color: #333;
+      background: #fff8dc;
+      border-left: 5px solid #DAA520;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .favoriteItem {
+      background: #fff8dc;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border-left: 5px solid #DAA520;
+      line-height: 1.5;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #666;
+      margin-top: 8px;
+    }
+
+    .returnButton {
+      display: inline-block;
+      padding: 12px 18px;
+      background: #2f241d;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 25px;
+    }
+
+    .returnButton:hover {
+      background: #b87b2f;
+    }
+
+    ul, ol {
+      padding-left: 25px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 750px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .helpBar {
+        display: block;
+      }
+
+      .helpButton {
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <a href="index.html">HOME</a>
+    <a href="about.html">ABOUT</a>
+    <a href="index.html#tools">TOOLBOX</a>
+    <a href="toolbox-contact.html">CONTACT</a>
+  </nav>
+
+  <h1>Punchline Direction Generator V1</h1>
+
+  <p class="subtitle">
+    Turn a stuck premise into multiple punchline paths: reversal, exaggeration, paraprosdokian, callback, character flaw, and more.
+  </p>
+
+  <div class="helpBar">
+    <span>Need help finding where the punchline can go?</span>
+    <button class="helpButton" onclick="toggleHelp()">?</button>
+  </div>
+
+  <div id="helpSection" class="helpSection">
+    <h2>How to Use This Tool</h2>
+
+    <h3>Purpose</h3>
+    <p>The Punchline Direction Generator helps you explore different punchline paths from one premise, including reversal, exaggeration, paraprosdokian, callback, comparison, and character flaw.</p>
+
+    <h3>When To Use It</h3>
+    <ul>
+      <li>When a premise feels funny but you do not know where the punchline should land.</li>
+      <li>When you want several joke-writing directions before choosing one.</li>
+      <li>When you are building tags, alternates, or a stronger ending.</li>
+    </ul>
+
+    <h3>How To Use It</h3>
+    <ol>
+      <li>Enter a premise, setup, or story idea.</li>
+      <li>Choose a comedy voice or angle.</li>
+      <li>Choose how many directions you want.</li>
+      <li>Add an optional focus word if one image or object matters.</li>
+      <li>Click Generate Punchline Directions.</li>
+      <li>Pick the strongest direction and write your own punchline from there.</li>
+    </ol>
+
+    <h3>Example Input</h3>
+    <p><strong>Premise:</strong> My doctor told me I need more exercise.<br><strong>Voice:</strong> Self-Deprecating<br><strong>Focus:</strong> doctor</p>
+
+    <h3>Example Output</h3>
+    <p><strong>Direction:</strong> Reversal — What if the doctor is in worse shape than you?<br><strong>Direction:</strong> Paraprosdokian — How can the final words change the meaning of the setup?</p>
+
+    <h3>Comedy Tip</h3>
+    <p>Do not marry the first punchline direction. Date a few. Comedy is cheaper than divorce, but barely.</p>
+  </div>
+
+<div class="box">
+    <label for="premise">Premise, Setup, or Bit Idea</label>
+    <textarea id="premise" placeholder="Example: My doctor told me I need more exercise..."></textarea>
+
+    <div class="grid">
+      <label for="voice">Comedy Voice or Angle
+        <select id="voice">
+          <option>Working Comic</option>
+          <option>Blue-Collar</option>
+          <option>Grandpa</option>
+          <option>Military Veteran</option>
+          <option>Small Town</option>
+          <option>Family Storyteller</option>
+          <option>Self-Deprecating</option>
+          <option>Grumpy Observer</option>
+          <option>Clean Corporate</option>
+          <option>Club Rougher</option>
+        </select>
+      </label>
+
+      <label for="amount">Number of Directions
+        <select id="amount">
+          <option value="5">5 Directions</option>
+          <option value="8" selected>8 Directions</option>
+          <option value="10">10 Directions</option>
+          <option value="12">12 Directions</option>
+        </select>
+      </label>
+    </div>
+
+    <label for="focus">Optional Focus Word, Image, or Object</label>
+    <input id="focus" placeholder="Example: doctor, GPS, lawn mower, mother-in-law, tree, truck...">
+
+    <button class="generate" onclick="generateDirections()">Generate Punchline Directions</button>
+    <button class="random" onclick="randomFill()">Surprise Me</button>
+    <button class="clear" onclick="clearTool()">Clear</button>
+
+    <p class="note">
+      Tip: This tool gives punchline directions, not finished jokes. The comedian still drives the truck.
+    </p>
+  </div>
+
+  <div id="output"></div>
+
+  <div class="favoriteBox">
+    <h2>Saved Punchline Directions</h2>
+    <div id="favorites"></div>
+  </div>
+
+  <a href="index.html#tools" class="returnButton">← Return To Toolbox</a>
+
+  <script>
+    const surpriseData = [
+      {
+        premise: "My doctor told me I need more exercise",
+        focus: "doctor"
+      },
+      {
+        premise: "Grandpa refuses to trust GPS directions",
+        focus: "GPS"
+      },
+      {
+        premise: "My great grandson is already accomplishing amazing things at age three",
+        focus: "tree"
+      },
+      {
+        premise: "Modern trucks have too many buttons",
+        focus: "truck"
+      },
+      {
+        premise: "Self-checkout machines act like they went to police academy",
+        focus: "unexpected item"
+      },
+      {
+        premise: "Retirement gives a man too much time near a lawn mower",
+        focus: "lawn mower"
+      },
+      {
+        premise: "Family reunions should come with referees",
+        focus: "referee"
+      },
+      {
+        premise: "My mother-in-law is a welding instructor",
+        focus: "welder"
+      }
+    ];
+
+    const directionBank = [
+      {
+        name: "Paraprosdokian",
+        description: "Lead the audience one direction, then make the final words change the meaning of the whole setup.",
+        questions: [
+          "What ending would make the audience reinterpret the first half?",
+          "What word could land last and flip the meaning?",
+          "Can the setup sound normal until the final three words betray everybody?"
+        ],
+        starter: "Start sensible, end sideways."
+      },
+      {
+        name: "Reversal",
+        description: "Make the opposite of the expected outcome happen.",
+        questions: [
+          "What would the audience naturally expect next?",
+          "What is the clean opposite of that expectation?",
+          "Who should have power here, and how can they lose it?"
+        ],
+        starter: "Point north, then drive south."
+      },
+      {
+        name: "Exaggeration",
+        description: "Push the truth until it becomes ridiculous but still recognizable.",
+        questions: [
+          "How far could this problem go before it needs a permit?",
+          "What is the biggest possible version of this tiny annoyance?",
+          "What would happen if this became a town policy, family tradition, or federal program?"
+        ],
+        starter: "Make the molehill file for mountain status."
+      },
+      {
+        name: "Understatement",
+        description: "Treat something huge, dangerous, or ridiculous like it is no big deal.",
+        questions: [
+          "How would a calm person describe this disaster?",
+          "What is the smallest possible wording for the biggest possible mess?",
+          "Can you make a crisis sound like a grocery list item?"
+        ],
+        starter: "Say less than the situation deserves."
+      },
+      {
+        name: "Literal Interpretation",
+        description: "Take a phrase, expression, or assumption exactly literally.",
+        questions: [
+          "What phrase in the premise can be misunderstood on purpose?",
+          "What would happen if everybody took the wording exactly as stated?",
+          "Is there a figure of speech hiding in this premise?"
+        ],
+        starter: "Pretend language has no common sense."
+      },
+      {
+        name: "Character Flaw",
+        description: "Reveal how the speaker's weakness, habit, or bad judgment makes the situation funnier.",
+        questions: [
+          "What dumb choice does the character keep defending?",
+          "What personal flaw makes this premise worse?",
+          "How can the character be confidently wrong?"
+        ],
+        starter: "The joke is not just what happened. It is who it happened to."
+      },
+      {
+        name: "Worst Case Scenario",
+        description: "Take the premise to the worst believable outcome.",
+        questions: [
+          "What is the worst place this situation could end?",
+          "Who gets embarrassed, injured, banned, or emotionally audited?",
+          "What is the emergency-room version of this premise?"
+        ],
+        starter: "Let the brakes fail, but keep it funny."
+      },
+      {
+        name: "Comparison",
+        description: "Compare the premise to something unrelated that carries the same feeling.",
+        questions: [
+          "What else feels exactly like this, even though it has no business being related?",
+          "What blue-collar, family, military, or small-town image matches this problem?",
+          "Can the comparison make the premise easier to picture?"
+        ],
+        starter: "This is like that, except nobody asked for either one."
+      },
+      {
+        name: "Rule of Three",
+        description: "Use two expected examples followed by one surprise example.",
+        questions: [
+          "What are two normal examples the audience will accept?",
+          "What third example breaks the pattern?",
+          "Can the third item be specific, visual, and sharper than the first two?"
+        ],
+        starter: "Normal, normal, left turn."
+      },
+      {
+        name: "Callback Seed",
+        description: "Find a word, image, or phrase that can return later with a bigger payoff.",
+        questions: [
+          "What short phrase could the audience remember?",
+          "What object or image can return later with a new meaning?",
+          "Could this become a running joke or closer?"
+        ],
+        starter: "Plant it now. Harvest it later."
+      },
+      {
+        name: "Status Flip",
+        description: "Change who looks smart, dumb, powerful, weak, classy, or ridiculous.",
+        questions: [
+          "Who starts with status in this premise?",
+          "How can the low-status person accidentally win?",
+          "How can the authority figure look foolish?"
+        ],
+        starter: "Knock the king off the horse."
+      },
+      {
+        name: "False Logic",
+        description: "Let the character use bad reasoning that almost sounds reasonable.",
+        questions: [
+          "What wrong conclusion could someone proudly defend?",
+          "How can the character connect two things that do not belong together?",
+          "What is the dumbest argument that still has rhythm?"
+        ],
+        starter: "Make stupid sound organized."
+      }
+    ];
+
+    function toggleHelp() {
+    const helpSection = document.getElementById("helpSection");
+
+    if (helpSection.style.display === "block") {
+      helpSection.style.display = "none";
+    } else {
+      helpSection.style.display = "block";
+    }
+  }
+
+    function generateDirections() {
+      const premise = document.getElementById("premise").value.trim();
+      const focus = document.getElementById("focus").value.trim();
+      const voice = document.getElementById("voice").value;
+      const amount = parseInt(document.getElementById("amount").value, 10);
+      const output = document.getElementById("output");
+
+      if (!premise) {
+        output.innerHTML = "<div class='result'>Enter a premise first. Punchlines need something to punch. Otherwise we're just shadowboxing in the parking lot.</div>";
+        return;
+      }
+
+      const selectedDirections = directionBank.slice(0, amount);
+      const focusText = focus ? focus : findFocusFromPremise(premise);
+      const safeData = escapeQuotes(`${voice} | ${premise} | Focus: ${focusText}`);
+
+      let cards = selectedDirections.map(function(direction) {
+        return buildDirectionCard(direction, premise, focusText, voice);
+      }).join("");
+
+      output.innerHTML = `
+        <div class="result">
+          <h2>Punchline Direction Map</h2>
+
+          <p><strong>Premise:</strong> ${escapeHTML(premise)}</p>
+          <p><strong>Comedy Voice:</strong> ${escapeHTML(voice)}</p>
+          <p><strong>Focus Word / Image:</strong> ${escapeHTML(focusText)}</p>
+
+          <div class="section">
+            <h3>Core Comedy Question</h3>
+            <div class="promptLine">
+              What is the audience expecting, and how can you break that expectation honestly?
+            </div>
+          </div>
+
+          <div class="section">
+            <h3>Punchline Directions</h3>
+            ${cards}
+          </div>
+
+          <div class="section">
+            <h3>Best Next Move</h3>
+            <ol>
+              <li>Pick the top 2 directions that feel strongest.</li>
+              <li>Write 3 rough punchlines for each one.</li>
+              <li>Choose the clearest surprise, not the fanciest wording.</li>
+              <li>Look for one short phrase that could become a callback later.</li>
+            </ol>
+          </div>
+
+          <div class="section">
+            <h3>Paraprosdokian Reminder</h3>
+            <p>
+              Build a sentence that seems to be going somewhere normal, then make the final words change the meaning.
+              The audience should think, "Wait... oh!" That little mental skid mark is where the laugh lives.
+            </p>
+          </div>
+
+          <button class="save" onclick="saveFavorite('${safeData}')">Save Punchline Direction Map</button>
+        </div>
+      `;
+    }
+
+    function buildDirectionCard(direction, premise, focus, voice) {
+      const questionList = direction.questions.map(function(question) {
+        return `<li>${escapeHTML(applyFocus(question, focus, voice))}</li>`;
+      }).join("");
+
+      return `
+        <div class="directionCard">
+          <h4>${escapeHTML(direction.name)}</h4>
+          <p><strong>What it does:</strong> ${escapeHTML(direction.description)}</p>
+          <p><strong>Writing Prompt:</strong> ${escapeHTML(direction.starter)}</p>
+          <ul>${questionList}</ul>
+          <p><strong>Try this:</strong> Write one punchline where “${escapeHTML(focus)}” is the surprise, problem, excuse, or final turn.</p>
+        </div>
+      `;
+    }
+
+    function applyFocus(question, focus, voice) {
+      return question + " Use " + focus + " if it naturally fits the " + voice + " angle.";
+    }
+
+    function findFocusFromPremise(premise) {
+      const words = premise
+        .replace(/[^\w\s]/g, "")
+        .split(/\s+/)
+        .filter(function(word) {
+          return word.length > 4;
+        });
+
+      if (words.length > 0) {
+        return words[words.length - 1];
+      }
+
+      return "main image";
+    }
+
+    function randomFill() {
+      const item = randomItem(surpriseData);
+      document.getElementById("premise").value = item.premise;
+      document.getElementById("focus").value = item.focus;
+    }
+
+    function saveFavorite(data) {
+      const favorites = document.getElementById("favorites");
+      favorites.innerHTML += `<div class="favoriteItem">${data}</div>`;
+    }
+
+    function clearTool() {
+      document.getElementById("premise").value = "";
+      document.getElementById("focus").value = "";
+      document.getElementById("voice").selectedIndex = 0;
+      document.getElementById("amount").selectedIndex = 1;
+      document.getElementById("output").innerHTML = "";
+    }
+
+    function randomItem(array) {
+      return array[Math.floor(Math.random() * array.length)];
+    }
+
+    function escapeQuotes(text) {
+      return text
+        .replace(/'/g, "&#39;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function escapeHTML(str) {
+      return String(str).replace(/[&<>'"]/g, function(tag) {
+        const charsToReplace = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        };
+
+        return charsToReplace[tag] || tag;
+      });
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grandpa Rule Engine V3</title>
+
+<style>
+.navbar {
+  background: #1d1713;
+  padding: 15px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 18px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.navbar a:hover {
+  color: #f1d9a5;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fafafa;
+  color: #222;
+}
+
+h1 {
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.helpBar {
+  background: #fff8e8;
+  border: 2px solid #b87b2f;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  color: #2f241d;
+}
+
+.helpButton {
+  width: auto;
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: 50%;
+  background: #2f241d;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  border: none;
+}
+
+.helpButton:hover {
+  background: #b87b2f;
+}
+
+.helpSection {
+  display: none;
+  background: #fff8e8;
+  border: 2px solid #b87b2f;
+  padding: 18px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.helpSection h2 {
+  margin-top: 0;
+}
+
+.helpSection h3 {
+  margin-bottom: 5px;
+  color: #2f241d;
+}
+
+.toolBox {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 6px;
+}
+
+input, select, textarea, button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+}
+
+button {
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+}
+
+.generateButton {
+  background: #2E8B57;
+}
+
+.generateButton:hover {
+  background: #256F47;
+}
+
+.clearButton {
+  background: #B22222;
+}
+
+.clearButton:hover {
+  background: #8B1A1A;
+}
+
+.result {
+  margin-top: 25px;
+  padding: 18px;
+  background: #f2f2f2;
+  border-left: 5px solid #2E8B57;
+  border-radius: 8px;
+  line-height: 1.6;
+}
+
+.ruleBlock {
+  background: white;
+  padding: 14px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.ruleTitle {
+  font-weight: bold;
+  color: #2E8B57;
+}
+
+.notes {
+  margin-top: 20px;
+  padding: 15px;
+  background: #fff8dc;
+  border-left: 5px solid #DAA520;
+  border-radius: 8px;
+}
+
+.returnButton {
+  display: inline-block;
+  padding: 12px 18px;
+  background: #2f241d;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-top: 25px;
+}
+
+.returnButton:hover {
+  background: #b87b2f;
+}
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+  <a href="index.html">HOME</a>
+  <a href="about.html">ABOUT</a>
+  <a href="index.html#tools">TOOLBOX</a>
+  <a href="toolbox-contact.html">CONTACT</a>
+</nav>
+
+<h1>Grandpa Rule Engine V3</h1>
+
+<div class="subtitle">
+Build porch philosophy, old-school wisdom, stubborn logic, and character-driving rules.
+</div>
+
+<div class="helpBar">
+  <span>Need help turning old-school logic into comedy rules?</span>
+  <button class="helpButton" onclick="toggleHelp()">?</button>
+</div>
+
+<div id="helpSection" class="helpSection">
+  <h2>How to Use This Tool</h2>
+
+  <h3>Purpose</h3>
+  <p>
+    The Grandpa Rule Engine helps you create old-school sayings, stubborn beliefs, porch wisdom, and character rules that can become jokes, callbacks, tags, or recurring character behavior.
+  </p>
+
+  <h3>When To Use It</h3>
+  <p>
+    Use this tool when a bit needs a strong point of view, a recurring character rule, a homespun punchline, or an old-school opinion that can collide with modern life.
+  </p>
+
+  <h3>How To Use It</h3>
+  <ol>
+    <li>Choose the character source.</li>
+    <li>Choose the topic.</li>
+    <li>Choose the wisdom style.</li>
+    <li>Click Build Grandpa Rules.</li>
+    <li>Review the generated rules and pressure questions.</li>
+    <li>Use the strongest rule as a punchline, opening opinion, callback, or character belief.</li>
+  </ol>
+
+  <h3>Example Input</h3>
+  <p>
+    <strong>Character Source:</strong> Grandpa<br><strong>Topic:</strong> Technology<br><strong>Wisdom Style:</strong> Questionable Wisdom
+  </p>
+
+  <h3>Example Output</h3>
+  <p>
+    <strong>Possible Rule:</strong> Never trust anything with more passwords than common sense.<br><strong>Comedy Use:</strong> Let Grandpa apply that rule to phones, bank websites, smart TVs, and finally the microwave.
+  </p>
+
+  <h3>Comedy Tip</h3>
+  <p>
+    The funniest “wisdom” often sounds correct for half a second, then falls apart under pressure. Let the character believe it completely. Confidence is the mule that pulls the joke wagon.
+  </p>
+</div>
+
+<div class="toolBox">
+
+<label>Character Source</label>
+<select id="character">
+<option>Grandpa</option>
+<option>Grandma</option>
+<option>Your Goofy Aunt</option>
+<option>Your Best Goofy Friend</option>
+<option>Old Ranch Hand</option>
+<option>Small Town Neighbor</option>
+<option>Hardware Store Philosopher</option>
+<option>Veteran</option>
+<option>Open Character</option>
+</select>
+
+<label>Topic</label>
+<select id="topic">
+<option>Technology</option>
+<option>Marriage</option>
+<option>Money</option>
+<option>Neighbors</option>
+<option>Work</option>
+<option>Travel</option>
+<option>Food</option>
+<option>Weather</option>
+<option>Small Town Living</option>
+<option>Open Topic</option>
+</select>
+
+<label>Wisdom Style</label>
+<select id="style">
+<option>Hard Earned Wisdom</option>
+<option>Questionable Wisdom</option>
+<option>Funny Contradiction</option>
+<option>Old School Common Sense</option>
+<option>Blue Collar Survival Rule</option>
+<option>Accidental Wisdom</option>
+</select>
+
+<button class="generateButton" onclick="generateRules()">
+Build Grandpa Rules
+</button>
+
+<button class="clearButton" onclick="clearTool()">
+Clear
+</button>
+
+<div id="output" class="result" style="display:none;"></div>
+
+<div class="notes">
+<strong>Purpose:</strong>
+This tool creates character philosophy, recurring beliefs, stubborn logic, and old-school wisdom to strengthen voice, callbacks, tags, and recurring comedy characters.
+</div>
+
+</div>
+
+<a href="index.html#tools" class="returnButton">
+← Return To Toolbox
+</a>
+
+<script>
+function toggleHelp() {
+  const helpBox = document.getElementById("helpBox");
+
+  if (helpSection.style.display === "block") {
+    helpSection.style.display = "none";
+  } else {
+    helpSection.style.display = "block";
+  }
+}
+
+const wisdomTemplates = [
+  "If ___ needs ___ to work, it probably ain't worth owning.",
+  "Never trust ___ that ___ more than people do.",
+  "If it takes longer than ___, you're doing it wrong.",
+  "You can learn a lot about folks by watching how they handle ___.",
+  "Back in my day we didn't need ___ and somehow survived.",
+  "If common sense worked today, ___ wouldn't exist.",
+  "Some folks got more ___ than judgment.",
+  "Life gets easier once you stop expecting ___ to make sense.",
+  "Nothing teaches patience faster than ___.",
+  "If you're gonna make mistakes, at least make interesting ones."
+];
+
+const topicWords = {
+  Technology: [
+    "updates",
+    "passwords",
+    "machines",
+    "internet",
+    "phones"
+  ],
+
+  Marriage: [
+    "arguments",
+    "anniversaries",
+    "communication",
+    "apologies",
+    "compromise"
+  ],
+
+  Money: [
+    "credit cards",
+    "budgets",
+    "bank accounts",
+    "expenses",
+    "sales"
+  ],
+
+  Neighbors: [
+    "fences",
+    "lawn mowers",
+    "gossip",
+    "dogs",
+    "mailboxes"
+  ],
+
+  Travel: [
+    "maps",
+    "airports",
+    "traffic",
+    "directions",
+    "luggage"
+  ],
+
+  Food: [
+    "leftovers",
+    "restaurants",
+    "gravy",
+    "coffee",
+    "dessert"
+  ],
+
+  Weather: [
+    "snow",
+    "rain",
+    "wind",
+    "forecasts",
+    "winter"
+  ],
+
+  Work: [
+    "meetings",
+    "bosses",
+    "paperwork",
+    "deadlines",
+    "coffee"
+  ],
+
+  "Small Town Living": [
+    "rumors",
+    "church suppers",
+    "hardware stores",
+    "neighbors",
+    "tractors"
+  ],
+
+  "Open Topic": [
+    "life",
+    "people",
+    "time",
+    "problems",
+    "luck"
+  ]
+};
+
+function randomItem(array) {
+  return array[
+    Math.floor(
+      Math.random() * array.length
+    )
+  ];
+}
+
+function generateRules() {
+  let character =
+  document.getElementById("character").value;
+
+  let topic =
+  document.getElementById("topic").value;
+
+  let style =
+  document.getElementById("style").value;
+
+  let output =
+  document.getElementById("output");
+
+  let words =
+  topicWords[topic];
+
+  let html = "";
+
+  html +=
+  `<h2>${character} Rules About ${topic}</h2>`;
+
+  for (let i = 1; i <= 5; i++) {
+    let rule =
+    randomItem(wisdomTemplates);
+
+    rule =
+    rule.replace("___",
+    randomItem(words));
+
+    rule =
+    rule.replace("___",
+    randomItem(words));
+
+    html += `
+    <div class="ruleBlock">
+      <div class="ruleTitle">
+        ${character} Rule #${Math.floor(Math.random() * 99) + 1}
+      </div>
+      "${rule}"
+    </div>
+    `;
+  }
+
+  html += `
+  <h3>Pressure Questions</h3>
+  <ul>
+    <li>What old rule collides with modern life?</li>
+    <li>What advice sounds smart but creates chaos?</li>
+    <li>What stubborn belief drives this character?</li>
+    <li>What fear hides underneath the rule?</li>
+    <li>What truth accidentally slips out?</li>
+  </ul>
+
+  <p>
+    <strong>${style} Filter:</strong>
+    Apply this tone while shaping the rule.
+  </p>
+  `;
+
+  output.innerHTML = html;
+  output.style.display = "block";
+}
+
+function clearTool() {
+  document
+  .getElementById("output")
+  .style.display = "none";
+}
+</script>
+
+</body>
+</html>

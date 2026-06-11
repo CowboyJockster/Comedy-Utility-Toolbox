@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Comedy Utility Toolbox | Stand-Up Comedy Writing Tools & Joke Development Utilities</title>
+
+  <meta name="description" content="Comedy Utility Toolbox offers stand-up comedy writing tools, joke development utilities, premise generators, callback mappers, punchline builders, and bit development tools for comedians, writers, and performers.">
+
+  <style>
+     .saved-dashboard {
+  background: #fff8e8;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  border-left: 8px solid #2E8B57;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.saved-dashboard h2 {
+  margin-top: 0;
+  color: #2f241d;
+}
+
+.saved-tool-link {
+  display: inline-block;
+  background: #2f241d;
+  color: white;
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  margin: 6px 6px 6px 0;
+}
+
+.saved-tool-link:hover {
+  background: #b87b2f;
+}
+
+.empty-saved {
+  color: #555;
+  font-style: italic;
+}
+    .roulette-box {
+  background: #fff8e8;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  border-left: 8px solid #b87b2f;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.roulette-box button {
+  background: #2E8B57;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.roulette-box button:hover {
+  background: #256f47;
+}
+
+#rouletteResult {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f7f3ea;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    .navbar {
+      background: #1d1713;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .navbar a:hover {
+      color: #f1d9a5;
+    }
+
+    header {
+      background: #2f241d;
+      color: white;
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    header h2 {
+      font-size: 22px;
+      font-weight: normal;
+      margin: 0 auto;
+      max-width: 850px;
+      color: #f1d9a5;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 35px 20px;
+    }
+
+    .intro,
+    .featured-tool,
+    .search-box,
+    .tool-dashboard,
+    .recently-added,
+    .start-here,
+    .problem-solver,
+    .toolbox-tip,
+    .creator-note {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    .featured-tool,
+    .creator-note {
+      border-left: 8px solid #b87b2f;
+    }
+
+    .toolbox-tip {
+      background: #fff8e8;
+      border-left: 8px solid #2E8B57;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 14px;
+      font-size: 18px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    .section-title {
+      font-size: 28px;
+      margin-top: 40px;
+      border-bottom: 3px solid #b87b2f;
+      padding-bottom: 8px;
+    }
+
+    .dashboard-grid,
+    .start-grid,
+    .recent-grid,
+    .problem-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .dashboard-grid {
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+
+    .start-grid,
+    .recent-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .problem-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .stat-card,
+    .start-card,
+    .problem-card {
+      background: #f7f3ea;
+      padding: 18px;
+      border-radius: 10px;
+    }
+
+    .stat-card,
+    .start-card {
+      text-align: center;
+      border-top: 5px solid #b87b2f;
+    }
+
+    .problem-card {
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+
+    .stat-number,
+    .step-number {
+      font-size: 34px;
+      font-weight: bold;
+      color: #2f241d;
+    }
+
+    .step-number {
+      color: #2E8B57;
+    }
+
+    .stat-label {
+      font-size: 15px;
+      font-weight: bold;
+      color: #555;
+      margin-top: 6px;
+    }
+
+    .recent-card {
+      display: block;
+      background: #f7f3ea;
+      padding: 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: #222;
+      border-left: 5px solid #b87b2f;
+    }
+
+    .recent-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .tool-card {
+      background: white;
+      padding: 22px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      border-top: 6px solid #b87b2f;
+    }
+
+    .tool-card h3 {
+      margin-top: 0;
+      color: #2f241d;
+      font-size: 22px;
+    }
+
+    .tool-card p {
+      font-size: 16px;
+      min-height: 80px;
+    }
+
+    .tool-tag {
+      display: inline-block;
+      background: #e8f4ec;
+      color: #2E8B57;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .bestFor {
+      margin-top: 12px;
+      padding: 8px 12px;
+      background: #f3f3f3;
+      border-left: 4px solid #2E8B57;
+      font-size: 14px;
+      font-weight: bold;
+      color: #444;
+      border-radius: 6px;
+      line-height: 1.5;
+    }
+
+    .tool-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .meta-pill {
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+      background: #ececec;
+    }
+
+    .meta-beginner {
+      background: #dff5df;
+    }
+
+    .meta-medium {
+      background: #fff0c7;
+    }
+
+    .meta-advanced {
+      background: #ffe0e0;
+    }
+
+    .utility-bar {
+      margin-top: 10px;
+    }
+
+    .utility-label {
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .utility-track {
+      width: 100%;
+      height: 10px;
+      background: #ddd;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .utility-fill {
+      height: 100%;
+      border-radius: 20px;
+      background: #4caf50;
+    }
+
+    .favorite-button {
+      display: block;
+      width: 100%;
+      background: #f4f4f4;
+      border: 1px solid #ccc;
+      color: #333;
+      border-radius: 20px;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 12px 0;
+    }
+
+    .favorite-button:hover {
+      background: #e7e7e7;
+    }
+
+    .favorite-button.saved {
+      background: #ffe8a3;
+      border-color: #d6a800;
+      color: #5c4300;
+    }
+
+    .new-badge {
+      display: inline-block;
+      background: #b87b2f;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 4px 8px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    .tool-card a,
+    .main-button,
+    .start-card a,
+    .problem-card a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 14px;
+      background: #2f241d;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .tool-card a:hover,
+    .main-button:hover,
+    .start-card a:hover,
+    .problem-card a:hover {
+      background: #b87b2f;
+    }
+
+    .note {
+      font-size: 15px;
+      color: #555;
+      margin-top: 25px;
+    }
+
+    footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+  color: #6b5140;
+  font-size: 14px;
+  border-top: 2px solid #d6b27c;
+}
+
+footer a {
+  color: #3b2b22;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+footer a:hover {
+  color: #b87b2f;
+}
+    /* DASHBOARD SECTION */
+
+.dashboard-section {
+
+  margin-top: 60px;
+  padding: 40px 20px;
+  background: #f4f4f4;
+  border-radius: 16px;
+
+}
+
+.dashboard-section h2 {
+
+  text-align: center;
+  margin-bottom: 10px;
+
+}
+
+.dashboard-intro {
+
+  text-align: center;
+  margin-bottom: 35px;
+  font-size: 18px;
+  color: #555;
+
+}
+
+.dashboard-grid {
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+
+}
+
+.dashboard-card {
+
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+}
+
+.dashboard-card h3 {
+
+  margin-bottom: 15px;
+
+}
+
+.dashboard-card ul {
+
+  padding-left: 18px;
+
+}
+
+.dashboard-card li {
+
+  margin-bottom: 10px;
+
+}
+/* HERO SECTION */
+
+.hero-section {
+
+  text-align: center;
+  padding: 40px 20px;
+  margin-bottom: 50px;
+
+}
+
+.hero-section h1 {
+
+  font-size: 48px;
+  margin-bottom: 15px;
+
+}
+
+.hero-tagline {
+
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+
+}
+
+.hero-description {
+
+  max-width: 800px;
+  margin: auto;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #555;
+
+}
+
+.hero-buttons {
+
+  margin-top: 30px;
+
+}
+
+.hero-button {
+
+  display: inline-block;
+  width: auto;
+  margin: 10px;
+  padding: 14px 24px;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #2f241d;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+
+}
+
+.hero-button:hover {
+
+  background: #b87b2f;
+
+}
+
+    .helpBar {
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      color: #2f241d;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    .helpButton {
+      width: auto;
+      margin: 0;
+      padding: 6px 12px;
+      border-radius: 50%;
+      background: #2f241d;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+      flex-shrink: 0;
+    }
+
+    .helpButton:hover {
+      background: #b87b2f;
+    }
+
+    .helpSection {
+      display: none;
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 18px;
+      border-radius: 10px;
+      margin: 20px 0 30px;
+      line-height: 1.6;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    .helpSection h2 {
+      margin-top: 0;
+      color: #2f241d;
+    }
+
+    .helpSection h3 {
+      margin-bottom: 5px;
+      color: #2f241d;
+    }
+
+    .helpSection ul,
+    .helpSection ol {
+      padding-left: 24px;
+    }
+
+    .helpSection li {
+      margin-bottom: 8px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div id="top"></div>
+
+<nav class="navbar">
+  <a href="index.html">HOME</a>
+  <a href="about.html">ABOUT</a>
+  <a href="index.html#tools">TOOLBOX</a>
+  <a href="toolbox-contact.html">CONTACT</a>
+</nav>
+<header>
+  <h1>Comedy Utility Toolbox</h1>
+  <h2>Stand-Up Comedy Writing Tools & Joke Development Utilities</h2>
+</header>
+
+<!-- HERO SECTION -->
+
+<section class="hero-section">
+
+  <h1>A Working Comedy Workshop For Stand-Up Comedians</h1>
+
+  <p class="hero-tagline">
+    A working comedy workshop built for stand-up comedians.
+  </p>
+
+  <p class="hero-description">
+    Generate ideas, organize material, build callbacks, structure setlists,
+    and develop stronger comedy faster — without drowning in notebooks,
+    sticky notes, or late-night voice memos labeled “FINAL_v27_REALFINAL”.
+  </p>
+
+  <div class="hero-buttons">
+    <a href="#tools" class="hero-button">Explore Tools</a>
+    <a href="command-center.html" class="hero-button">Open Dashboard</a>
+  </div>
+
+</section>
+	
+<main class="container">
+
+<section class="intro">
+    <p>
+      Welcome to the Comedy Utility Toolbox — a growing collection of practical stand-up comedy writing tools designed to help comedians, writers, performers, and funny folks build stronger jokes, sharper premises, better callbacks, punchlines, comedy bits, and full routines.
+    </p>
+
+    <p>
+      Whether you're starting with a blank page or trying to tighten a rough idea, these comedy writing utilities are built to help you find angles, raise stakes, shape characters, discover punchlines, and turn funny thoughts into workable material.
+    </p>
+
+    <a href="about.html" class="main-button">About / Mission</a>
+  </section>
+
+  <div class="helpBar">
+    <span>Need help understanding how to use the Comedy Utility Toolbox?</span>
+    <button class="helpButton" onclick="toggleHelp()">?</button>
+  </div>
+
+  <div id="helpSection" class="helpSection">
+    <h2>How to Use This Toolbox</h2>
+
+    <h3>Purpose</h3>
+    <p>
+      The Comedy Utility Toolbox is a collection of stand-up comedy writing tools designed to help comedians
+      find premises, uncover truth, build punchlines, develop characters, map callbacks, organize material,
+      and shape ideas into stronger comedy bits.
+    </p>
+
+    <h3>When To Use It</h3>
+    <ul>
+      <li>Use it when you have a rough idea but do not know where to take it.</li>
+      <li>Use it when a premise feels flat and needs a better angle.</li>
+      <li>Use it when you need callbacks, tags, character voice, escalation, or set organization.</li>
+      <li>Use it before a rewrite session, open mic, show prep, or setlist-building session.</li>
+    </ul>
+
+    <h3>How To Use It</h3>
+    <ol>
+      <li>Start with the problem you are trying to solve: idea, truth, punchline, character, callback, or structure.</li>
+      <li>Choose the tool that matches that problem from the Toolbox sections below.</li>
+      <li>Open the tool and use its own help button if you need guidance.</li>
+      <li>Copy the useful results into your own notes, Command Center, Projects Dashboard, or Bit Builder Workspace.</li>
+      <li>Rewrite the material in your own voice before taking it to the stage.</li>
+    </ol>
+
+    <h3>Example Input</h3>
+    <p>
+      A rough idea like: <strong>“Grandpa refuses to trust GPS directions.”</strong>
+    </p>
+
+    <h3>Example Output</h3>
+    <p>
+      You might use the Premise Collision Generator for new angles, the Truth Detector for the honest frustration,
+      the Escalation Ladder for bigger stakes, the Callback Mapper for repeated phrases, and the Setlist Architect
+      when the bit is ready to place in a show.
+    </p>
+
+    <h3>Comedy Tip</h3>
+    <p>
+      Do not try to use every tool at once. Pick one job at a time. A good path is:
+      Premise Collision Generator → Truth Detector → Punchline Direction Generator → Escalation Ladder Tool → Callback Mapper.
+      The tools help build the house, but the comedian still swings the hammer.
+    </p>
+  </div>
+
+
+  <section class="start-here">
+    <h2>🎤 New To Comedy? Start Here.</h2>
+
+    <p>
+      New comedians and writers often ask: "Where should I begin?"
+      Try this recommended path to build a comedy bit from idea to stronger routine.
+    </p>
+
+    <div class="start-grid">
+      <div class="start-card">
+        <div class="step-number">1</div>
+        <h3>Premise Collision Generator</h3>
+        <p>Discover unexpected comedy ideas and joke concepts.</p>
+        <a href="premise-collision-generator.html">Start Here</a>
+      </div>
+
+      <div class="start-card">
+        <div class="step-number">2</div>
+        <h3>Truth Detector</h3>
+        <p>Find the honest emotional core hiding underneath your premise.</p>
+        <a href="truth-detector.html">Next Step</a>
+      </div>
+
+      <div class="start-card">
+        <div class="step-number">3</div>
+        <h3>Punchline Direction Generator</h3>
+        <p>Choose a punchline path before you start forcing jokes.</p>
+        <a href="punchline_direction_generator_v1.html">Find Direction</a>
+      </div>
+
+      <div class="start-card">
+        <div class="step-number">4</div>
+        <h3>Escalation Ladder Tool</h3>
+        <p>Raise stakes and build stronger laughs.</p>
+        <a href="escalation-ladder-tool.html">Build The Joke</a>
+      </div>
+
+      <div class="start-card">
+        <div class="step-number">5</div>
+        <h3>Callback Mapper</h3>
+        <p>Strengthen routines and create bigger payoff moments.</p>
+        <a href="callback-mapper.html">Finish Strong</a>
+      </div>
+    </div>
+  </section>
+
+
+<!-- PROJECTS DASHBOARD -->
+
+<section class="dashboard-section">
+
+  <h2>Comedy Command Center</h2>
+
+  <p class="dashboard-intro">
+    Organize your material, track active bits, and keep your comedy chaos under control.
+  </p>
+
+  <div class="dashboard-grid">
+
+    <div class="dashboard-card">
+      <h3>🎤 Active Bits</h3>
+      <ul>
+        <li>Ranch Rules Story</li>
+        <li>Jimbo Biker Bar</li>
+        <li>Grandpa Advice Set</li>
+      </ul>
+    </div>
+
+    <div class="dashboard-card">
+      <h3>🧰 Saved Tool Results</h3>
+      <ul>
+        <li>Callback Seed Ideas</li>
+        <li>Escalation Runs</li>
+        <li>Perspective Shifts</li>
+      </ul>
+    </div>
+
+    <div class="dashboard-card">
+      <h3>📂 Bit Categories</h3>
+      <ul>
+        <li>Storytelling</li>
+        <li>Blue Collar</li>
+        <li>Military</li>
+        <li>Grandpa Material</li>
+      </ul>
+    </div>
+
+    <div class="dashboard-card">
+      <h3>📝 Recent Work</h3>
+      <ul>
+        <li>Updated Setlist</li>
+        <li>New Crowd Work Tags</li>
+        <li>Church Set Revisions</li>
+      </ul>
+    </div>
+
+  </div>
+
+</section>
+
+  
+<section class="saved-dashboard">
+
+  <h2>★ My Saved Toolbox</h2>
+
+  <p>
+    Your saved comedy tools will appear here for quick access.
+  </p>
+
+  <div id="savedToolsDashboard">
+    <span class="empty-saved">No saved tools yet.</span>
+  </div>
+
+</section>
+  <section class="featured-tool">
+    <h2>Featured Comedy Tool</h2>
+    <h3 id="featuredTitle">Punchline Direction Generator</h3>
+    <p id="featuredDescription">Explore punchline paths including paraprosdokian, reversal, exaggeration, understatement, callbacks, and escalation.</p>
+    <a id="featuredLink" href="punchline_direction_generator_v1.html" class="main-button">Open Featured Tool</a>
+  </section>
+
+  <section class="tool-dashboard">
+    <h2>🧰 Toolbox At A Glance</h2>
+
+    <div class="dashboard-grid">
+      <div class="stat-card">
+        <div class="stat-number">18</div>
+        <div class="stat-label">Comedy Utilities Available</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-number">5</div>
+        <div class="stat-label">Idea Discovery</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-number">5</div>
+        <div class="stat-label">Structure & Bit Building</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Voice & Character</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Organization & Performance</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="recently-added">
+    <h2>⭐ Toolbox Spotlight</h2>
+
+    <div class="recent-grid">
+      <a href="punchline_direction_generator_v1.html" class="recent-card">
+        <h3>Punchline Direction Generator</h3>
+        <p>Explore multiple punchline directions when a premise feels stuck.</p>
+      </a>
+
+      <a href="comedy-detective-board.html" class="recent-card">
+        <h3>Comedy Detective Board</h3>
+        <p>Track clues, callbacks, themes, patterns, and developing ideas.</p>
+      </a>
+
+      <a href="callback-seed-planter.html" class="recent-card">
+        <h3>Callback Seed Planter</h3>
+        <p>Plant joke seeds early so they can pay off later.</p>
+      </a>
+    </div>
+  </section>
+
+  
+
+<section class="roulette-box">
+
+  <h2>🎲 Stuck? Spin The Toolbox</h2>
+
+  <p>
+    Not sure where to start?
+    Spin the toolbox and let fate
+    hand you a comedy tool.
+  </p>
+
+  <button onclick="spinToolbox()">
+
+    Spin The Toolbox
+
+  </button>
+
+  <div id="rouletteResult">
+
+  </div>
+
+</section>
+
+  <section class="toolbox-tip">
+    <h2>Toolbox Tip</h2>
+    <p>
+      Start with one rough idea. Run it through one idea tool, one truth tool, and one structure tool.
+      That simple path can turn a loose thought into the beginning of a real comedy bit.
+    </p>
+    <p>
+      A good order is:
+      <strong>Premise Collision Generator</strong> →
+      <strong>Truth Detector</strong> →
+      <strong>Punchline Direction Generator</strong> →
+      <strong>Escalation Ladder Tool</strong> →
+      <strong>Callback Mapper</strong>.
+    </p>
+  </section>
+
+  
+  <section class="problem-solver">
+    <h2>Choose Your Comedy Problem</h2>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <h3>I Need An Idea</h3>
+        <p>Start with a fresh concept or unexpected angle.</p>
+        <a href="premise-collision-generator.html">Premise Collision Generator</a>
+      </div>
+
+      <div class="problem-card">
+        <h3>I Need A Better Angle</h3>
+        <p>Rotate perspective and find a stronger point of view.</p>
+        <a href="perspective-generator.html">Perspective Generator</a>
+      </div>
+
+      <div class="problem-card">
+        <h3>I Need More Punchlines</h3>
+        <p>Explore punchline directions before choosing the best path.</p>
+        <a href="punchline_direction_generator_v1.html">Punchline Direction Generator</a>
+      </div>
+
+      <div class="problem-card">
+        <h3>I Need Callbacks</h3>
+        <p>Plant comedy seeds and connect earlier jokes.</p>
+        <a href="callback-mapper.html">Callback Mapper</a>
+      </div>
+
+      <div class="problem-card">
+        <h3>I Need Character Help</h3>
+        <p>Build stronger personalities and funny traits.</p>
+        <a href="character-dna-builder.html">Character DNA Builder</a>
+      </div>
+
+      <div class="problem-card">
+        <h3>I Need Truth Under The Joke</h3>
+        <p>Find emotional honesty hiding beneath the premise.</p>
+        <a href="truth-detector.html">Truth Detector</a>
+      </div>
+
+      <div class="problem-card">
+        <h3>I Need Grandpa Wisdom</h3>
+        <p>Old-school logic occasionally disguised as nonsense.</p>
+        <a href="grandpa-rule-engine.html">Grandpa Rule Engine</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="search-box">
+    <h2>Find A Comedy Tool</h2>
+    <input type="text" id="toolSearch" onkeyup="searchTools()" placeholder="Search by keyword: callback, premise, character, grandpa, truth...">
+  </section>
+
+  <h2 id="tools" class="section-title">Idea Discovery Tools</h2>
+<section class="tool-grid">
+
+    <div class="tool-card">
+      <span class="tool-tag">Idea Discovery</span>
+      <h3>Premise Collision Generator</h3>
+      <p>Combine unrelated ideas to create fresh comedy premises, unusual angles, and surprising joke setups.</p>
+      <div class="bestFor">Best For: Stand-Up • Premise Discovery • Joke Seeds</div>
+
+      <div class="tool-meta">
+        <span class="meta-pill meta-beginner">Easy</span>
+        <span class="meta-pill">Premise Building</span>
+        <span class="meta-pill">2-5 Minutes</span>
+      </div>
+
+      <div class="utility-bar">
+        <div class="utility-label">Creative Utility</div>
+        <div class="utility-track">
+          <div class="utility-fill" style="width:95%;"></div>
+        </div>
+      </div>
+
+      <button class="favorite-button" data-tool="Premise Collision Generator">☆ Save Tool</button>
+      <a href="premise-collision-generator.html">Open Tool</a>
+    </div>
+
+    <div class="tool-card">
+      <span class="tool-tag">Punchline Building</span>
+      <h3>What’s Worse? Generator</h3>
+      <p>Escalate a situation by comparing bad, worse, and ridiculous outcomes for stronger punchline development.</p>
+      <div class="bestFor">Best For: Comparisons • Escalation • Darker Twists</div>
+
+      <div class="tool-meta">
+        <span class="meta-pill meta-beginner">Easy</span>
+        <span class="meta-pill">Escalation</span>
+        <span class="meta-pill">2-5 Minutes</span>
+      </div>
+
+      <div class="utility-bar">
+        <div class="utility-label">Creative Utility</div>
+        <div class="utility-track">
+          <div class="utility-fill" style="width:89%;"></div>
+        </div>
+      </div>
+
+      <button class="favorite-button" data-tool="What’s Worse? Generator">☆ Save Tool</button>
+      <a href="whats-worse-generator.html">Open Tool</a>
+    </div>
+
+    <div class="tool-card">
+      <span class="tool-tag">Joke Foundation</span>
+      <h3>Truth Detector</h3>
+      <p>Find the honest emotional truth hiding underneath a joke idea, story, complaint, or observation.</p>
+      <div class="bestFor">Best For: Honesty Checks • Premise Testing • Stronger Angles</div>
+
+      <div class="tool-meta">
+        <span class="meta-pill meta-beginner">Easy</span>
+        <span class="meta-pill">Honest Premises</span>
+        <span class="meta-pill">2-5 Minutes</span>
+      </div>
+
+      <div class="utility-bar">
+        <div class="utility-label">Creative Utility</div>
+        <div class="utility-track">
+          <div class="utility-fill" style="width:88%;"></div>
+        </div>
+      </div>
+
+      <button class="favorite-button" data-tool="Truth Detector">☆ Save Tool</button>
+      <a href="truth-detector.html">Open Tool</a>
+    </div>
+
+    <div class="tool-card">
+      <span class="tool-tag">Idea Discovery</span>
+      <h3>Hidden Assumption Filter</h3>
+      <p>Reveal hidden assumptions hiding inside a premise to uncover stronger joke angles and surprising punchline opportunities.</p>
+      <div class="bestFor">Best For: Hidden Angles • Premise Testing • Punchline Discovery</div>
+
+      <div class="tool-meta">
+        <span class="meta-pill meta-medium">Moderate</span>
+        <span class="meta-pill">Hidden Angles</span>
+        <span class="meta-pill">5-10 Minutes</span>
+      </div>
+
+      <div class="utility-bar">
+        <div class="utility-label">Creative Utility</div>
+        <div class="utility-track">
+          <div class="utility-fill" style="width:91%;"></div>
+        </div>
+      </div>
+
+      <button class="favorite-button" data-tool="Hidden Assumption Filter">☆ Save Tool</button>
+      <a href="hidden-assumption-filter.html">Open Tool</a>
+    </div>
+
+    <div class="tool-card">
+      <span class="tool-tag">Organization</span>
+      <h3>Comedy Detective Board</h3>
+      <p>Track clues, observations, callbacks, themes, patterns, and discoveries while building comedy material.</p>
+      <div class="bestFor">Best For: Idea Tracking • Callback Mapping • Bit Development</div>
+
+      <div class="tool-meta">
+        <span class="meta-pill meta-medium">Moderate</span>
+        <span class="meta-pill">Organization</span>
+        <span class="meta-pill">10-20 Minutes</span>
+      </div>
+
+      <div class="utility-bar">
+        <div class="utility-label">Creative Utility</div>
+        <div class="utility-track">
+          <div class="utility-fill" style="width:90%;"></div>
+        </div>
+      </div>
+
+      <button class="favorite-button" data-tool="Comedy Detective Board">☆ Save Tool</button>
+      <a href="comedy-detective-board.html">Open Tool</a>
+    </div>
+
+  </section>
+
+  <h2 class="section-title">Structure & Bit Building Tools</h2>
+
+  <section class="tool-grid">
+
+    <div class="tool-card">
+      <span class="tool-tag">Structure & Callbacks</span>
+      <h3>Callback Mapper</h3>
+      <p>Track jokes, repeated phrases, and earlier details that can return later as stronger callbacks.</p>
+      <div class="bestFor">Best For: Callbacks • Set Structure • Longform Bits</div>
+
+      <div class="tool-meta">
+        <span class="meta-pill meta-medium">Moderate</span>
+        <span class="meta-pill">Bit Structure</span>
+        <span class="meta-pill">5-10 Minutes</span>
+      </div>
+
+      <div class="utility-bar">
+        <div class="utility-label">Creative Utility</div>
+        <div class="utility-track">
+          <div class="utility-fill" style="width:98%;"></div>
+        </div>
+      </div>
+
+      <button class="favorite-button" data-tool="Callback Mapper">☆ Save Tool</button>
+      <a href="callback-mapper.html">Open Tool</a>
+    </div>
+
+    <div class="tool-card">
+      <span class="tool-tag">Structure & Callbacks</span>
+      <h3>Callback Seed Planter</h3>
+      <p>Plant small joke seeds early in a routine so they can grow into bigger laughs later in the set.</p>
+      <div class="bestFor">Best For: Callback Writing • Joke Expansion • Tag Building</div>
+
+      <div class="tool-meta">
+        <span class="meta-pill meta-medium">Moderate</span>
+        <span class="meta-pill">Future Callbacks</span>
+        <span class="meta-pill">5-10 Minutes</span>
+      </div>
+
+      <div class="utility-bar">
+        <div class="utility-label">Creative Utility</div>
+        <div class="utility-track">
+          <div class="utility-fill" style="width:96%;"></div>
+        </div>
+      </div>
+
+      <button class="favorite-button" data-tool="Callback Seed Planter">☆ Save Tool</button>
+      <a href="callback-seed-planter.html">Open Tool</a>
+    </div>
+
+
+
+    <div class="tool-card">
+      <span class="tool-tag">Punchline Building</span>
+      <h3>Punchline Direction Generator</h3>
+      <p>Explore punchline paths including paraprosdokian, reversal, exaggeration, understatement, callbacks, character flaws, and worst-case scenarios.</p>
+      <div class="bestFor">Best For: Stuck Premises • Punchline Options • Joke Direction</div>
+
+      <div class="tool-meta">
+        <span class="meta-pill meta-beginner">Easy</span>
+        <span class="meta-pill">Punchline Paths</span>
+        <span class="meta-pill">3-7 Minutes</span>
+      </div>
+
+      <div class="utility-bar">
+        <div class="utility-label">Creative Utility</div>
+        <div class="utility-track">
+          <div class="utility-fill" style="width:97%;"></div>
+        </div>
+      </div>
+
+      <button class="favorite-button" data-tool="Punchline Direction Generator">☆ Save Tool</button>
+      <a href="punchline_direction_generator_v1.html">Open Tool</a>
+    </div>
+
+    <div class="tool-card">
+      <span class="tool-tag">Punchline Building</span>
+      <h3>Escalation Ladder Tool</h3>
+      <p>Build jokes step-by-step by raising the stakes from normal to absurd without losing the audience.</p>
+      <div class="bestFor">Best For: Escalation • Stronger Punchlines • Bit Building</div>
+
+      <div class="tool-meta">
+        <span class="meta-pill meta-medium">Moderate</span>
+        <span class="meta-pill">Punchline Growth</span>
+        <span class="meta-pill">5-10 Minutes</span>
+      </div>
+
+      <div class="utility-bar">
+        <div class="utility-label">Creative Utility</div>
+        <div class="utility-track">
+          <div class="utility-fill" style="width:94%;"></div>
+        </div>
+      </div>
+
+      <button class="favorite-button" data-tool="Escalation Ladder Tool">☆ Save Tool</button>
+      <a href="escalation-ladder-tool.html">Open Tool</a>
+    </div>
+
+  </section>
+
+  <h2 class="section-title">Voice, Character & Perspective Tools</h2>
+
+  <section class="tool-grid">
+
+    <div class="tool-card">
+      <span class="tool-tag">Voice & Perspective</span>
+      <h3>Perspective Generator</h3>
+      <p>Rework a premise through different points of view to uncover new joke angles and character voices.</p>
+      <div class="bestFor">Best For: Alternate Angles • Rewrites • Punchline Discovery</div>
+
+      <div class="tool-meta">
+        <span class="meta-pill meta-medium">Moderate</span>
+        <span class="meta-pill">Voice & Angle</span>
+        <span class="meta-pill">3-7 Minutes</span>
+      </div>
+
+      <div class="utility-bar">
+        <div class="utility-label">Creative Utility</div>
+        <div class="utility-track">
+          <div class="utility-fill" style="width:92%;"></div>
+        </div>
+      </div>
+
+      <button class="favorite-button" data-tool="Perspective Generator">☆ Save Tool</button>
+      <a href="perspective-generator.html">Open Tool</a>
+    </div>
+
+    <div class="tool-card">
+      <span class="tool-tag">Character Development</span>
+      <h3>Character DNA Builder</h3>
+      <p>Create memorable comedy characters by defining habits, flaws, beliefs, speech patterns, and comic behavior.</p>
+      <div class="bestFor">Best For: Character Voice • Personas • Storytelling</div>
+
+      <div class="tool-meta">
+        <span class="meta-pill meta-medium">Moderate</span>
+        <span class="meta-pill">Character Work</span>
+        <span class="meta-pill">5-10 Minutes</span>
+      </div>
+
+      <div class="utility-bar">
+        <div class="utility-label">Creative Utility</div>
+        <div class="utility-track">
+          <div class="utility-fill" style="width:93%;"></div>
+        </div>
+      </div>
+
+      <button class="favorite-button" data-tool="Character DNA Builder">☆ Save Tool</button>
+      <a href="character-dna-builder.html">Open Tool</a>
+    </div>
+
+    <div class="tool-card">
+      <span class="tool-tag">Voice & Flavor</span>
+      <h3>Regional Vocabulary Generator</h3>
+      <p>Add local flavor, rural phrases, regional language, and character-specific wording to comedy material.</p>
+      <div class="bestFor">Best For: Rural Flavor • Local Color • Voice Building</div>
+
+      <div class="tool-meta">
+        <span class="meta-pill meta-beginner">Easy</span>
+        <span class="meta-pill">Local Flavor</span>
+        <span class="meta-pill">2-5 Minutes</span>
+      </div>
+
+      <div class="utility-bar">
+        <div class="utility-label">Creative Utility</div>
+        <div class="utility-track">
+          <div class="utility-fill" style="width:84%;"></div>
+        </div>
+      </div>
+
+      <button class="favorite-button" data-tool="Regional Vocabulary Generator">☆ Save Tool</button>
+      <a href="regional-vocabulary-generator.html">Open Tool</a>
+    </div>
+
+  </section>
+
+  <h2 class="section-title">Signature Comedy Tools</h2>
+
+  <section class="tool-grid">
+
+    <div class="tool-card">
+      <span class="tool-tag">Character & Voice</span>
+      <h3>Grandpa Rule Engine</h3>
+      <p>Turn old-school wisdom, hard-earned opinions, and backyard philosophy into funny comedy rules.</p>
+      <div class="bestFor">Best For: Character Rules • Rural Logic • Storytelling</div>
+
+      <div class="tool-meta">
+        <span class="meta-pill meta-medium">Moderate</span>
+        <span class="meta-pill">Old-School Wisdom</span>
+        <span class="meta-pill">5-10 Minutes</span>
+      </div>
+
+      <div class="utility-bar">
+        <div class="utility-label">Creative Utility</div>
+        <div class="utility-track">
+          <div class="utility-fill" style="width:90%;"></div>
+        </div>
+      </div>
+
+      <button class="favorite-button" data-tool="Grandpa Rule Engine">☆ Save Tool</button>
+      <a href="grandpa-rule-engine.html">Open Tool</a>
+    </div>
+
+  </section>
+
+  <p class="note">
+    Note: Each tool opens as its own page. Keep all tool HTML files in the same folder as this homepage so the buttons work correctly.
+  </p>
+
+  <section class="creator-note">
+    <h2>A Note From The Toolbox</h2>
+
+    <p>
+      These utilities are designed to help generate ideas, explore angles,
+      organize thoughts, and strengthen comedy structure.
+    </p>
+
+    <p>
+      The Comedy Utility Toolbox does not write stand-up routines for you.
+      The comedian still brings the life experience, observations,
+      point of view, storytelling, timing, rewrites, and stage work.
+    </p>
+
+    <p>
+      Tools can help build the house. You still swing the hammer.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 Comedy Utility Toolbox | Created by Freddie Waltz
+  <a href="index.html">Home</a> |
+  <a href="about.html">About</a> |
+  <a href="meet-the-creator.html">Meet the Creator</a> |
+  <a href="toolbox-contact.html">Contact</a> |
+  <a href="privacy-policy.html">Privacy Policy</a> |
+  <a href="terms-of-use.html">Terms of Use</a>
+</footer>
+<script>
+
+  function toggleHelp() {
+    const helpSection = document.getElementById("helpSection");
+
+    if (!helpSection) {
+      return;
+    }
+
+    if (helpSection.style.display === "block") {
+      helpSection.style.display = "none";
+    } else {
+      helpSection.style.display = "block";
+    }
+  }
+
+  const featuredTools = [
+    {
+      title: "Punchline Direction Generator",
+      description: "Explore punchline paths including paraprosdokian, reversal, exaggeration, understatement, callbacks, and escalation.",
+      link: "punchline_direction_generator_v1.html"
+    },
+    {
+      title: "Callback Seed Planter",
+      description: "Plant small joke seeds early. Harvest bigger laughs later. Build stronger callbacks and strengthen entire routines.",
+      link: "callback-seed-planter.html"
+    },
+    {
+      title: "Truth Detector",
+      description: "Find the honest emotional truth hiding underneath a joke idea, story, complaint, or observation.",
+      link: "truth-detector.html"
+    },
+    {
+      title: "Premise Collision Generator",
+      description: "Combine unrelated ideas to create fresh comedy premises, unusual angles, and surprising joke setups.",
+      link: "premise-collision-generator.html"
+    },
+    {
+      title: "Grandpa Rule Engine",
+      description: "Turn old-school wisdom, hard-earned opinions, and backyard philosophy into funny comedy rules.",
+      link: "grandpa-rule-engine.html"
+    },
+    {
+      title: "Callback Mapper",
+      description: "Track jokes, repeated phrases, and earlier details that can return later as stronger callbacks.",
+      link: "callback-mapper.html"
+    }
+  ];
+
+  function rotateFeaturedTool() {
+    const randomTool = featuredTools[Math.floor(Math.random() * featuredTools.length)];
+
+    document.getElementById("featuredTitle").textContent = randomTool.title;
+    document.getElementById("featuredDescription").textContent = randomTool.description;
+    document.getElementById("featuredLink").href = randomTool.link;
+  }
+
+  function searchTools() {
+    const searchInput = document.getElementById("toolSearch").value.toLowerCase();
+    const toolCards = document.querySelectorAll(".tool-card");
+
+    toolCards.forEach(function(card) {
+      const cardText = card.innerText.toLowerCase();
+
+      if (cardText.includes(searchInput)) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  }
+
+  rotateFeaturedTool();
+
+  const favoriteButtons = document.querySelectorAll(".favorite-button");
+
+  let savedTools = JSON.parse(localStorage.getItem("savedComedyTools")) || [];
+
+  favoriteButtons.forEach(function(button) {
+    const toolName = button.dataset.tool;
+
+    if (savedTools.includes(toolName)) {
+      button.classList.add("saved");
+      button.textContent = "★ Saved";
+    }
+
+    button.addEventListener("click", function() {
+      if (savedTools.includes(toolName)) {
+        savedTools = savedTools.filter(function(tool) {
+          return tool !== toolName;
+        });
+
+        button.classList.remove("saved");
+        button.textContent = "☆ Save Tool";
+      } else {
+        savedTools.push(toolName);
+
+        button.classList.add("saved");
+        button.textContent = "★ Saved";
+      }
+
+      localStorage.setItem("savedComedyTools", JSON.stringify(savedTools));
+	updateSavedDashboard();
+    });
+  });
+	function spinToolbox() {
+  const rouletteTools = [
+    { name: "Premise Collision Generator", link: "premise-collision-generator.html" },
+    { name: "Truth Detector", link: "truth-detector.html" },
+    { name: "Escalation Ladder Tool", link: "escalation-ladder-tool.html" },
+    { name: "Punchline Direction Generator", link: "punchline_direction_generator_v1.html" },
+    { name: "Callback Mapper", link: "callback-mapper.html" },
+    { name: "Perspective Generator", link: "perspective-generator.html" },
+    { name: "Character DNA Builder", link: "character-dna-builder.html" },
+    { name: "Regional Vocabulary Generator", link: "regional-vocabulary-generator.html" },
+    { name: "Grandpa Rule Engine", link: "grandpa-rule-engine.html" },
+    { name: "Callback Seed Planter", link: "callback-seed-planter.html" }
+  ];
+
+  const randomTool = rouletteTools[Math.floor(Math.random() * rouletteTools.length)];
+
+  document.getElementById("rouletteResult").innerHTML =
+    'Your tool: <a href="' + randomTool.link + '">' + randomTool.name + '</a>';
+}
+	const toolLinks = {
+  "Premise Collision Generator": "premise-collision-generator.html",
+  "What’s Worse? Generator": "whats-worse-generator.html",
+  "Truth Detector": "truth-detector.html",
+  "Hidden Assumption Filter": "hidden-assumption-filter.html",
+  "Comedy Detective Board": "comedy-detective-board.html",
+  "Callback Mapper": "callback-mapper.html",
+  "Callback Seed Planter": "callback-seed-planter.html",
+  "Escalation Ladder Tool": "escalation-ladder-tool.html",
+  "Punchline Direction Generator": "punchline_direction_generator_v1.html",
+  "Perspective Generator": "perspective-generator.html",
+  "Character DNA Builder": "character-dna-builder.html",
+  "Regional Vocabulary Generator": "regional-vocabulary-generator.html",
+  "Grandpa Rule Engine": "grandpa-rule-engine.html",
+  "Setlist Architect": "setlist-architect.html"
+};
+
+function updateSavedDashboard() {
+  const dashboard = document.getElementById("savedToolsDashboard");
+
+  if (!dashboard) {
+    return;
+  }
+
+  const savedTools = JSON.parse(localStorage.getItem("savedComedyTools")) || [];
+
+  if (savedTools.length === 0) {
+    dashboard.innerHTML = '<span class="empty-saved">No saved tools yet.</span>';
+    return;
+  }
+
+  let html = "";
+
+  savedTools.forEach(function(tool) {
+    if (toolLinks[tool]) {
+      html += '<a class="saved-tool-link" href="' + toolLinks[tool] + '">★ ' + tool + '</a>';
+    }
+  });
+
+  dashboard.innerHTML = html;
+}
+
+updateSavedDashboard();
+</script>
+
+</body>
+</html>

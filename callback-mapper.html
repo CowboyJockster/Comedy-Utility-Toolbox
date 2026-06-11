@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Callback Mapper V3</title>
+
+  <style>
+    .navbar {
+      background: #1d1713;
+      padding: 15px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .navbar a:hover {
+      color: #f1d9a5;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1150px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f2f2f2;
+      color: #222;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      color: #555;
+      margin-bottom: 25px;
+      font-size: 18px;
+    }
+
+    .helpBar {
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      color: #2f241d;
+    }
+
+    .helpButton {
+      width: auto;
+      margin: 0;
+      padding: 6px 12px;
+      border-radius: 50%;
+      background: #2f241d;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+    }
+
+    .helpButton:hover {
+      background: #b87b2f;
+    }
+
+    .helpSection {
+      display: none;
+      background: #fff8e8;
+      border: 2px solid #b87b2f;
+      padding: 18px;
+      border-radius: 10px;
+      margin: 20px 0;
+      line-height: 1.5;
+    }
+
+    .helpSection h2 {
+      margin-top: 0;
+    }
+
+    .helpSection h3 {
+      margin-bottom: 5px;
+      color: #2f241d;
+    }
+
+    .box, .result, .favoriteBox {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
+
+    textarea, input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      font-size: 18px;
+      box-sizing: border-box;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      color: white;
+      margin-top: 12px;
+    }
+
+    .generate {
+      background: #2E8B57;
+    }
+
+    .generate:hover {
+      background: #246B46;
+    }
+
+    .random {
+      background: #4169E1;
+    }
+
+    .random:hover {
+      background: #2F4FB2;
+    }
+
+    .clear {
+      background: #B22222;
+    }
+
+    .clear:hover {
+      background: #8B1A1A;
+    }
+
+    .save {
+      background: #DAA520;
+    }
+
+    .save:hover {
+      background: #B8860B;
+    }
+
+    .section {
+      background: #fafafa;
+      padding: 15px;
+      margin-top: 18px;
+      border-left: 5px solid #2E8B57;
+      border-radius: 8px;
+    }
+
+    .section h3 {
+      margin-top: 0;
+    }
+
+    ul, ol {
+      padding-left: 25px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      line-height: 1.45;
+    }
+
+    .callbackLine {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+      background: #fff8dc;
+      border-left: 5px solid #DAA520;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .meterRow {
+      margin: 8px 0;
+      font-size: 17px;
+    }
+
+    .stars {
+      color: #B8860B;
+      letter-spacing: 2px;
+    }
+
+    .favoriteItem {
+      background: #fff8dc;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border-left: 5px solid #DAA520;
+      line-height: 1.5;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #666;
+      margin-top: 8px;
+    }
+
+    .returnButton {
+      display: inline-block;
+      padding: 12px 18px;
+      background: #2f241d;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 25px;
+    }
+
+    .returnButton:hover {
+      background: #b87b2f;
+    }
+
+    @media (max-width: 750px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <a href="index.html">HOME</a>
+    <a href="about.html">ABOUT</a>
+    <a href="index.html#tools">TOOLBOX</a>
+    <a href="toolbox-contact.html">CONTACT</a>
+  </nav>
+
+  <h1>Callback Mapper V3</h1>
+
+  <p class="subtitle">
+    Find phrases, images, characters, and ideas that can return later for bigger laughs.
+  </p>
+
+  <div class="helpBar">
+    <span>Need help mapping callbacks through a bit or set?</span>
+    <button class="helpButton" onclick="toggleHelp()">?</button>
+  </div>
+
+    <div id="helpSection" class="helpSection">
+    <h2>How To Use This Tool</h2>
+
+    <h3>Purpose</h3>
+    <p>The Callback Mapper helps you find phrases, images, characters, rules, and ideas that can return later for bigger laughs. It turns loose jokes into a connected routine.</p>
+
+    <h3>When To Use It</h3>
+    <p>Use this tool when you want to connect separate jokes, strengthen a longer bit, create a running joke, or build a stronger closer by bringing back something the audience already remembers.</p>
+
+    <h3>How To Use It</h3>
+    <ol>
+      <li>Enter your original premise or bit idea.</li>
+      <li>Add a possible callback anchor such as a phrase, object, image, or rule.</li>
+      <li>Choose a recurring character or voice.</li>
+      <li>Choose the callback type.</li>
+      <li>Click Map Callbacks.</li>
+      <li>Use the placement map to decide where the callback can return later.</li>
+    </ol>
+
+    <h3>Example Input</h3>
+    <p><strong>Premise:</strong> Grandpa refuses to trust GPS directions.<br>
+    <strong>Callback Anchor:</strong> Hard to find on purpose.<br>
+    <strong>Character:</strong> Grandpa.<br>
+    <strong>Callback Type:</strong> Phrase Callback.</p>
+
+    <h3>Example Output</h3>
+    <p>The tool suggests early, middle, reverse, escalation, and closer callback placements so the phrase can return later with a stronger payoff.</p>
+
+    <h3>Comedy Tip</h3>
+    <p>A callback works best when the audience remembers it easily and it returns with a new meaning. Keep the anchor short, clear, and repeatable.</p>
+  </div>
+
+  <div class="box">
+    <label for="premise">Original Premise or Bit Idea</label>
+    <textarea id="premise" placeholder="Example: Grandpa refuses to trust GPS directions..."></textarea>
+
+    <label for="anchor">Possible Callback Anchor</label>
+    <input id="anchor" placeholder="Example: blinking lights, hard to find on purpose, that's how they get you...">
+
+    <label for="character">Recurring Character or Voice</label>
+    <select id="character">
+      <option>Grandpa</option>
+      <option>Your Goofy Aunt</option>
+      <option>Your Best Goofy Friend</option>
+      <option>Neighbor</option>
+      <option>Drunk</option>
+      <option>Police Officer</option>
+      <option>Pastor</option>
+      <option>Mechanic</option>
+      <option>Military Veteran</option>
+      <option>Small Town Gossip</option>
+    </select>
+
+    <label for="callbackType">Callback Type</label>
+    <select id="callbackType">
+      <option>Phrase Callback</option>
+      <option>Character Callback</option>
+      <option>Image Callback</option>
+      <option>Rule Callback</option>
+      <option>Reverse Callback</option>
+      <option>Escalation Callback</option>
+      <option>Closer Callback</option>
+    </select>
+
+    <button class="generate" onclick="mapCallbacks()">Map Callbacks</button>
+    <button class="random" onclick="randomFill()">Surprise Me</button>
+    <button class="clear" onclick="clearTool()">Clear</button>
+
+    <p class="note">
+      Tip: A callback works best when the audience remembers it easily and it returns with a new meaning.
+    </p>
+  </div>
+
+  <div id="output"></div>
+
+  <div class="favoriteBox">
+    <h2>Saved Callback Maps</h2>
+    <div id="favorites"></div>
+  </div>
+
+  <a href="index.html#tools" class="returnButton">← Return To Toolbox</a>
+
+  <script>
+    const surpriseData = [
+      {
+        premise: "Grandpa refuses to trust GPS directions",
+        anchor: "hard to find on purpose"
+      },
+      {
+        premise: "Your Goofy Aunt distrusts smart appliances",
+        anchor: "blinking lights"
+      },
+      {
+        premise: "Your Best Goofy Friend misunderstands dating apps",
+        anchor: "swipe left at the cattle auction"
+      },
+      {
+        premise: "Self-checkout machines are judging people",
+        anchor: "unexpected item in the bagging area"
+      },
+      {
+        premise: "Modern trucks have too many buttons",
+        anchor: "airplane cockpit"
+      },
+      {
+        premise: "Family reunions need referees",
+        anchor: "two-cart-length rule"
+      },
+      {
+        premise: "Online banking feels suspicious",
+        anchor: "that's how they get you"
+      }
+    ];
+
+    function toggleHelp() {
+      const helpSection = document.getElementById("helpSection");
+
+      if (helpSection.style.display === "block") {
+        helpSection.style.display = "none";
+      } else {
+        helpSection.style.display = "block";
+      }
+    }
+
+    function mapCallbacks() {
+      const premise = document.getElementById("premise").value.trim();
+      const anchor = document.getElementById("anchor").value.trim();
+      const character = document.getElementById("character").value;
+      const callbackType = document.getElementById("callbackType").value;
+      const output = document.getElementById("output");
+
+      if (!premise || !anchor) {
+        output.innerHTML = "<div class='result'>Enter a premise and a callback anchor first. A callback without an anchor is just a loose goat.</div>";
+        return;
+      }
+
+      const introReturn = buildIntroReturn(premise, anchor, character);
+      const callbackSpots = buildCallbackSpots(premise, anchor, character, callbackType);
+      const reverseCallbacks = buildReverseCallbacks(anchor, character);
+      const escalationReturns = buildEscalationReturns(anchor, character);
+      const setCloser = buildSetCloser(anchor, character, premise);
+      const warningSigns = buildWarningSigns(anchor);
+      const strengthMeter = buildStrengthMeter();
+
+      const safeData = escapeQuotes(`${callbackType} | ${character} | ${premise} | Anchor: ${anchor}`);
+
+      output.innerHTML = `
+        <div class="result">
+          <h2>Callback Case Map</h2>
+          <p><strong>Premise:</strong> ${escapeHTML(premise)}</p>
+          <p><strong>Anchor:</strong> ${escapeHTML(anchor)}</p>
+          <p><strong>Character:</strong> ${escapeHTML(character)}</p>
+          <p><strong>Callback Type:</strong> ${escapeHTML(callbackType)}</p>
+
+          <div class="section">
+            <h3>Memory Anchor</h3>
+            <p>The phrase or image the audience must remember:</p>
+            <div class="callbackLine">“${escapeHTML(anchor)}”</div>
+          </div>
+
+          <div class="section">
+            <h3>First Mention Setup</h3>
+            <ul>${listItems(introReturn)}</ul>
+          </div>
+
+          <div class="section">
+            <h3>Callback Placement Map</h3>
+            <ol>${listItems(callbackSpots)}</ol>
+          </div>
+
+          <div class="section">
+            <h3>Reverse Callback Options</h3>
+            <ul>${listItems(reverseCallbacks)}</ul>
+          </div>
+
+          <div class="section">
+            <h3>Escalation Callback Ladder</h3>
+            <ol>${listItems(escalationReturns)}</ol>
+          </div>
+
+          <div class="section">
+            <h3>Closer Callback Idea</h3>
+            <ul>${listItems(setCloser)}</ul>
+          </div>
+
+          <div class="section">
+            <h3>Callback Warning Signs</h3>
+            <ul>${listItems(warningSigns)}</ul>
+          </div>
+
+          <div class="section">
+            <h3>Callback Strength Meter</h3>
+            ${strengthMeter}
+          </div>
+
+          <button class="save" onclick="saveFavorite('${safeData}')">Save Callback Map</button>
+        </div>
+      `;
+    }
+
+    function buildIntroReturn(premise, anchor, character) {
+      return [
+        `Introduce “${escapeHTML(anchor)}” early in a simple, clear way so the audience can remember it.`,
+        `Attach the anchor to ${escapeHTML(character)}, so the phrase or image feels owned by a character.`,
+        `Keep the first use short. Do not over-explain it. The callback needs room to grow.`,
+        `Make sure the first mention connects naturally to: “${escapeHTML(premise)}.”`
+      ];
+    }
+
+    function buildCallbackSpots(premise, anchor, character, callbackType) {
+      return [
+        `Early callback: repeat “${escapeHTML(anchor)}” once after a related joke to prove it is memorable.`,
+        `Middle callback: bring it back when a new topic has the same emotional problem as “${escapeHTML(premise)}.”`,
+        `Character callback: let ${escapeHTML(character)} use “${escapeHTML(anchor)}” as their personal explanation for something unrelated.`,
+        `Surprise callback: hide the phrase until the audience almost forgot it, then bring it back sharply.`,
+        `Type-specific use: for ${escapeHTML(callbackType.toLowerCase())}, make the return feel familiar but not identical.`
+      ];
+    }
+
+    function buildReverseCallbacks(anchor, character) {
+      return [
+        `Instead of ${escapeHTML(character)} saying “${escapeHTML(anchor)},” have another character say it back to them.`,
+        `Make “${escapeHTML(anchor)}” mean the opposite later in the set.`,
+        `Let the audience think the callback is coming, then twist the final word.`,
+        `Use “${escapeHTML(anchor)}” as proof that ${escapeHTML(character)} was accidentally right all along.`
+      ];
+    }
+
+    function buildEscalationReturns(anchor, character) {
+      return [
+        `Level 1: ${escapeHTML(character)} uses “${escapeHTML(anchor)}” for a small annoyance.`,
+        `Level 2: ${escapeHTML(character)} uses it for a bigger social problem.`,
+        `Level 3: ${escapeHTML(character)} uses it where it clearly does not belong.`,
+        `Level 4: “${escapeHTML(anchor)}” becomes a family rule, town slogan, emergency warning, or personal philosophy.`,
+        `Level 5: End with the anchor returning as the punchline to a completely different story.`
+      ];
+    }
+
+    function buildSetCloser(anchor, character, premise) {
+      return [
+        `Closing move: return to “${escapeHTML(anchor)}” after the biggest or most emotional joke.`,
+        `Let ${escapeHTML(character)} summarize the whole set using the anchor.`,
+        `Tie the anchor back to the original premise: “${escapeHTML(premise)}.”`,
+        `Best closer style: the audience recognizes the phrase before you fully say it.`
+      ];
+    }
+
+    function buildWarningSigns(anchor) {
+      return [
+        `If “${escapeHTML(anchor)}” needs too much explanation, simplify it.`,
+        `If the return is identical every time, change the meaning on the second or third use.`,
+        `If the audience will not remember it, make the phrase shorter or more visual.`,
+        `If the callback feels forced, connect it through emotion instead of topic.`
+      ];
+    }
+
+    function buildStrengthMeter() {
+      return `
+        <div class="grid">
+          <label>Recognition
+            <select>
+              <option>⭐</option>
+              <option>⭐⭐</option>
+              <option>⭐⭐⭐</option>
+              <option selected>⭐⭐⭐⭐</option>
+              <option>⭐⭐⭐⭐⭐</option>
+            </select>
+          </label>
+
+          <label>Repeatability
+            <select>
+              <option>⭐</option>
+              <option>⭐⭐</option>
+              <option>⭐⭐⭐</option>
+              <option selected>⭐⭐⭐⭐</option>
+              <option>⭐⭐⭐⭐⭐</option>
+            </select>
+          </label>
+
+          <label>Escalation Potential
+            <select>
+              <option>⭐</option>
+              <option>⭐⭐</option>
+              <option>⭐⭐⭐</option>
+              <option selected>⭐⭐⭐⭐</option>
+              <option>⭐⭐⭐⭐⭐</option>
+            </select>
+          </label>
+
+          <label>Closer Strength
+            <select>
+              <option>⭐</option>
+              <option>⭐⭐</option>
+              <option>⭐⭐⭐</option>
+              <option>⭐⭐⭐⭐</option>
+              <option selected>⭐⭐⭐⭐⭐</option>
+            </select>
+          </label>
+        </div>
+      `;
+    }
+
+    function randomFill() {
+      const item = randomItem(surpriseData);
+      document.getElementById("premise").value = item.premise;
+      document.getElementById("anchor").value = item.anchor;
+    }
+
+    function saveFavorite(data) {
+      const favorites = document.getElementById("favorites");
+      favorites.innerHTML += `<div class="favoriteItem">${data}</div>`;
+    }
+
+    function clearTool() {
+      document.getElementById("premise").value = "";
+      document.getElementById("anchor").value = "";
+      document.getElementById("character").selectedIndex = 0;
+      document.getElementById("callbackType").selectedIndex = 0;
+      document.getElementById("output").innerHTML = "";
+    }
+
+    function listItems(array) {
+      return array.map(function(item) {
+        return `<li>${item}</li>`;
+      }).join("");
+    }
+
+    function randomItem(array) {
+      return array[Math.floor(Math.random() * array.length)];
+    }
+
+    function escapeQuotes(text) {
+      return text
+        .replace(/'/g, "&#39;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function escapeHTML(str) {
+      return String(str).replace(/[&<>'"]/g, function(tag) {
+        const charsToReplace = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        };
+
+        return charsToReplace[tag] || tag;
+      });
+    }
+  </script>
+
+</body>
+</html>
